@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { menus, placeSubmenus, basicSubmenus } from "../../constants/Menus";
-import { useNavigate } from "react-router-dom";
+import {
+  menus,
+  placeSubmenus,
+  basicSubmenus,
+  academicSubmenus,
+} from "../../constants/Menus";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [toggle, setToggle] = useState(false);
@@ -27,6 +32,9 @@ const Sidebar = () => {
       case "Places":
         setSubmenus(placeSubmenus);
         break;
+      case "Academic":
+        setSubmenus(academicSubmenus);
+        break;
       default:
         setSubmenus([]);
     }
@@ -35,15 +43,14 @@ const Sidebar = () => {
   const selectSubmenu = (link) => {
     navigate(link);
     setToggle(false);
-    setActive(null)
+    setActive(null);
   };
 
   return (
-    <div className="flex flex-shrink-0 transition-all">
-
+    <div className="flex transition-all">
       {/* Side bar */}
-      <nav className="h-screen z-20 flex-col items-center flex-shrink-0 hidden w-36 py-4 bg-white border-r-2 border-indigo-100 shadow-md sm:flex rounded-lg">
-        <div className="flex flex-col z-20 items-start p-4 space-y-4">
+      <nav className="min-h-[85vh] z-20 flex flex-col items-center flex-shrink-0 w-36 py-4 bg-white border-r-2 border-indigo-100 shadow-md sm:flex rounded-lg">
+        <div className="flex flex-1 flex-col z-20 items-start p-4 space-y-4">
           {menus.map((option, index) => (
             <button
               className={
@@ -56,6 +63,7 @@ const Sidebar = () => {
             </button>
           ))}
         </div>
+        <Link className="border border-gray rounded-md p-2" to={'/controlPanel'}>Back to Home</Link>
       </nav>
 
       {/* Sub menus */}
@@ -63,7 +71,7 @@ const Sidebar = () => {
         className={
           !toggle
             ? "hidden"
-            : "inset-y-0 left-0 z-10 flex-shrink-0 w-44 bg-white border-r-2 border-indigo-100 shadow-lg sm:left-16 rounded-tr-3xl rounded-br-3xl"
+            : "z-10 flex-shrink-0 w-44 bg-white border-r-2 border-indigo-100 shadow-lg rounded-tr-3xl rounded-br-3xl transition-all duration-500 ease-in-out"
         }
       >
         <nav className="flex flex-col z-20 items-start p-4 space-y-4">

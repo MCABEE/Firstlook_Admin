@@ -43,3 +43,11 @@ export const districts = [
   { id: 4, name: "Kottayam" },
   { id: 5, name: "Palakkad" },
 ];
+
+export const streams = [
+    { id: 1, name: "Engineering" },
+    { id: 2, name: "Computer Science" },
+    { id: 3, name: "Medical" },
+    { id: 4, name: "Business" },
+    { id: 5, name: "Politics" },
+]

@@ -19,6 +19,9 @@ export default {
         'gray': '#B8B8B8',
         'gray-light': '#F0F0F0',
       },
+      fontFamily: {
+        'oxygen': ['Oxygen']
+      },
     },
   },
   plugins: [],

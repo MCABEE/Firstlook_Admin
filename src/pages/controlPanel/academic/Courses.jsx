@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Button from "../../../components/Button";
 import Dropdown from "../../../components/dropDown";
 import InputField from "../../../components/inputField";
-import { countries, districts, states } from "../../../constants";
+import Button from "../../../components/Button";
+import { streams } from "../../../constants";
 
-const Pincode = () => {
-  const [selected, setSelected] = useState("add");
+const Courses = () => {
+    const [selected, setSelected] = useState("add");
     const selectedLink =
       "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
     const nonSelectedLink =
@@ -29,12 +29,9 @@ const Pincode = () => {
             </button>
           </div>
           <form>
-            <h2 className="mb-4">Add Pin Code</h2>
-            <Dropdown name={"country"} options={countries} placeHolder={'Select Country'}/>
-            <Dropdown name={"state"} options={states} placeHolder={'Select State'}/>
-            <Dropdown name={"district"} options={districts} placeHolder={'Select District'}/>
-            <InputField id={"pincode"} placeholder={"Pin Code"} type={"number"} />
-            <InputField id={"postOffice"} placeholder={"Post Office Name"} type={"text"} />
+            <h2 className="mb-4">Add Course</h2>
+            <Dropdown name={"stream"} options={streams} placeHolder={'Select Stream'}/>
+            <InputField id={"course"} placeholder={"Course Name"} type={"text"} />
             <Button
               label={"Save"}
               style={"w-36 rounded-xl bg-pink mt-4 text-white py-2 float-right"}
@@ -45,4 +42,4 @@ const Pincode = () => {
     );
 }
 
-export default Pincode
+export default Courses

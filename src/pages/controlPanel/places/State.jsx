@@ -7,13 +7,13 @@ import { countries } from "../../../constants";
 const State = () => {
   const [selected, setSelected] = useState("add");
   const selectedLink =
-    "w-20 bg-pink text-center p-2 rounded-md border border-slate-200 text-white";
+    "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
-    "w-20 bg-white text-center p-2 rounded-md border border-slate-200";
+    "w-20 bg-white text-center p-2 rounded-xl border border-slate-200";
 
   return (
     <section>
-      <div className="absolute top-[30%] left-[30%]">
+      <div className="grid place-content-center mt-8">
         <div className="flex gap-5 mb-10">
           <button
             onClick={() => setSelected("add")}
@@ -34,7 +34,7 @@ const State = () => {
           <InputField id={"State"} placeholder={"State Name"} type={"text"} />
           <Button
             label={"Save"}
-            style={"w-36 rounded-md bg-pink mt-4 text-white py-2 float-right"}
+            style={"w-36 rounded-xl bg-pink mt-4 text-white py-2 float-right"}
           />
         </form>
       </div>

@@ -10,7 +10,7 @@ const InputField = ({ type, id, placeholder, setValue }) => {
         type={type}
         id={id}
         placeholder={placeholder}
-        className="border border-gray rounded-md py-2 px-5 my-2 w-80"
+        className="border border-gray rounded-xl py-2 px-5 my-2 w-80"
         onChange={updateValue}
       />
     </div>

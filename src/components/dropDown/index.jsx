@@ -4,7 +4,7 @@ const Dropdown = ({ name, options, placeHolder }) => {
     <div>
       <select
         name={name}
-        className="border border-gray rounded-md py-2 px-5 my-2 w-80"
+        className="border border-gray rounded-xl py-2 px-5 my-2 w-80"
       >
         <option value={null}>{placeHolder}</option>
         {options.map((option) => (

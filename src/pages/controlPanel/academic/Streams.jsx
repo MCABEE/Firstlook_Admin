@@ -1,9 +1,8 @@
 import { useState } from "react";
-import Button from "../../../components/Button";
 import InputField from "../../../components/inputField";
+import Button from "../../../components/Button";
 
-const Country = () => {
-
+const Streams = () => {
     const [selected, setSelected] = useState('add')
     const selectedLink = 'w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white';
     const nonSelectedLink = 'w-20 bg-white text-center p-2 rounded-xl border border-slate-200';
@@ -16,10 +15,10 @@ const Country = () => {
           <button onClick={ ()=> setSelected('viewAll')} className={selected === 'viewAll' ? selectedLink: nonSelectedLink}>View all</button>
         </div>
         <form>
-          <h2 className="mb-4">Add Country</h2>
+          <h2 className="mb-4">Add Stream</h2>
           <InputField
-            id={"country"}
-            placeholder={"Country Name"}
+            id={"stream"}
+            placeholder={"Stream Name"}
             type={"text"}
           />
           <Button
@@ -30,6 +29,6 @@ const Country = () => {
       </div>
     </section>
   );
-};
+}
 
-export default Country;
+export default Streams

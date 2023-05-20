@@ -25,3 +25,7 @@ export const placeSubmenus = [
   { id: 6, menu: "Cities", link: "cities" },
 ];
 
+export const academicSubmenus = [
+  {id:1, menu:'Steams', link:'streams'},
+  {id:2, menu:'Courses', link:'courses'}
+]
