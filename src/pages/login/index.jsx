@@ -12,9 +12,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const selectedLink =
-    "w-20 bg-pink text-center cursor-pointer w-40 p-2 rounded-xl border border-slate-200 text-white";
+    "w-20 bg-pink text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
-    "w-20 bg-white text-center cursor-pointer w-40 p-2 rounded-xl border border-slate-200";
+    "w-20 bg-white text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200";
 
   useEffect(() => {
     if (auth) {
@@ -28,13 +28,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <section className="h-[90vh] flex items-center justify-center bg-slate-100">
         <div>
           <h3>Select Login Type</h3>
           <form onSubmit={login}>
-            <div className="flex gap-10 mt-5 mb-10 font-medium">
+            <div className="flex gap-8 mt-5 mb-10 font-medium">
               <div
                 onClick={() => setSelected("major")}
                 className={
@@ -67,7 +67,7 @@ const LoginPage = () => {
         </div>
       </section>
       <Footer />
-    </div>
+    </>
   );
 };
 

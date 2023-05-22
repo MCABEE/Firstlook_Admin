@@ -3,7 +3,7 @@ export const menus = [
   "Places",
   "Religion",
   "Institution",
-  "Employees",
+  "Employers",
   "Academic",
   "Occupation",
 ];
@@ -26,6 +26,16 @@ export const placeSubmenus = [
 ];
 
 export const academicSubmenus = [
-  {id:1, menu:'Steams', link:'streams'},
-  {id:2, menu:'Courses', link:'courses'}
-]
+  { id: 1, menu: "Steams", link: "streams" },
+  { id: 2, menu: "Courses", link: "courses" },
+];
+
+export const institutionSubmenus = [
+  { id: 1, menu: "College Names", link: "colleges" },
+  { id: 2, menu: "University Names", link: "universities" },
+  { id: 3, menu: "Institute Names", link: "institutes" },
+];
+
+export const employersSubmenu = [
+  { id: 1, menu: "Employer", link: "employer" },
+];

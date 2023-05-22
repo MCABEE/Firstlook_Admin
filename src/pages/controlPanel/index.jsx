@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../components/Sidebar";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 
@@ -7,12 +7,12 @@ const ControlPanel = () => {
   return (
     <>
       <Header />
-      <section className="layout bg-slate-100 h-screen w-screen overflow-hidden">
+      <main className="layout bg-slate-100 h-screen w-screen overflow-hidden">
         <Sidebar />
-        <main className="content p-5 ">
+        <section className="content p-5 ">
           <Outlet />
-        </main>
-      </section>
+        </section>
+      </main>
       <Footer />
     </>
   );

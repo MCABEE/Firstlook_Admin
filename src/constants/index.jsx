@@ -45,9 +45,43 @@ export const districts = [
 ];
 
 export const streams = [
-    { id: 1, name: "Engineering" },
-    { id: 2, name: "Computer Science" },
-    { id: 3, name: "Medical" },
-    { id: 4, name: "Business" },
-    { id: 5, name: "Politics" },
-]
+  {
+    id: 2,
+    name: "Computer Science",
+    courses: [
+      { id: 1, name: "BCA" },
+      { id: 2, name: "BSc.Computer Science" },
+    ],
+  },
+  {
+    id: 3,
+    name: "Medical",
+    courses: [
+      { id: 1, name: "Masters in Medicine" },
+      { id: 2, name: "Bachelors in Medicine" },
+    ],
+  },
+];
+
+export const colleges = [
+  { id: 1, name: "Loyal College", place: "Chennai", country: "India" },
+  { id: 2, name: "M.E.S College", place: "Malappuram", country: "India" },
+  { id: 3, name: "Nehru College", place: "Coimbatore", country: "India" },
+];
+
+export const universities = [
+  { id: 1, name: "Nehru University", place: "Coimvatore", country: "India" },
+  { id: 2, name: "Kerala University", place: "Triavadrum", country: "India" },
+  { id: 3, name: "Calicut University", place: "Malappuram", country: "India" },
+];
+
+export const Institutes = [
+  { id: 1, name: "ABCD", place: "Coimbatore", country: "India" },
+  { id: 2, name: "XYZ", place: "Trivadrum", country: "India" },
+  { id: 3, name: "Xylem", place: "Malappuram", country: "India" },
+];
+
+export const employers = [
+  { id: 1, stream: "IT", employers: ['Infosys', 'TCS', 'UST Global'] },
+  { id: 2, stream: "Healthcare", employers: ['Appolo Hospitals', 'AIIMS', 'Reliance Hospitals'] },
+];

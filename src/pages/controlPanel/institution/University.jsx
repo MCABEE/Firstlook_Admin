@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Dropdown from "../../../components/dropDown";
+import { countries, universities } from "../../../constants";
 import InputField from "../../../components/inputField";
 import Button from "../../../components/Button";
-import { streams } from "../../../constants";
 
-const Courses = () => {
+const University = () => {
   const [selected, setSelected] = useState("add");
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
@@ -30,15 +30,20 @@ const Courses = () => {
         </div>
         {selected === "add" && (
           <form>
-            <h2 className="mb-4">Add Course</h2>
+            <h2 className="mb-4">Add University Name</h2>
             <Dropdown
-              name={"stream"}
-              options={streams}
-              placeHolder={"Select Stream"}
+              name={"country"}
+              options={countries}
+              placeHolder={"Select Country"}
             />
             <InputField
-              id={"course"}
-              placeholder={"Course Name"}
+              id={"university"}
+              placeholder={"University Name"}
+              type={"text"}
+            />
+            <InputField
+              id={"place"}
+              placeholder={"Place / Location"}
               type={"text"}
             />
             <Button
@@ -54,29 +59,24 @@ const Courses = () => {
             <h2 className="mb-4">View all</h2>
             <Dropdown
               name={"country"}
-              options={streams}
+              options={countries}
               placeHolder={"Select Country"}
             />
 
             <div className="mt-3 flex flex-col gap-3">
-              {streams.map((stream) => (
-                <>
-                  <span
-                    key={stream.id}
-                    className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
-                  >
-                    {stream.name}
-                  </span>
-                  {stream?.courses?.map((course) => (
-                    <div key={course?.id} className="flex justify-between ml-4">
-                      <div className="flex gap-2">
-                        <input id="course" type="checkbox" />
-                        <label htmlFor="course">{course?.name}</label>
-                      </div>
-                      <button>❌</button>
-                    </div>
-                  ))}
-                </>
+              <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
+                Universities
+              </span>
+              {universities?.map((university) => (
+                <div key={university?.id} className="flex justify-between ml-4">
+                  <div className="flex gap-2">
+                    <input id="university" type="checkbox" />
+                    <label htmlFor="university">
+                      {university?.name}, {university.place}
+                    </label>
+                  </div>
+                  <button>❌</button>
+                </div>
               ))}
             </div>
           </div>
@@ -86,4 +86,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default University;
