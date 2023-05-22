@@ -14,7 +14,11 @@ import {
 } from "./pages/controlPanel/places";
 import { MotherTounge } from "./pages/controlPanel/basic";
 import { Streams, Courses } from "./pages/controlPanel/academic";
-import { College, Institute, University } from "./pages/controlPanel/institution";
+import {
+  College,
+  Institute,
+  University,
+} from "./pages/controlPanel/institution";
 import { Caste, Religion } from "./pages/controlPanel/religion";
 import { Employers } from "./pages/controlPanel/employers";
 import { authContext } from "./context/authContext";
@@ -27,11 +31,13 @@ function App() {
     <authContext.Provider value={{ auth, setAuth }}>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+
+        {/* Protected routes */}
         <Route element={<ProtectedRoutes />}>
           <Route path="/controlPanel" element={<ControlPanel />}>
 
             {/* Dashboard */}
-            <Route index element ={<Dashboard />} />
+            <Route index element={<Dashboard />} />
 
             {/* Basic */}
             <Route path="motherTounge" element={<MotherTounge />} />
@@ -55,8 +61,8 @@ function App() {
             <Route path="cities" element={<Cities />} />
 
             {/* Religion */}
-            <Route path="religion" element={<Religion/>} />
-            <Route path="caste" element={<Caste/>} />
+            <Route path="religion" element={<Religion />} />
+            <Route path="caste" element={<Caste />} />
 
             {/* Academic */}
             <Route path="streams" element={<Streams />} />
@@ -67,9 +73,9 @@ function App() {
             <Route path="universities" element={<University />} />
             <Route path="institutes" element={<Institute />} />
 
-            {/* Employees */}
-            <Route path="employer" element={<Employers/>}/>
-
+            {/* Employers */}
+            <Route path="employer" element={<Employers />} />
+            
           </Route>
         </Route>
         <Route path="*" element={<ErrorPage />} />

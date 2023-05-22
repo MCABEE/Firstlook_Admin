@@ -38,3 +38,7 @@ body,
 .p {
   @apply text-sm md:text-base;
 }
+
+button:hover{
+  opacity: .9;
+}

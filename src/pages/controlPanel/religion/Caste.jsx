@@ -3,6 +3,7 @@ import InputField from "../../../components/inputField";
 import Button from "../../../components/Button";
 import Dropdown from "../../../components/dropDown";
 import { religions } from "../../../constants";
+import deleteIcon from '../../../assets/delete_icon.svg'
 
 const Caste = () => {
   const [selected, setSelected] = useState("add");
@@ -63,12 +64,12 @@ const Caste = () => {
                     {religion.name}
                   </span>
                   {religion?.caste?.map((name, index) => (
-                    <div key={index} className="flex justify-between ml-4">
+                    <div key={index} className="flex justify-between items-center ml-4">
                       <div className="flex gap-2">
-                        <input id="course" type="checkbox" />
-                        <label htmlFor="course">{name}</label>
+                        <input id={name} type="checkbox" />
+                        <label htmlFor={name}>{name}</label>
                       </div>
-                      <button>❌</button>
+                      <button><img src={deleteIcon} className="opacity-60" alt="delete" width={22} /></button>
                     </div>
                   ))}
                 </>
