@@ -30,6 +30,11 @@ export const academicSubmenus = [
   { id: 2, menu: "Courses", link: "courses" },
 ];
 
+export const religionSubmenus = [
+  {id:1, menu:'Religion', link:'religion'},
+  {id:2, menu:'Caste', link:'caste'},
+] 
+
 export const institutionSubmenus = [
   { id: 1, menu: "College Names", link: "colleges" },
   { id: 2, menu: "University Names", link: "universities" },

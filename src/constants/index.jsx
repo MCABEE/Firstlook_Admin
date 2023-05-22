@@ -82,6 +82,18 @@ export const Institutes = [
 ];
 
 export const employers = [
-  { id: 1, stream: "IT", employers: ['Infosys', 'TCS', 'UST Global'] },
-  { id: 2, stream: "Healthcare", employers: ['Appolo Hospitals', 'AIIMS', 'Reliance Hospitals'] },
+  { id: 1, stream: "IT", employers: ["Infosys", "TCS", "UST Global"] },
+  {
+    id: 2,
+    stream: "Healthcare",
+    employers: ["Appolo Hospitals", "AIIMS", "Reliance Hospitals"],
+  },
+];
+
+export const religions = [
+  {
+    id: 1,
+    name: "Christian",
+    caste: ["Syro Malabar Catholic", "Latin Catholic", "Orthodox", "Jacobite"],
+  },
 ];

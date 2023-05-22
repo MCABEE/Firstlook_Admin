@@ -6,6 +6,7 @@ import {
   academicSubmenus,
   institutionSubmenus,
   employersSubmenu,
+  religionSubmenus,
 
 } from "../constants/Menus";
 import { Link, useNavigate } from "react-router-dom";
@@ -44,6 +45,9 @@ const Sidebar = () => {
       case "Employers":  
         setSubmenus(employersSubmenu);
         break;
+      case "Religion":
+        setSubmenus(religionSubmenus);
+        break;  
       default:
         setSubmenus([]);
     }

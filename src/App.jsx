@@ -15,6 +15,7 @@ import {
 import { MotherTounge } from "./pages/controlPanel/basic";
 import { Streams, Courses } from "./pages/controlPanel/academic";
 import { College, Institute, University } from "./pages/controlPanel/institution";
+import { Caste, Religion } from "./pages/controlPanel/religion";
 import { Employers } from "./pages/controlPanel/employers";
 import { authContext } from "./context/authContext";
 import { useState } from "react";
@@ -52,6 +53,10 @@ function App() {
             <Route path="homeTown" element={<HomeTown />} />
             <Route path="pincode" element={<Pincode />} />
             <Route path="cities" element={<Cities />} />
+
+            {/* Religion */}
+            <Route path="religion" element={<Religion/>} />
+            <Route path="caste" element={<Caste/>} />
 
             {/* Academic */}
             <Route path="streams" element={<Streams />} />
