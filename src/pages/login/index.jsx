@@ -61,7 +61,7 @@ const LoginPage = () => {
             />
             <Button
               label={"OPEN"}
-              style={"w-40 rounded-xl bg-pink mt-4 text-white py-2"}
+              style={"w-full rounded-xl bg-pink mt-4 text-white py-2"}
             />
           </form>
         </div>
