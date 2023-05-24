@@ -21,6 +21,7 @@ import {
 } from "./pages/controlPanel/institution";
 import { Caste, Religion } from "./pages/controlPanel/religion";
 import { Employers } from "./pages/controlPanel/employers";
+import { NewUsers } from "./pages/controlPanel/users";
 import { authContext } from "./context/authContext";
 import { useState } from "react";
 
@@ -43,7 +44,7 @@ function App() {
             <Route path="statistics" element={<h1>Satistics</h1>} />
 
             {/* Users */}
-            <Route path="newUsers" element={<h1>new users</h1>} />
+            <Route path="newUsers" element={<NewUsers />} />
             <Route path="allUsers" element={<h1>all users</h1>} />
             <Route
               path="incompleteProfiles"

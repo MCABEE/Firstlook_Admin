@@ -7,7 +7,7 @@ const ControlPanel = () => {
   return (
     <>
       <Header />
-      <main className="layout bg-slate-100 h-screen w-screen overflow-hidden">
+      <main className="layout bg-slate-100 overflow-hidden">
         <Sidebar />
         <section className="content p-5 ">
           <Outlet />

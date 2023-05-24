@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { menus } from "../constants/Menus";
 import { Link, useNavigate } from "react-router-dom";
+import closeIcon from '../assets/close_icon.svg'
 
 const Sidebar = () => {
   const [toggle, setToggle] = useState(false);
@@ -41,6 +42,8 @@ const Sidebar = () => {
 
     // navigate to the link
     navigate(menu.link);
+    setToggle(false);
+    setActive(null);
   };
 
   return (
@@ -77,7 +80,9 @@ const Sidebar = () => {
             "z-10 w-44 relative bg-white border-r-2 py-8 px-4 border-indigo-100 shadow-lg rounded-tr-3xl rounded-br-3xl"
           }
         >
-          <button onClick={()=> setToggle(false)} className="absolute top-3 right-3">❌</button>
+          <button onClick={()=> setToggle(false)} className="absolute top-3 right-3">
+            <img src={closeIcon} alt="close" width={20} />
+          </button>
           <nav className="flex flex-col items-start space-y-6">
             {submenus?.map((option) => (
               <div className="w-full" key={option?.id}>
@@ -89,6 +94,7 @@ const Sidebar = () => {
                 >
                   {option?.name}
                 </button>
+                {/* Dropdown */}
                 {dropdown === option.name && (
                   <div className="text-sm transition-all duration-500  mt-2 pl-2 flex flex-col gap-y-2">
                     {option.subMenus.map((menu) => (
