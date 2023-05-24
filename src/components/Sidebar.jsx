@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { menus } from "../constants/Menus";
 import { Link, useNavigate } from "react-router-dom";
-import closeIcon from '../assets/close_icon.svg'
+import closeIcon from "../assets/close_icon.svg";
 
 const Sidebar = () => {
   const [toggle, setToggle] = useState(false);
@@ -33,7 +33,6 @@ const Sidebar = () => {
   };
 
   const selectSubmenu = (menu) => {
-
     // show dropdown menus
     if (menu.hasSubmenu) {
       setDropdown(menu.name);
@@ -47,7 +46,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex transition-all">
+    <div className="flex transition-all relative">
       {/* Side bar */}
       <nav className="min-h-[85vh] z-20 flex flex-col items-start py-8 w-44 px-4 bg-white border-r-2 border-indigo-100 shadow-md sm:flex">
         <div className="flex w-full flex-1 flex-col z-20 items-start space-y-6">
@@ -74,41 +73,51 @@ const Sidebar = () => {
       </nav>
 
       {/* Sub menus */}
-      {toggle && (
-        <div
-          className={
-            "z-10 w-44 relative bg-white border-r-2 py-8 px-4 border-indigo-100 shadow-lg rounded-tr-3xl rounded-br-3xl"
-          }
+
+      <div
+        className={
+          !toggle
+            ? "absolute bottom-0 top-0 left-0 text-white  transition-transform duration-500 -translate-x-full"
+            : "absolute bottom-0 top-0 z-10 w-44 bg-white border-r-2 py-8 px-4 border-indigo-100 shadow-lg rounded-tr-3xl rounded-br-3xl transform transition-transform duration-300 translate-x-full"
+        }
+      >
+        <button
+          onClick={() => setToggle(false)}
+          className="absolute top-3 right-3"
         >
-          <button onClick={()=> setToggle(false)} className="absolute top-3 right-3">
-            <img src={closeIcon} alt="close" width={20} />
-          </button>
-          <nav className="flex flex-col items-start space-y-6">
-            {submenus?.map((option) => (
-              <div className="w-full" key={option?.id}>
-                <button
-                  className={option.name === dropdown
+          <img src={closeIcon} alt="close" width={20} />
+        </button>
+        <nav className="flex flex-col items-start space-y-6">
+          {submenus?.map((option) => (
+            <div className="w-full" key={option?.id}>
+              <button
+                className={
+                  option.name === dropdown
                     ? "text-blue w-full font-medium text-start"
-                    : "hover:text-blue w-full text-start"}
-                  onClick={() => selectSubmenu(option)}
-                >
-                  {option?.name}
-                </button>
-                {/* Dropdown */}
-                {dropdown === option.name && (
-                  <div className="text-sm transition-all duration-500  mt-2 pl-2 flex flex-col gap-y-2">
-                    {option.subMenus.map((menu) => (
-                      <Link className="hover:text-blue" key={menu.id} to={menu.link}>
-                        {menu.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        </div>
-      )}
+                    : "hover:text-blue w-full text-start"
+                }
+                onClick={() => selectSubmenu(option)}
+              >
+                {option?.name}
+              </button>
+              {/* Dropdown */}
+              {dropdown === option.name && (
+                <div className="text-sm transition-all duration-500  mt-2 pl-2 flex flex-col gap-y-2">
+                  {option.subMenus.map((menu) => (
+                    <Link
+                      className="hover:text-blue"
+                      key={menu.id}
+                      to={menu.link}
+                    >
+                      {menu.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Dropdown from "../../../components/dropDown";
 import { Modal } from "../../../components/modal";
 import { rows, columns } from "../../../constants";
 
-const NewUsers = () => {
+const AllUsers = () => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,8 +21,8 @@ const NewUsers = () => {
       <div className="flex gap-1 overflow-auto items-start">
         <div>
           <div className="p-2 rounded-xl text-center border text-gray-dark w-28">
-            <p className="text-xs">New Users</p>
-            <h2>123</h2>
+            <p className="text-xs">All Users</p>
+            <h2>64232</h2>
           </div>
         </div>
         <div className="px-3">
@@ -34,6 +34,8 @@ const NewUsers = () => {
               <Dropdown style={dropdownStyle} placeHolder="Gender" />
               <Dropdown style={dropdownStyle} placeHolder="Religion" />
               <Dropdown style={dropdownStyle} placeHolder="Caste" />
+              <Dropdown style={dropdownStyle} placeHolder="Year" />
+              <Dropdown style={dropdownStyle} placeHolder="Month" />
               <div>
                 <button className="border rounded-xl text-white bg-pink h-[40px] px-2">
                   Apply
@@ -47,9 +49,9 @@ const NewUsers = () => {
       {/* TABLE */}
       <div className="bg-white mt-10 p-2 rounded-md">
         <div className="flex justify-between py-2">
-          <div className="p-2 text-center">
+          <div className="p-2 text-center ">
             <p>
-              Filtered Result : <span className="text-lg font-bold">369</span>{" "}
+              Filtered Result : <span className="text-lg font-bold">360</span>{" "}
             </p>
           </div>
           <button
@@ -67,4 +69,4 @@ const NewUsers = () => {
   );
 };
 
-export default NewUsers;
+export default AllUsers;
