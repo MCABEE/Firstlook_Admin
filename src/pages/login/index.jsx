@@ -1,15 +1,20 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import InputField from "../../components/inputField";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-import { authContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthorized } from "../../redux/slices/authSlice";
 
 const LoginPage = () => {
-  const { auth, setAuth } = useContext(authContext);
   const [selected, setSelected] = useState("major");
+  const { authorized } = useSelector((store) => store.auth);
+
+  console.log('=========== ', authorized);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const selectedLink =
     "w-20 bg-pink text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200 text-white";
@@ -17,13 +22,13 @@ const LoginPage = () => {
     "w-20 bg-white text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200";
 
   useEffect(() => {
-    if (auth) {
+    if (authorized) {
       navigate("/controlPanel");
     }
-  }, [auth]);
+  }, [authorized]);
 
   const login = () => {
-    setAuth(true);
+    dispatch(setAuthorized());
     navigate("/controlPanel");
   };
 

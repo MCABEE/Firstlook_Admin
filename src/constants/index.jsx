@@ -98,17 +98,6 @@ export const religions = [
   },
 ];
 
-
-export const columns = [
-  { field: "id", headerName: "No", width: 80 },
-  { field: "firstName", headerName: "First name", width: 150 },
-  { field: "gender", headerName: "Gender", width: 110 },
-  { field: "state", headerName: "State", width: 150 },
-  { field: "district", headerName: "District", width: 150 },
-  { field: "religion", headerName: "Religion", width: 130 },
-  { field: "join", headerName: "Reg. Date", width: 150 },
-];
-
 export const rows = [
   {
     id: 1,
@@ -141,7 +130,7 @@ export const rows = [
     id: 4,
     gender: "Male",
     firstName: "Arya",
-    state: "Kerala",
+    state: "Jammu kashmir",
     district: "Eranakulam",
     religion: "Muslim",
     join: "12/05/2023",

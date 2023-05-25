@@ -1,10 +1,9 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import { authContext } from "../context/authContext";
+import { useSelector } from "react-redux";
 
 function ProtectedRoutes() {
-  const { auth } = useContext(authContext);
-  return auth ? <Outlet /> : <Navigate to={"/"} />;
+  const { authorized } = useSelector((state) => state.auth);
+  return authorized ? <Outlet /> : <Navigate to={"/"} />;
 }
 
 export default ProtectedRoutes;

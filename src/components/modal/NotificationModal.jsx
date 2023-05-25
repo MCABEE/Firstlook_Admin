@@ -7,14 +7,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export const Modal = ({ open, handleClose }) => {
+export const NotificationModal = ({ open, handleClose }) => {
   return (
     <div>
       <Dialog maxWidth={'sm'} fullWidth={true} open={open} onClose={handleClose}>
         <DialogTitle>Notification</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter a message to show as notification to user.
+            Enter a message to show notification to users.
           </DialogContentText>
           <TextField
             autoFocus
