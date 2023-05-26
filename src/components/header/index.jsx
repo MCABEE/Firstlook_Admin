@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { authContext } from "../../context/authContext";
+import { useSelector, useDispatch } from "react-redux";
+import { setUnauthorized } from "../../redux/slices/authSlice";
 
 const Header = () => {
+  
+  const { authorized } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { auth, setAuth } = useContext(authContext);
   const logout = () => {
-    setAuth(false);
+    dispatch(setUnauthorized())
     navigate("/");
   };
 
@@ -20,7 +22,7 @@ const Header = () => {
         <div className="h-5 w-[2px] bg-black" />
         <p>Control Panel</p>
       </div>
-      {auth && (
+      {authorized && (
         <button
           onClick={logout}
           className="border border-slate-200 bg-slate-300 p-2 font-medium rounded-md"

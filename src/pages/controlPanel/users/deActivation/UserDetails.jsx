@@ -26,7 +26,7 @@ const UserDetails = () => {
         <div className=" flex justify-center gap-3 font-semibold text-sm">
           <p>Location : Eranakulam, Kerala</p>
           <p>Reg. Date: 27/07/2023</p>
-          <p>De-Avt. Date: 30/07/2023</p>
+          <p>De-Act. Date: 30/07/2023</p>
         </div>
         <div>
           <button

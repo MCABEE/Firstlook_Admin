@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Avatar from "../../../../assets/user_avatar.png";
 import { NotificationModal } from "../../../../components/modal/NotificationModal";
+import DataTable from "./DataTable";
+import IdProof from "./IdProof";
 
 const IdVerificationUserDetails = () => {
   const [open, setOpen] = useState(false);
+  const [isAuto, setIsAuto] = useState(true);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -40,106 +43,27 @@ const IdVerificationUserDetails = () => {
       </div>
 
       <section className="mt-5">
-        {/* ID info */}
-        <h3 className="text-center">Adhar Auto-Verification</h3>
+        <div className="flex justify-between">
+          {/* ID info */}
+          <h3 className="text-center">
+            {isAuto ? "Adhar Auto-Verification" : "Adhar Manual Verification"}
+          </h3>
+          <button
+            onClick={() => setIsAuto(!isAuto)}
+            className="float-right border rounded-md p-2"
+          >
+            switch mode
+          </button>
+        </div>
         <div className="flex justify-center flex-wrap gap-10">
-          {/* user data */}
-          <div className="bg-white rounded-lg shadow-md p-4 mt-5">
-            <h4>User Data</h4>
-            <table className="mt-3">
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 text-start py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                  First Name
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  Tom
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Second Name
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  Joseph
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Date Of Birth
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  12/04/1997
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Father Name
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  Mark
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Address
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  <p>Plamattom H </p>
-                  <p>Edamattom P.O </p>
-                  <p>kallur, Eranakulam </p>
-                </td>
-              </tr>
-            </table>
-          </div>
+          {/* user data --- make it dynamic */}
+          <DataTable heading={"User Data"} />
 
-          {/* uidai data */}
-          <div className="bg-white rounded-lg shadow-md p-4 mt-5">
-            <h4>UIDAI Data</h4>
-            <table className="mt-3">
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 text-start py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                  First Name
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  Tom
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Second Name
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  Joseph
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Date Of Birth
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  12/04/1997
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Father Name
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  Mark
-                </td>
-              </tr>
-              <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-                <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-                  Address
-                </th>
-                <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-                  <p>Plamattom H </p>
-                  <p>Edamattom P.O </p>
-                  <p>kallur, Eranakulam </p>
-                </td>
-              </tr>
-            </table>
-          </div>
+          {/* uidai data --- make it dynamic */}
+          {isAuto && <DataTable heading={"UIDAI Data"} />}
+
+          {/* ID - Manual verification */}
+          {!isAuto && <IdProof />}
         </div>
 
         <div className="mt-5 flex gap-5 justify-center">
