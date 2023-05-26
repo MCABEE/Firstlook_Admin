@@ -11,8 +11,6 @@ const LoginPage = () => {
   const [selected, setSelected] = useState("major");
   const { authorized } = useSelector((store) => store.auth);
 
-  console.log('=========== ', authorized);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

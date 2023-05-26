@@ -31,6 +31,7 @@ import {
   DeActivationTable,
   DeActivatedUser,
 } from "./pages/controlPanel/users/deActivation";
+import { Statistics } from "./pages/controlPanel/statistics";
 
 function App() {
   return (
@@ -41,12 +42,11 @@ function App() {
       {/* Protected routes */}
       <Route element={<ProtectedRoutes />}>
         <Route path="/controlPanel" element={<ControlPanel />}>
-
           {/* Dashboard */}
           <Route index element={<Dashboard />} />
 
           {/* Statistics */}
-          <Route path="statistics" element={<h1>Satistics</h1>} />
+          <Route path="statistics" element={<Statistics />} />
 
           {/* Users */}
           <Route path="newUsers" element={<Outlet />}>
@@ -63,7 +63,7 @@ function App() {
             path="incompleteProfiles"
             element={<h1>incompleteProfiles</h1>}
           />
-          
+
           <Route
             path="nonActiveProfiles"
             element={<h1>nonActiveProfiles</h1>}
