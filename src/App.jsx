@@ -32,6 +32,7 @@ import {
   DeActivatedUser,
 } from "./pages/controlPanel/users/deActivation";
 import { Statistics } from "./pages/controlPanel/statistics";
+import { AllPhotos } from "./pages/controlPanel/photos";
 
 function App() {
   return (
@@ -83,7 +84,7 @@ function App() {
           <Route path="payments" element={<h1>Payments</h1>} />
 
           {/* Photo Updates */}
-          <Route path="photoUpdates" element={<h1>Photo</h1>} />
+          <Route path="photoUpdates" element={<AllPhotos />} />
 
           {/* video updates */}
           <Route path="videoUpdates" element={<h1>video</h1>} />
