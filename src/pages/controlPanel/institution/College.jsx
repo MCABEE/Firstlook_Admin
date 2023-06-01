@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Dropdown from "../../../components/dropDown";
-import { colleges, countries } from "../../../constants";
+import {Dropdown} from "../../../components/dropDown";
+import { colleges, countries } from "../../../lib/constants";
 import InputField from "../../../components/inputField";
 import Button from "../../../components/Button";
 

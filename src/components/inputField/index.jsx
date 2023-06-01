@@ -1,9 +1,5 @@
 /* eslint-disable react/prop-types */
-const InputField = ({ type, id, placeholder, setValue }) => {
-  const updateValue = (e) => {
-    setValue(e.target.value);
-  };
-
+const InputField = ({ type, id, placeholder, setState }) => {
   return (
     <div>
       <input
@@ -11,7 +7,7 @@ const InputField = ({ type, id, placeholder, setValue }) => {
         id={id}
         placeholder={placeholder}
         className="border border-gray rounded-xl py-2 px-5 my-2 w-80"
-        onChange={updateValue}
+        onChange={(e) => setState(e.target.value)}
       />
     </div>
   );

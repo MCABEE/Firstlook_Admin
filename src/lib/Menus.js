@@ -1,9 +1,9 @@
 const basicSubmenus = [
   { id: 1, name: "Mother Tounge", link: "motherTounge" },
-  { id: 2, name: "Father Education", link: "fatherEducation" },
-  { id: 3, name: "Father Occupation", link: "fatherOccupation" },
-  { id: 4, name: "Mother Education", link: "motherEducation" },
-  { id: 5, name: "Mother Occupation", link: "motherOccupation" },
+  // { id: 2, name: "Father Education", link: "fatherEducation" },
+  // { id: 3, name: "Father Occupation", link: "fatherOccupation" },
+  // { id: 4, name: "Mother Education", link: "motherEducation" },
+  // { id: 5, name: "Mother Occupation", link: "motherOccupation" },
 ];
 
 const placeSubmenus = [
@@ -19,6 +19,11 @@ const academicSubmenus = [
   { id: 1, name: "Steams", link: "streams" },
   { id: 2, name: "Courses", link: "courses" },
 ];
+
+const occupationSubmenus = [
+  { id: 1, name: "Steams", link: "occupationStreams" },
+  { id: 2, name: "Designation", link: "designation" },
+]
 
 const religionSubmenus = [
   { id: 1, name: "Religion", link: "religion" },
@@ -125,7 +130,7 @@ export const menus = [
         subMenus: employersSubmenu,
       },
       { id: 6, name: "Academic", hasSubmenu: true, subMenus: academicSubmenus },
-      { id: 7, name: "Occupation", hasSubmenu: false },
+      { id: 7, name: "Occupation", hasSubmenu: true, subMenus: occupationSubmenus},
     ],
   },
   {

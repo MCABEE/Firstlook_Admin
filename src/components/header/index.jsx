@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUnauthorized } from "../../redux/slices/authSlice";
+import { Toaster } from "react-hot-toast";
 
 const Header = () => {
   
@@ -14,6 +15,7 @@ const Header = () => {
 
   return (
     <header className="border flex border-b-2 px-4 py-5 border-slate-200">
+      <Toaster  position="top-center"/>
       <div className="flex flex-1 gap-6 items-center">
         <div className="flex items-center gap-2">
           <img src="/first look - icon.svg" alt="Logo" width={32} />

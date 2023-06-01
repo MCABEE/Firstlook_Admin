@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { menus } from "../constants/Menus";
+import { menus } from "../lib/Menus";
 import { Link, useNavigate } from "react-router-dom";
 import closeIcon from "../assets/close_icon.svg";
 

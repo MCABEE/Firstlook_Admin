@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Dropdown from "../../../../components/dropDown";
-import { rows } from "../../../../constants";
+import {Dropdown} from "../../../../components/dropDown";
+import { rows } from "../../../../lib/constants";
 import { DataTable } from "../../../../components/dataTable";
 import { NotificationModal } from "../../../../components/modal/NotificationModal";
 import { useNavigate } from "react-router-dom";

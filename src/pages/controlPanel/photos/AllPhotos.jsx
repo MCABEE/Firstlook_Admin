@@ -1,5 +1,5 @@
 import { Pagination } from "@mui/material";
-import Dropdown from "../../../components/dropDown";
+import {Dropdown} from "../../../components/dropDown";
 import PhotoDetails from "./PhotoDetails";
 import { useState } from "react";
 

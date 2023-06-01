@@ -1,12 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputField from "../../../components/inputField";
 import Button from "../../../components/Button";
-import Dropdown from "../../../components/dropDown";
-import { religions } from "../../../constants";
-import deleteIcon from '../../../assets/delete_icon.svg'
+import { Dropdown } from "../../../components/dropDown";
+import deleteIcon from "../../../assets/delete_icon.svg";
+import { addCaste, getReligions } from "../../../services/dataManager";
+import { toast } from "react-hot-toast";
 
 const Caste = () => {
   const [selected, setSelected] = useState("add");
+  const [religions, setReligions] = useState([]);
+
+  const [religion, setReligion] = useState("");
+  const [caste, setCaste] = useState("");
+
+  const listReligions = async () => {
+    const { data } = await getReligions();
+    setReligions(data.religions);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addCaste({ religion, caste });
+    toast.success("Caste name added!");
+  };
+
+  useEffect(() => {
+    listReligions();
+  }, []);
+
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
@@ -30,14 +51,20 @@ const Caste = () => {
           </button>
         </div>
         {selected === "add" && (
-          <form>
+          <form onSubmit={handleSubmit}>
             <h2 className="mb-4">Add Caste</h2>
             <Dropdown
               name={"religion"}
               options={religions}
               placeHolder={"Select Religion"}
+              setState={setReligion}
             />
-            <InputField id={"caste"} placeholder={"Caste Name"} type={"text"} />
+            <InputField
+              id={"caste"}
+              placeholder={"Caste Name"}
+              type={"text"}
+              setState={setCaste}
+            />
             <Button
               label={"Save"}
               style={"w-36 rounded-xl bg-pink mt-4 text-white py-2 float-right"}
@@ -64,12 +91,22 @@ const Caste = () => {
                     {religion.name}
                   </span>
                   {religion?.caste?.map((name, index) => (
-                    <div key={index} className="flex justify-between items-center ml-4">
+                    <div
+                      key={index}
+                      className="flex justify-between items-center ml-4"
+                    >
                       <div className="flex gap-2">
                         <input id={name} type="checkbox" />
                         <label htmlFor={name}>{name}</label>
                       </div>
-                      <button><img src={deleteIcon} className="opacity-60" alt="delete" width={22} /></button>
+                      <button>
+                        <img
+                          src={deleteIcon}
+                          className="opacity-60"
+                          alt="delete"
+                          width={22}
+                        />
+                      </button>
                     </div>
                   ))}
                 </>

@@ -6,9 +6,13 @@ import Footer from "../../components/footer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthorized } from "../../redux/slices/authSlice";
+import { doLogin } from "../../services/auth";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [selected, setSelected] = useState("major");
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
   const { authorized } = useSelector((store) => store.auth);
 
   const navigate = useNavigate();
@@ -19,15 +23,30 @@ const LoginPage = () => {
   const nonSelectedLink =
     "w-20 bg-white text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200";
 
+  // redirect to dashboard, if the user is authorized
   useEffect(() => {
     if (authorized) {
       navigate("/controlPanel");
     }
-  }, [authorized]);
+  });
 
-  const login = () => {
-    dispatch(setAuthorized());
-    navigate("/controlPanel");
+  // form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await doLogin({
+        email: mail,
+        password,
+        isMaster: selected === "major" ? true : false,
+      });
+
+      toast.success("Login success!");
+      localStorage.setItem("token", JSON.stringify(data.token));
+      dispatch(setAuthorized());
+      navigate("/controlPanel");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
@@ -36,7 +55,7 @@ const LoginPage = () => {
       <section className="h-[90vh] flex items-center justify-center bg-slate-100">
         <div>
           <h3>Select Login Type</h3>
-          <form onSubmit={login}>
+          <form onSubmit={handleSubmit}>
             <div className="flex gap-8 mt-5 mb-10 font-medium">
               <div
                 onClick={() => setSelected("major")}
@@ -56,11 +75,17 @@ const LoginPage = () => {
               </div>
             </div>
 
-            <InputField type={"text"} id={"email"} placeholder={"Email ID"} />
+            <InputField
+              type={"text"}
+              id={"email"}
+              placeholder={"Email ID"}
+              setState={setMail}
+            />
             <InputField
               type={"password"}
               id={"password"}
               placeholder={"Password"}
+              setState={setPassword}
             />
             <Button
               label={"OPEN"}

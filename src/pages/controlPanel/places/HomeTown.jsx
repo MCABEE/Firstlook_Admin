@@ -1,11 +1,59 @@
-import { useState } from "react";
-import Dropdown from "../../../components/dropDown";
+import { useEffect, useState } from "react";
+import { Dropdown, DropdownValueId } from "../../../components/dropDown";
 import InputField from "../../../components/inputField";
 import Button from "../../../components/Button";
-import { countries, districts, states } from "../../../constants";
+import {
+  addHomeTown,
+  getCountries,
+  getDistricts,
+  getStates,
+} from "../../../services/dataManager";
+import { toast } from "react-hot-toast";
 
 const HomeTown = () => {
   const [selected, setSelected] = useState("add");
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [districts, setDistricts] = useState([]);
+
+  const [country, setCounty] = useState("");
+  const [stateId, setStateId] = useState("");
+  const [districtId, setDistrictId] = useState("");
+  const [homeTown, setHomeTown] = useState("");
+
+  const listCountries = async () => {
+    const { data } = await getCountries();
+    setCountries(data.countries);
+  };
+
+  const listStates = async (country) => {
+    const { data } = await getStates(country);
+    setStates(data.states);
+  };
+
+  const listDistricts = async (stateId) => {
+    const { data } = await getDistricts(stateId);
+    setDistricts(data.districts);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addHomeTown({ district: districtId, homeTown });
+    toast.success("Hometown added!");
+  };
+
+  useEffect(() => {
+    listStates(country);
+  }, [country]);
+
+  useEffect(() => {
+    listDistricts(stateId);
+  }, [stateId]);
+
+  useEffect(() => {
+    listCountries();
+  }, []);
+
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
@@ -28,27 +76,31 @@ const HomeTown = () => {
             View all
           </button>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h2 className="mb-4">Add Home Town</h2>
           <Dropdown
             name={"country"}
             options={countries}
             placeHolder={"Select Country"}
+            setState={setCounty}
           />
-          <Dropdown
+          <DropdownValueId
             name={"state"}
             options={states}
             placeHolder={"Select State"}
+            setState={setStateId}
           />
-          <Dropdown
-            name={"state"}
+          <DropdownValueId
+            name={"district"}
             options={districts}
             placeHolder={"Select District"}
+            setState={setDistrictId}
           />
           <InputField
-            id={"State"}
+            id={"homeTown"}
             placeholder={"Home Town Name"}
             type={"text"}
+            setState={setHomeTown}
           />
           <Button
             label={"Save"}

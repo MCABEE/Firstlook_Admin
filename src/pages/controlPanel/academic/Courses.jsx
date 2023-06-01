@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Dropdown from "../../../components/dropDown";
+import { Dropdown } from "../../../components/dropDown";
 import InputField from "../../../components/inputField";
 import Button from "../../../components/Button";
-import { streams } from "../../../constants";
+import { streams } from "../../../lib/constants";
 
 const Courses = () => {
   const [selected, setSelected] = useState("add");

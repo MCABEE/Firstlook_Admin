@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { DataTable } from "../../../../components/dataTable";
-import Dropdown from "../../../../components/dropDown";
+import {Dropdown} from "../../../../components/dropDown";
 import { NotificationModal } from "../../../../components/modal/NotificationModal";
-import { rows } from "../../../../constants";
+import { rows } from "../../../../lib/constants";
 import {useNavigate} from 'react-router-dom'
 
 const AllUsers = () => {
