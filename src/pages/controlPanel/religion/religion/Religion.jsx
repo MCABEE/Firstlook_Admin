@@ -1,27 +1,23 @@
 import { useState } from "react";
-import Button from "../../../components/Button";
-import InputField from "../../../components/inputField";
-import { addCountry } from "../../../services/dataManager";
+import Button from "../../../../components/Button";
+import InputField from "../../../../components/inputField";
+import { addReligion } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const Country = () => {
+const Religion = () => {
   const [selected, setSelected] = useState("add");
-  const [country, setCountry] = useState("");
+  const [religion, setReligion] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addReligion({ religion });
+    toast.success('Religion added!')
+  };
 
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
     "w-20 bg-white text-center p-2 rounded-xl border border-slate-200";
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await addCountry({country});
-      toast.success("Country added!");
-    } catch (error) {
-      toast.error(error.response.data.maessage);
-    }
-  };
 
   return (
     <section>
@@ -41,12 +37,12 @@ const Country = () => {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-          <h2 className="mb-4">Add Country</h2>
+          <h2 className="mb-4">Add Religion</h2>
           <InputField
-            id={"country"}
+            id={"religion"}
+            placeholder={"Religion Name"}
             type={"text"}
-            placeholder={"Country Name"}
-            setState={setCountry}
+            setState={setReligion}
           />
           <Button
             label={"Save"}
@@ -58,4 +54,4 @@ const Country = () => {
   );
 };
 
-export default Country;
+export default Religion;

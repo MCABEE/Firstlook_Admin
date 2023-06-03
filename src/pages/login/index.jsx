@@ -10,7 +10,7 @@ import { doLogin } from "../../services/auth";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
-  const [selected, setSelected] = useState("major");
+  const [selected, setSelected] = useState("master");
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const { authorized } = useSelector((store) => store.auth);
@@ -37,10 +37,9 @@ const LoginPage = () => {
       const { data } = await doLogin({
         email: mail,
         password,
-        isMaster: selected === "major" ? true : false,
+        isMaster: selected === "master" ? true : false,
       });
 
-      toast.success("Login success!");
       localStorage.setItem("token", JSON.stringify(data.token));
       dispatch(setAuthorized());
       navigate("/controlPanel");
@@ -58,9 +57,9 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit}>
             <div className="flex gap-8 mt-5 mb-10 font-medium">
               <div
-                onClick={() => setSelected("major")}
+                onClick={() => setSelected("master")}
                 className={
-                  selected === "major" ? selectedLink : nonSelectedLink
+                  selected === "master" ? selectedLink : nonSelectedLink
                 }
               >
                 MASTER

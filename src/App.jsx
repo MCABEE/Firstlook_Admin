@@ -101,10 +101,6 @@ function App() {
 
           {/* Data Manager */}
           <Route path="motherTounge" element={<MotherTounge />} />
-          {/* <Route path="fatherEducation" element={<h1>fatherEducation</h1>} />
-          <Route path="fatherOccupation" element={<h1>fatherOccupation</h1>} />
-          <Route path="motherEducation" element={<h1>motherEducation</h1>} />
-          <Route path="motherOccupation" element={<h1>motherOccupation</h1>} /> */}
 
           {/* Places */}
           <Route path="country" element={<Country />} />

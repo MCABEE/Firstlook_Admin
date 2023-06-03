@@ -1,5 +1,2 @@
-import Employers from "./Employers";
-
-export {
-    Employers
-}
+import Employers from "./employer";
+export { Employers };

@@ -1,4 +1,4 @@
-import MotherTounge from "./MotherTounge";
+import MotherTounge from "./motherTounge/";
 
 export{
     MotherTounge

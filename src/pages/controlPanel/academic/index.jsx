@@ -1,5 +1,5 @@
-import Streams from "./Streams";
-import Courses from "./Courses";
+import Streams from "./stream";
+import Courses from "./course";
 
 export {
     Streams,

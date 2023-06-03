@@ -1,6 +1,6 @@
-import Institute from "./Institute";
-import University from "./University";
-import College from "./College";
+import Institute from "./institute";
+import University from "./university";
+import College from "./college";
 
 export {
     Institute,

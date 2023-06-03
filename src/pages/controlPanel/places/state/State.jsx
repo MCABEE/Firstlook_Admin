@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Button from "../../../components/Button";
-import InputField from "../../../components/inputField";
-import {Dropdown} from "../../../components/dropDown";
-import { getCountries, addState } from "../../../services/dataManager";
+import Button from "../../../../components/Button";
+import InputField from "../../../../components/inputField";
+import {Dropdown} from "../../../../components/dropDown";
+import { getCountries, addState } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
 const State = () => {

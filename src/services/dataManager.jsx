@@ -44,9 +44,20 @@ export const addPincode = (data) =>
   axios.post("/api/admin/dataManager/place/pincode", data, headers);
 
 // =============== BASIC =================
-
 export const addMotherTounge = (data) =>
   axios.post("/api/admin/dataManager/basic/motherTounge", data, headers);
+
+export const getMotherTounges = (country) =>
+  axios.get(
+    `/api/admin/dataManager/basic/motherTounge?country=${country}`,
+    headers
+  );
+
+export const deleteMotherTounge = (languageId, language) =>
+  axios.delete(
+    `/api/admin/dataManager/basic/motherTounge?languageId=${languageId}&language=${language}`,
+    headers
+  );
 
 // ============== RELIGION ===============
 export const addReligion = (data) =>
@@ -57,3 +68,43 @@ export const getReligions = () =>
 
 export const addCaste = (data) =>
   axios.post("/api/admin/dataManager/religion/caste", data, headers);
+
+export const getCastes = (religion) =>
+axios.get(`/api/admin/dataManager/religion/caste?religion=${religion}`, headers);
+
+export const deleteCaste = (casteName) => 
+    axios.delete(`/api/admin/dataManager/religion/caste?caste=${casteName}`, headers)
+
+// ============== INSTITUTION ================
+export const addCollege = (data) =>
+  axios.post("/api/admin/dataManager/institution/college", data, headers);
+
+export const addUniversity = (data) =>
+  axios.post("/api/admin/dataManager/institution/university", data, headers);
+
+export const addInstitute = (data) =>
+  axios.post("/api/admin/dataManager/institution/institute", data, headers);
+
+// ============== ACADEMIC =================
+export const addStream = (data) =>
+  axios.post("/api/admin/dataManager/academic/stream", data, headers);
+
+export const getStreams = () =>
+  axios.get("/api/admin/dataManager/academic/stream", headers);
+
+export const addCourse = (data) =>
+  axios.post("/api/admin/dataManager/academic/course", data, headers);
+
+//============== OCCUPATION ================
+export const addOccupationStream = (data) =>
+  axios.post("/api/admin/dataManager/occupation/stream", data, headers);
+
+export const getOccupationStreams = () =>
+  axios.get("/api/admin/dataManager/occupation/stream", headers);
+
+export const addDesignation = (data) =>
+  axios.post("/api/admin/dataManager/occupation/designation", data, headers);
+
+// ============== EMPLOYER ================
+export const addEmployer = (data) =>
+  axios.post("/api/admin/datamanager/employer", data, headers);

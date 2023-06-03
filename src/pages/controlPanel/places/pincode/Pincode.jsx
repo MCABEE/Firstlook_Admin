@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-import Button from "../../../components/Button";
-import { Dropdown, DropdownValueId } from "../../../components/dropDown";
-import InputField from "../../../components/inputField";
+import Button from "../../../../components/Button";
+import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
+import InputField from "../../../../components/inputField";
 import {
-  addCity,
+  addPincode,
   getCountries,
+  getDistricts,
   getStates,
-} from "../../../services/dataManager";
+} from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const Cities = () => {
+const Pincode = () => {
   const [selected, setSelected] = useState("add");
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
+  const [districts, setDistricts] = useState([]);
+
   const [country, setCounty] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
+  const [stateId, setStateId] = useState("");
+  const [districtId, setDistrictId] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [postOffice, setPostOffice] = useState("");
 
   const listCountries = async () => {
     const { data } = await getCountries();
@@ -27,15 +32,24 @@ const Cities = () => {
     setStates(data.states);
   };
 
+  const listDistricts = async (stateId) => {
+    const { data } = await getDistricts(stateId);
+    setDistricts(data.districts);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCity({ stateId: state, city });
-    toast.success("City name added!");
+    await addPincode({ districtId, pincode, postOffice });
+    toast.success("Pincode added!");
   };
 
   useEffect(() => {
     listStates(country);
   }, [country]);
+
+  useEffect(() => {
+    listDistricts(stateId);
+  }, [stateId]);
 
   useEffect(() => {
     listCountries();
@@ -64,7 +78,7 @@ const Cities = () => {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-          <h2 className="mb-4">Add Cities</h2>
+          <h2 className="mb-4">Add Pin Code</h2>
           <Dropdown
             name={"country"}
             options={countries}
@@ -74,14 +88,26 @@ const Cities = () => {
           <DropdownValueId
             name={"state"}
             options={states}
-            placeHolder={"Select State/Province"}
-            setState={setState}
+            placeHolder={"Select State"}
+            setState={setStateId}
+          />
+          <DropdownValueId
+            name={"district"}
+            options={districts}
+            placeHolder={"Select District"}
+            setState={setDistrictId}
           />
           <InputField
-            id={"city"}
-            placeholder={"City Name"}
+            id={"pincode"}
+            placeholder={"Pin Code"}
+            type={"number"}
+            setState={setPincode}
+          />
+          <InputField
+            id={"postOffice"}
+            placeholder={"Post Office Name"}
             type={"text"}
-            setState={setCity}
+            setState={setPostOffice}
           />
           <Button
             label={"Save"}
@@ -93,4 +119,4 @@ const Cities = () => {
   );
 };
 
-export default Cities;
+export default Pincode;

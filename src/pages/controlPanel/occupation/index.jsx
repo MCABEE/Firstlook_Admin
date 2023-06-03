@@ -1,5 +1,5 @@
-import OccupationStreams from './Streams'
-import Designation from './Designation'
+import OccupationStreams from './streams'
+import Designation from './designation'
 
 export {
     OccupationStreams,

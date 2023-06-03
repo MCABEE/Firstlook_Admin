@@ -1,4 +1,4 @@
-import Religion from "./Religion";
-import Caste from "./Caste";
+import Religion from "./religion/Religion";
+import Caste from "./caste/Caste";
 
 export { Religion, Caste };

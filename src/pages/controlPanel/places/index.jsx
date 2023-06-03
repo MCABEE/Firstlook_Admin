@@ -1,8 +1,8 @@
-import Country from "./Country";
-import State from "./State";
-import District from "./District";
-import Cities from "./Cities";
-import Pincode from "./Pincode";
-import HomeTown from "./HomeTown";
+import Country from "./country/Country";
+import State from "./state/State";
+import District from "./district/District";
+import Cities from "./cities/Cities";
+import Pincode from "./pincode/Pincode";
+import HomeTown from "./homeTown/HomeTown";
 
 export { Country, State, District, Cities, Pincode, HomeTown };

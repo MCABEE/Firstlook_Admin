@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Button from "../../../components/Button";
-import { DropdownValueId, Dropdown } from "../../../components/dropDown/";
-import InputField from "../../../components/inputField";
+import Button from "../../../../components/Button";
+import { DropdownValueId, Dropdown } from "../../../../components/dropDown";
+import InputField from "../../../../components/inputField";
 import {
   getCountries,
   getStates,
   addDistrict,
-} from "../../../services/dataManager";
+} from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
 const District = () => {
