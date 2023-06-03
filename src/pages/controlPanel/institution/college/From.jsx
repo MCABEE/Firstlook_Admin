@@ -10,11 +10,10 @@ import { toast } from "react-hot-toast";
 const From = ({ countries }) => {
   const [country, setCountry] = useState("");
   const [institution, setInstitution] = useState("");
-  const [location, setLocation] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCollege({ country, institution, location });
+    await addCollege({ country, institution });
     toast.success("College added!");
   };
 
@@ -32,12 +31,6 @@ const From = ({ countries }) => {
         placeholder={"College Name"}
         type={"text"}
         setState={setInstitution}
-      />
-      <InputField
-        id={"place"}
-        placeholder={"Location / Place"}
-        type={"text"}
-        setState={setLocation}
       />
       <Button
         label={"Save"}

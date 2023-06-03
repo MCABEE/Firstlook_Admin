@@ -8,8 +8,8 @@ const Dropdown = ({ name, options, placeHolder, style, setState }) => {
           onChange={(e) => setState(e.target.value)}
         >
           <option value={''}>{placeHolder}</option>
-          {options?.map((option) => (
-            <option key={option?.id} value={option?.name}>
+          {options?.map((option, index) => (
+            <option key={index} value={option?.name}>
               {option?.name}
             </option>
           ))}

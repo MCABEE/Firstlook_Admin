@@ -1,8 +1,29 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { Dropdown } from "../../../../components/dropDown";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { deleteInstitution, getInstitutions } from "../../../../services/dataManager";
+import { toast } from "react-hot-toast";
 
 const ViewAll = ({countries}) => {
+  const [universities, setUniversities] = useState([]);
+  const [country, setCountry] = useState("");
+
+  const listInstitutes = async (country) => {
+    const { data } = await getInstitutions("institute", country);
+    setUniversities(data.institutions);
+  };
+
+  const removeInstitute = async (id) => {
+    await deleteInstitution("institute", id);
+    toast.success("Deleted Successfully!");
+    listInstitutes(country);
+  };
+
+  useEffect(() => {
+    listInstitutes(country);
+  }, [country]);
+
   return (
     <div>
       <h2 className="mb-4">View all</h2>
@@ -10,22 +31,32 @@ const ViewAll = ({countries}) => {
         name={"country"}
         options={countries}
         placeHolder={"Select Country"}
+        setState={setCountry}
       />
 
       <div className="mt-3 flex flex-col gap-3">
-        <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
-          Institutes
-        </span>
-        {['Institutes']?.map((institute) => (
-          <div key={institute?.id} className="flex justify-between ml-4">
-            <div className="flex gap-2">
-              <input id="institute" type="checkbox" />
-              <label htmlFor="institute">
-                {institute?.name}, {institute?.place}
-              </label>
-            </div>
-            <button><DeleteForeverOutlinedIcon/></button>
-          </div>
+        {universities?.map((country) => (
+          <>
+            <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
+              {country._id}
+            </span>
+            {country?.institutions.map((institution) => (
+              <div key={institution._id} className="flex justify-between ml-4">
+                <div className="flex gap-2 overflow-hidden">
+                  <input id="college" type="checkbox" />
+                  <label htmlFor="college">
+                    {institution.name}
+                  </label>
+                </div>
+                <button
+                  className="text-slate-500"
+                  onClick={() => removeInstitute(institution._id)}
+                >
+                  <DeleteForeverOutlinedIcon />
+                </button>
+              </div>
+            ))}
+          </>
         ))}
       </div>
     </div>

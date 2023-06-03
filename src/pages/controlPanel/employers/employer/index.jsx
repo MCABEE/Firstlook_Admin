@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "./Form";
 import ViewAll from "./ViewAll";
+import { getCountries } from "../../../../services/dataManager";
 
 const Employers = () => {
   const [selected, setSelected] = useState("add");
+
+  const [countries, setCountries] = useState([]);
+  const listCountries = async () => {
+    const { data } = await getCountries();
+    setCountries(data.countries);
+  };
+
+  useEffect(() => {
+    listCountries();
+  }, []);
+
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
@@ -26,10 +38,10 @@ const Employers = () => {
             View all
           </button>
         </div>
-        {selected === "add" && <Form />}
+        {selected === "add" && <Form countries={countries} />}
 
         {/* VIEW ALL */}
-        {selected === "viewAll" && <ViewAll />}
+        {selected === "viewAll" && <ViewAll countries={countries} />}
       </div>
     </section>
   );

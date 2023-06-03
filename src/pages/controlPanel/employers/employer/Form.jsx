@@ -1,16 +1,15 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import {
   addEmployer,
-  getCountries,
   getOccupationStreams,
 } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const Form = () => {
-  const [countries, setCountries] = useState([]);
+const Form = ({ countries }) => {
   const [streams, setStreams] = useState([]);
 
   const [country, setCountry] = useState("");
@@ -23,18 +22,12 @@ const Form = () => {
     toast.success("Employer added!");
   };
 
-  const listCountries = async () => {
-    const { data } = await getCountries();
-    setCountries(data.countries);
-  };
-
   const listStreams = async () => {
     const { data } = await getOccupationStreams();
     setStreams(data.occupationStreams);
   };
 
   useEffect(() => {
-    listCountries();
     listStreams();
   }, []);
 

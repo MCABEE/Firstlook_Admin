@@ -70,10 +70,16 @@ export const addCaste = (data) =>
   axios.post("/api/admin/dataManager/religion/caste", data, headers);
 
 export const getCastes = (religion) =>
-axios.get(`/api/admin/dataManager/religion/caste?religion=${religion}`, headers);
+  axios.get(
+    `/api/admin/dataManager/religion/caste?religion=${religion}`,
+    headers
+  );
 
-export const deleteCaste = (casteName) => 
-    axios.delete(`/api/admin/dataManager/religion/caste?caste=${casteName}`, headers)
+export const deleteCaste = (casteName) =>
+  axios.delete(
+    `/api/admin/dataManager/religion/caste?caste=${casteName}`,
+    headers
+  );
 
 // ============== INSTITUTION ================
 export const addCollege = (data) =>
@@ -84,6 +90,15 @@ export const addUniversity = (data) =>
 
 export const addInstitute = (data) =>
   axios.post("/api/admin/dataManager/institution/institute", data, headers);
+
+export const getInstitutions = (type, country) =>
+  axios.get(
+    `/api/admin/dataManager/institution/${type}?country=${country}`,
+    headers
+  );
+
+export const deleteInstitution = (type, id) =>
+  axios.delete(`/api/admin/dataManager/institution/${type}?id=${id}`, headers);
 
 // ============== ACADEMIC =================
 export const addStream = (data) =>
@@ -108,3 +123,9 @@ export const addDesignation = (data) =>
 // ============== EMPLOYER ================
 export const addEmployer = (data) =>
   axios.post("/api/admin/datamanager/employer", data, headers);
+
+export const getEmployers = (country) =>
+  axios.get(`/api/admin/datamanager/employer?country=${country}`, headers);
+
+export const deleteEmployer = (id) =>
+  axios.delete(`/api/admin/datamanager/employer?id=${id}`, headers);

@@ -10,7 +10,6 @@ const Form = ({ countries }) => {
 
   const [country, setCountry] = useState("");
   const [institution, setInstitution] = useState("");
-  const [location, setLocation] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,12 +31,6 @@ const Form = ({ countries }) => {
         placeholder={"Institute Name"}
         type={"text"}
         setState={setInstitution}
-      />
-      <InputField
-        id={"place"}
-        placeholder={"Place / Location"}
-        type={"text"}
-        setState={setLocation}
       />
       <Button
         label={"Save"}
