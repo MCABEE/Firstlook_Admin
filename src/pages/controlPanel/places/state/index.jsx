@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import Button from "../../../../components/Button";
-import InputField from "../../../../components/inputField";
-import {Dropdown} from "../../../../components/dropDown";
-import { getCountries, addState } from "../../../../services/dataManager";
-import { toast } from "react-hot-toast";
+import { getCountries } from "../../../../services/dataManager";
+import Form from "./Form";
+import ViewAll from "./ViewAll";
 
 const State = () => {
   const [selected, setSelected] = useState("add");
   const [countries, setCountries] = useState([]);
-  const [country, setCounty] = useState("");
-  const [state, setState] = useState("");
+
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
@@ -23,12 +20,6 @@ const State = () => {
   useEffect(() => {
     listCountries();
   }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await addState({ country, state });
-    toast.success("State added!");
-  };
 
   return (
     <section>
@@ -47,25 +38,9 @@ const State = () => {
             View all
           </button>
         </div>
-        <form onSubmit={handleSubmit}>
-          <h2 className="mb-4">Add State</h2>
-          <Dropdown
-            name={"state"}
-            options={countries}
-            placeHolder={"Select Country"}
-            setState={setCounty}
-          />
-          <InputField
-            id={"State"}
-            placeholder={"State Name"}
-            type={"text"}
-            setState={setState}
-          />
-          <Button
-            label={"Save"}
-            style={"w-36 rounded-xl bg-pink mt-4 text-white py-2 float-right"}
-          />
-        </form>
+
+        {selected === "add" && <Form countries={countries} />}
+        {selected === "viewAll" && <ViewAll countries={countries} />}
       </div>
     </section>
   );

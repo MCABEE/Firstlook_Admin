@@ -3,25 +3,24 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import { addMotherTounge, getStatesList } from "../../../../services/dataManager";
+import { addCity, getStatesList } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const Form = ({ countries }) => {
+const Form = ({countries}) => {
   const [states, setStates] = useState([]);
   const [country, setCounty] = useState("");
-
-  const [stateId, setStateId] = useState("");
-  const [language, setLanguage] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await addMotherTounge({ stateId, language });
-    toast.success("Language added!");
-  };
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
 
   const listStates = async (country) => {
     const { data } = await getStatesList(country);
     setStates(data.states);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addCity({ stateId: state, city });
+    toast.success("City name added!");
   };
 
   useEffect(() => {
@@ -30,7 +29,7 @@ const Form = ({ countries }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="mb-4">Add Mother Tounge</h2>
+      <h2 className="mb-4">Add Cities</h2>
       <Dropdown
         name={"country"}
         options={countries}
@@ -40,14 +39,14 @@ const Form = ({ countries }) => {
       <DropdownValueId
         name={"state"}
         options={states}
-        placeHolder={"Select State / Province"}
-        setState={setStateId}
+        placeHolder={"Select State/Province"}
+        setState={setState}
       />
       <InputField
-        id={"language"}
-        placeholder={"Language"}
+        id={"city"}
+        placeholder={"City Name"}
         type={"text"}
-        setState={setLanguage}
+        setState={setCity}
       />
       <Button
         label={"Save"}

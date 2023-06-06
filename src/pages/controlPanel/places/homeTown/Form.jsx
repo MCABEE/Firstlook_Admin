@@ -3,34 +3,46 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import { addMotherTounge, getStatesList } from "../../../../services/dataManager";
+import { addHomeTown, getDistrictsList, getStatesList } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const Form = ({ countries }) => {
+const Form = ({countries}) => {
+
   const [states, setStates] = useState([]);
+  const [districts, setDistricts] = useState([]);
+
   const [country, setCounty] = useState("");
-
   const [stateId, setStateId] = useState("");
-  const [language, setLanguage] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await addMotherTounge({ stateId, language });
-    toast.success("Language added!");
-  };
+  const [districtId, setDistrictId] = useState("");
+  const [homeTown, setHomeTown] = useState("");
 
   const listStates = async (country) => {
     const { data } = await getStatesList(country);
     setStates(data.states);
   };
 
+  const listDistricts = async (stateId) => {
+    const { data } = await getDistrictsList(stateId);
+    setDistricts(data.districts);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addHomeTown({ district: districtId, homeTown });
+    toast.success("Hometown added!");
+  };
+
   useEffect(() => {
     listStates(country);
   }, [country]);
 
+  useEffect(() => {
+    listDistricts(stateId);
+  }, [stateId]);
+
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="mb-4">Add Mother Tounge</h2>
+      <h2 className="mb-4">Add Home Town</h2>
       <Dropdown
         name={"country"}
         options={countries}
@@ -40,14 +52,20 @@ const Form = ({ countries }) => {
       <DropdownValueId
         name={"state"}
         options={states}
-        placeHolder={"Select State / Province"}
+        placeHolder={"Select State"}
         setState={setStateId}
       />
+      <DropdownValueId
+        name={"district"}
+        options={districts}
+        placeHolder={"Select District"}
+        setState={setDistrictId}
+      />
       <InputField
-        id={"language"}
-        placeholder={"Language"}
+        id={"homeTown"}
+        placeholder={"Home Town Name"}
         type={"text"}
-        setState={setLanguage}
+        setState={setHomeTown}
       />
       <Button
         label={"Save"}

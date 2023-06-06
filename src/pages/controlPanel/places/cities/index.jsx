@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
+import { getCountries } from "../../../../services/dataManager";
 import Form from "./Form";
 import ViewAll from "./ViewAll";
-import { getStreams } from "../../../../services/dataManager";
 
-const Courses = () => {
+const Cities = () => {
   const [selected, setSelected] = useState("add");
-  const [streams, setStreams] = useState([]);
+  const [countries, setCountries] = useState([]);
 
-
-  const listStreams = async () => {
-    const { data } = await getStreams();
-    setStreams(data.streams);
+  const listCountries = async () => {
+    const { data } = await getCountries();
+    setCountries(data.countries);
   };
 
   useEffect(() => {
-    listStreams();
-  },[]);
+    listCountries();
+  }, []);
+
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
@@ -38,14 +38,11 @@ const Courses = () => {
             View all
           </button>
         </div>
-        {/* FORM */}
-        {selected === "add" && <Form streams={streams} />}
-
-        {/* VIEW ALL */}
-        {selected === "viewAll" && <ViewAll streams={streams} />}
+        {selected === "add" && <Form countries={countries} />}
+        {selected === "viewAll" && <ViewAll countries={countries} />}
       </div>
     </section>
   );
 };
 
-export default Courses;
+export default Cities;

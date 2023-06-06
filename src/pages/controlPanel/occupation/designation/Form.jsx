@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import Button from "../../../../components/Button";
 import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import {
-  addDesignation,
-  getOccupationStreams,
-} from "../../../../services/dataManager";
+import { addDesignation } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const Form = () => {
-  const [streams, setStreams] = useState([]);
+const Form = ({ streams }) => {
   const [stream, setStream] = useState("");
   const [designation, setDesignation] = useState("");
 
@@ -18,15 +15,6 @@ const Form = () => {
     await addDesignation({ stream, designation });
     toast.success("Designation added!");
   };
-
-  const listStreams = async () => {
-    const { data } = await getOccupationStreams();
-    setStreams(data.occupationStreams);
-  };
-
-  useEffect(() => {
-    listStreams();
-  }, []);
 
   return (
     <form onSubmit={handleSubmit}>

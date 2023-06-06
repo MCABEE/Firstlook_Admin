@@ -1,37 +1,35 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import Button from "../../../../components/Button";
 import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import { addCourse } from "../../../../services/dataManager";
+import Button from "../../../../components/Button";
+import { addState } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const Form = ({streams}) => {
-  const [stream, setStream] = useState("");
-  const [course, setCourse] = useState("");
+const Form = ({countries}) => {
+  const [country, setCounty] = useState("");
+  const [state, setState] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCourse({ stream, course });
-    toast.success('Course added!')
+    await addState({ country, state });
+    toast.success("State added!");
   };
-
-
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="mb-4">Add Course</h2>
+      <h2 className="mb-4">Add State</h2>
       <Dropdown
-        name={"stream"}
-        options={streams}
-        placeHolder={"Select Stream"}
-        setState={setStream}
+        name={"state"}
+        options={countries}
+        placeHolder={"Select Country"}
+        setState={setCounty}
       />
       <InputField
-        id={"course"}
-        placeholder={"Course Name"}
+        id={"State"}
+        placeholder={"State Name"}
         type={"text"}
-        setState={setCourse}
+        setState={setState}
       />
       <Button
         label={"Save"}

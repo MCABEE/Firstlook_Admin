@@ -1,7 +1,7 @@
 import axios from "./axios";
 
 const getToken = () => {
-  return localStorage.getItem('token');
+  return localStorage.getItem("token");
 };
 
 const getHeaders = () => {
@@ -15,44 +15,83 @@ const getHeaders = () => {
 
 // ============== PLACE ==============
 
-// ADD NEW COUNTRY
+// >>>>>> COUNTRY
 export const addCountry = (data) =>
   axios.post("/api/admin/dataManager/place/country", data, getHeaders());
 
-// GET ALL COUNTRIES
 export const getCountries = () =>
   axios.get("/api/admin/dataManager/place/country", getHeaders());
 
-// ADD NEW STATE
+export const deleteCountry = (id) =>
+  axios.delete(`/api/admin/dataManager/place/country?id=${id}`, getHeaders());
+
+//>>>>>> STATE
 export const addState = (data) =>
   axios.post("/api/admin/dataManager/place/state", data, getHeaders());
 
-// GET STATES OF A COUNTRY / ALL
 export const getStates = (country) =>
-  axios.get(`/api/admin/dataManager/place/state?country=${country}`, getHeaders());
+  axios.get(
+    `/api/admin/dataManager/place/state?country=${country}`,
+    getHeaders()
+  );
 
-// ADD NEW DISTRICT
+export const getStatesList = (country) =>
+  axios.get(
+    `/api/admin/dataManager/place/state?dropdown=${true}&country=${country}`,
+    getHeaders()
+  );
+
+export const deleteState = (id) =>
+  axios.delete(`/api/admin/dataManager/place/state?id=${id}`, getHeaders());
+
+//>>>>>> DISTRICT
 export const addDistrict = (data) =>
   axios.post("/api/admin/dataManager/place/district", data, getHeaders());
 
-// GET DISTRICTS OF A STATE / ALL
 export const getDistricts = (stateId) =>
   axios.get(
     `/api/admin/dataManager/place/district?stateId=${stateId}`,
     getHeaders()
   );
 
-// ADD NEW HOMETOWN
+export const getDistrictsList = (stateId) =>
+  axios.get(
+    `/api/admin/dataManager/place/district?dropdown=${true}&stateId=${stateId}`,
+    getHeaders()
+  );
+
+export const deleteDistrict = (id) =>
+  axios.delete(`/api/admin/dataManager/place/district?id=${id}`, getHeaders());
+
+//>>>>>> HOMETOWN
 export const addHomeTown = (data) =>
   axios.post("/api/admin/dataManager/place/homeTown", data, getHeaders());
 
-// ADD NEW CITY
+export const getHomeTowns = () =>
+  axios.get(`/api/admin/dataManager/place/homeTown`, getHeaders());
+
+export const deleteHomeTown = (id) =>
+  axios.delete(`/api/admin/dataManager/place/homeTown?id=${id}`, getHeaders());
+
+//>>>>>> CITY
 export const addCity = (data) =>
   axios.post("/api/admin/dataManager/place/city", data, getHeaders());
 
-// ADD NEW PINCODE
+export const getCities = () =>
+  axios.get("/api/admin/dataManager/place/city", getHeaders());
+
+export const deleteCity = (id) =>
+  axios.delete(`/api/admin/dataManager/place/city?id=${id}`, getHeaders());
+
+//>>>>>> PINCODE
 export const addPincode = (data) =>
   axios.post("/api/admin/dataManager/place/pincode", data, getHeaders());
+
+export const getPincodes = () =>
+  axios.get(`/api/admin/dataManager/place/pincode`, getHeaders());
+
+export const deletePincode = (id) =>
+  axios.delete(`/api/admin/dataManager/place/pincode?id=${id}`, getHeaders());
 
 // =============== BASIC =================
 export const addMotherTounge = (data) =>
@@ -64,9 +103,9 @@ export const getMotherTounges = (country) =>
     getHeaders()
   );
 
-export const deleteMotherTounge = (languageId, language) =>
+export const deleteMotherTounge = (stateId, language) =>
   axios.delete(
-    `/api/admin/dataManager/basic/motherTounge?languageId=${languageId}&language=${language}`,
+    `/api/admin/dataManager/basic/motherTounge?stateId=${stateId}&language=${language}`,
     getHeaders()
   );
 
@@ -76,6 +115,9 @@ export const addReligion = (data) =>
 
 export const getReligions = () =>
   axios.get("/api/admin/dataManager/religion", getHeaders());
+
+export const deleteReligion = (id) =>
+  axios.get(`/api/admin/dataManager/religion?id=${id}`, getHeaders());
 
 export const addCaste = (data) =>
   axios.post("/api/admin/dataManager/religion/caste", data, getHeaders());
@@ -97,10 +139,18 @@ export const addCollege = (data) =>
   axios.post("/api/admin/dataManager/institution/college", data, getHeaders());
 
 export const addUniversity = (data) =>
-  axios.post("/api/admin/dataManager/institution/university", data, getHeaders());
+  axios.post(
+    "/api/admin/dataManager/institution/university",
+    data,
+    getHeaders()
+  );
 
 export const addInstitute = (data) =>
-  axios.post("/api/admin/dataManager/institution/institute", data, getHeaders());
+  axios.post(
+    "/api/admin/dataManager/institution/institute",
+    data,
+    getHeaders()
+  );
 
 export const getInstitutions = (type, country) =>
   axios.get(
@@ -109,7 +159,10 @@ export const getInstitutions = (type, country) =>
   );
 
 export const deleteInstitution = (type, id) =>
-  axios.delete(`/api/admin/dataManager/institution/${type}?id=${id}`, getHeaders());
+  axios.delete(
+    `/api/admin/dataManager/institution/${type}?id=${id}`,
+    getHeaders()
+  );
 
 // ============== ACADEMIC =================
 export const addStream = (data) =>
@@ -118,8 +171,14 @@ export const addStream = (data) =>
 export const getStreams = () =>
   axios.get("/api/admin/dataManager/academic/stream", getHeaders());
 
+export const deleteStream = (id) =>
+  axios.delete(`/api/admin/dataManager/academic/stream?id=${id}`, getHeaders());
+
 export const addCourse = (data) =>
   axios.post("/api/admin/dataManager/academic/course", data, getHeaders());
+
+export const getCourses = () =>
+  axios.get("/api/admin/dataManager/academic/course", getHeaders());
 
 //============== OCCUPATION ================
 export const addOccupationStream = (data) =>
@@ -128,8 +187,27 @@ export const addOccupationStream = (data) =>
 export const getOccupationStreams = () =>
   axios.get("/api/admin/dataManager/occupation/stream", getHeaders());
 
+export const deleteOccpationStream = (id) =>
+  axios.delete(
+    `/api/admin/dataManager/occupation/stream?id=${id}`,
+    getHeaders()
+  );
+
 export const addDesignation = (data) =>
-  axios.post("/api/admin/dataManager/occupation/designation", data, getHeaders());
+  axios.post(
+    "/api/admin/dataManager/occupation/designation",
+    data,
+    getHeaders()
+  );
+
+export const getDesignation = () =>
+  axios.get("/api/admin/dataManager/occupation/designation", getHeaders());
+
+export const deleteDesignation = (id) =>
+  axios.delete(
+    `/api/admin/dataManager/occupation/designation?id=${id}`,
+    getHeaders()
+  );
 
 // ============== EMPLOYER ================
 export const addEmployer = (data) =>

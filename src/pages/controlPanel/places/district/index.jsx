@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
-import Form from "./Form";
+import { getCountries } from "../../../../services/dataManager";
+import Form from "./From";
 import ViewAll from "./ViewAll";
-import { getStreams } from "../../../../services/dataManager";
-
-const Courses = () => {
+const District = () => {
   const [selected, setSelected] = useState("add");
-  const [streams, setStreams] = useState([]);
+  const [countries, setCountries] = useState([]);
 
-
-  const listStreams = async () => {
-    const { data } = await getStreams();
-    setStreams(data.streams);
-  };
-
-  useEffect(() => {
-    listStreams();
-  },[]);
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
     "w-20 bg-white text-center p-2 rounded-xl border border-slate-200";
+
+  const listCountries = async () => {
+    const { data } = await getCountries();
+    setCountries(data.countries);
+  };
+
+  useEffect(() => {
+    listCountries();
+  }, []);
 
   return (
     <section>
@@ -38,14 +37,13 @@ const Courses = () => {
             View all
           </button>
         </div>
-        {/* FORM */}
-        {selected === "add" && <Form streams={streams} />}
 
-        {/* VIEW ALL */}
-        {selected === "viewAll" && <ViewAll streams={streams} />}
+        {selected === "add" && <Form countries={countries} />}
+        {selected === "viewAll" && <ViewAll countries={countries} />}
+
       </div>
     </section>
   );
 };
 
-export default Courses;
+export default District;

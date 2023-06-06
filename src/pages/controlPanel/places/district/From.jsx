@@ -1,22 +1,21 @@
 /* eslint-disable react/prop-types */
+import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import { addMotherTounge, getStatesList } from "../../../../services/dataManager";
-import { toast } from "react-hot-toast";
+import { addDistrict, getStatesList } from "../../../../services/dataManager";
 
-const Form = ({ countries }) => {
+const From = ({ countries }) => {
   const [states, setStates] = useState([]);
+  const [state, setState] = useState("");
   const [country, setCounty] = useState("");
-
-  const [stateId, setStateId] = useState("");
-  const [language, setLanguage] = useState("");
+  const [district, setDistrict] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addMotherTounge({ stateId, language });
-    toast.success("Language added!");
+    await addDistrict({ stateId: state, district });
+    toast.success("District added!");
   };
 
   const listStates = async (country) => {
@@ -30,7 +29,7 @@ const Form = ({ countries }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="mb-4">Add Mother Tounge</h2>
+      <h2 className="mb-4">Add District</h2>
       <Dropdown
         name={"country"}
         options={countries}
@@ -40,14 +39,14 @@ const Form = ({ countries }) => {
       <DropdownValueId
         name={"state"}
         options={states}
-        placeHolder={"Select State / Province"}
-        setState={setStateId}
+        placeHolder={"Select State"}
+        setState={setState}
       />
       <InputField
-        id={"language"}
-        placeholder={"Language"}
+        id={"State"}
+        placeholder={"District Name"}
         type={"text"}
-        setState={setLanguage}
+        setState={setDistrict}
       />
       <Button
         label={"Save"}
@@ -57,4 +56,4 @@ const Form = ({ countries }) => {
   );
 };
 
-export default Form;
+export default From;

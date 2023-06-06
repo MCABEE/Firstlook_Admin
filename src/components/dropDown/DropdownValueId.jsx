@@ -7,7 +7,7 @@ const DropdownValueId = ({ name, options, placeHolder, style, setState }) => {
           className={style || "border border-gray rounded-xl py-2 px-5 my-2 w-80"}
           onChange={(e) => setState(e.target.value)}
         >
-          <option value={null}>{placeHolder}</option>
+          <option value={''}>{placeHolder}</option>
           {options?.map((option) => (
             <option key={option?._id} value={option?._id}>
               {option?.name}

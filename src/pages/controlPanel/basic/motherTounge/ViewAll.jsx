@@ -38,29 +38,34 @@ const ViewAll = ({ countries }) => {
       />
 
       <div className="mt-3 flex flex-col gap-3">
-        {motherTounges.map((motherTounge) => (
+        {motherTounges?.map((country) => (
           <>
-            <span
-              key={motherTounge?._id}
-              className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
-            >
-              {motherTounge?.state.name}
-            </span>
-            {motherTounge?.languages?.map((language) => (
-              <div key={language} className="flex justify-between ml-4">
-                <div className="flex gap-2">
-                  <input id="language" type="checkbox" />
-                  <label htmlFor="language">{language}</label>
-                </div>
-                <button
-                  className="text-slate-500"
-                  onClick={() =>
-                    deleteLanguage(motherTounge._id, language)
-                  }
+            {country?.states?.map((state) => (
+              <>
+                <span
+                  key={state?.stateId}
+                  className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
                 >
-                  <DeleteForeverOutlinedIcon />
-                </button>
-              </div>
+                  {`${state?.state} - ${country?._id}`}
+                </span>
+                {state?.languages?.map((language, index) => (
+                  <div
+                    key={language + index}
+                    className="flex justify-between ml-4"
+                  >
+                    <div className="flex gap-2">
+                      <input id="language" type="checkbox" />
+                      <label htmlFor="language">{language}</label>
+                    </div>
+                    <button
+                      className="text-slate-500"
+                      onClick={() => deleteLanguage(state?.stateId, language)}
+                    >
+                      <DeleteForeverOutlinedIcon />
+                    </button>
+                  </div>
+                ))}
+              </>
             ))}
           </>
         ))}

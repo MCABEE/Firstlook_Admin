@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { deleteOccpationStream, getOccupationStreams } from "../../../../services/dataManager";
+import { deleteReligion, getReligions } from "../../../../services/dataManager";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { toast } from "react-hot-toast";
 
 const ViewAll = () => {
-  const [streams, setStreams] = useState([]);
+  const [religions, setReligions] = useState([]);
   const [list, setList] = useState([]);
 
-  const fetchStreams = async () => {
-    const { data } = await getOccupationStreams();
-    setStreams(data.occupationStreams);
-    setList(data.occupationStreams);
+  const fetchReligion = async () => {
+    const { data } = await getReligions();
+    setReligions(data.religions);
+    setList(data.religions);
   };
 
   const searchReligion = (search) => {
@@ -20,17 +20,17 @@ const ViewAll = () => {
             religion.name.toLowerCase().includes(search.toLowerCase())
           )
         )
-      : setList(streams);
+      : setList(religions);
   };
 
-  const removeStream = async (id) => {
-    await deleteOccpationStream(id);
+  const removeReligion = async (id) => {
+    await deleteReligion(id);
     toast.success("Deleted successfully");
-    fetchStreams();
+    fetchReligion();
   };
 
   useEffect(() => {
-    fetchStreams();
+    fetchReligion();
   }, []);
 
   return (
@@ -42,15 +42,15 @@ const ViewAll = () => {
         className="border border-gray rounded-xl py-2 px-5 my-2 w-80"
         onChange={(e) => searchReligion(e.target.value)}
       />
-      {list?.map((stream) => (
-        <div key={stream?._id} className="flex justify-between ml-4">
+      {list?.map((religion) => (
+        <div key={religion?._id} className="flex justify-between ml-4">
           <div className="flex gap-2">
             <input id="language" type="checkbox" />
-            <label htmlFor="language">{stream?.name}</label>
+            <label htmlFor="language">{religion?.name}</label>
           </div>
           <button
             className="text-slate-500"
-            onClick={() => removeStream(stream._id)}
+            onClick={() => removeReligion(religion._id)}
           >
             <DeleteForeverOutlinedIcon />
           </button>
