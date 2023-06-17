@@ -21,7 +21,10 @@ import {
 } from "./pages/controlPanel/institution";
 import { Caste, Religion } from "./pages/controlPanel/religion";
 import { Employers } from "./pages/controlPanel/employers";
-import { AllUsers, UserDetails } from "./pages/controlPanel/users/allUsers";
+import {
+  AllUsers,
+  UserProfile,
+} from "./pages/controlPanel/users/allUsers";
 import { NewUsers, NewUserDetails } from "./pages/controlPanel/users/newUsers";
 import {
   IdVerification,
@@ -33,7 +36,12 @@ import {
 } from "./pages/controlPanel/users/deActivation";
 import { Statistics } from "./pages/controlPanel/statistics";
 import { AllPhotos } from "./pages/controlPanel/photos";
-import { Designation, OccupationStreams } from "./pages/controlPanel/occupation";
+import {
+  Designation,
+  OccupationStreams,
+} from "./pages/controlPanel/occupation";
+import { AddPost, FeedPost, ViewPost } from "./pages/controlPanel/adminPublish";
+import Payments from "./pages/controlPanel/payments";
 
 function App() {
   return (
@@ -58,7 +66,13 @@ function App() {
 
           <Route path="allUsers" element={<Outlet />}>
             <Route index element={<AllUsers />} />
-            <Route path=":id" element={<UserDetails />} />
+            <Route path=":id" element={<UserProfile />} />
+            {/* <Route index element={<UserDetails />} />
+              <Route path="Ids" element={<h3>Ids</h3>} />
+              <Route path="posts" element={<h3>Posts</h3>} />
+              <Route path="payments" element={<h3>Payments</h3>} />
+              <Route path="Reports" element={<h3>Reports</h3>} />
+            </Route> */}
           </Route>
 
           <Route
@@ -82,7 +96,7 @@ function App() {
           </Route>
 
           {/* Payments */}
-          <Route path="payments" element={<h1>Payments</h1>} />
+          <Route path="payments" element={<Payments />} />
 
           {/* Photo Updates */}
           <Route path="photoUpdates" element={<AllPhotos />} />
@@ -121,6 +135,12 @@ function App() {
           {/* Occupation */}
           <Route path="occupationStreams" element={<OccupationStreams />} />
           <Route path="designation" element={<Designation />} />
+
+          {/* Feed post */}
+          <Route path="feedPost" element={<FeedPost />}>
+            <Route index element={<AddPost />} />
+            <Route path="viewAll" element={<ViewPost />} />
+          </Route>
 
           {/* Institutions */}
           <Route path="colleges" element={<College />} />

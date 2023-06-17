@@ -40,7 +40,7 @@ const NewUsers = () => {
   return (
     <section>
       {/* Total users and Filters */}
-      <div className="flex md:flex-row sm:flex-col gap-1 overflow-auto items-start">
+      <div className="flex md:flex-row flex-col gap-1 overflow-auto items-start">
         <div>
           <div className="p-2 rounded-xl text-center border text-gray-dark w-28">
             <p className="text-xs">New Users</p>
@@ -82,7 +82,7 @@ const NewUsers = () => {
           </button>
         </div>
 
-        <DataTable rows={rows} columns={columns} />
+        <DataTable rows={rows} columns={columns} showCheckbox={true} />
       </div>
 
       {/* Notification Modal */}

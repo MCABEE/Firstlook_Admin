@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { DataGrid } from "@mui/x-data-grid";
 
-export const DataTable = ({rows, columns}) => {
+export const DataTable = ({rows, columns, showCheckbox}) => {
   return (
-    <div style={{ height: 500, width: "100%" }}>
+    <div style={{ height: '70vh', width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -13,7 +13,7 @@ export const DataTable = ({rows, columns}) => {
           },
         }}
         pageSizeOptions={[10, 20, 50]}
-        checkboxSelection
+        checkboxSelection={showCheckbox}
       />
     </div>
   );

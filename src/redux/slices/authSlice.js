@@ -4,7 +4,10 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         authorized: false,
-        role: '',
+        adminDetails: {
+            id: '',
+            isMaster: false
+        }
     },
     reducers: {
         setAuthorized: (state) => {
@@ -13,11 +16,11 @@ export const authSlice = createSlice({
         setUnauthorized: (state) => {
             state.authorized = false;
         },
-        setRole: (state, action) => {
-            state.role = action.payload;
+        setAdminDetails: (state, action) => {
+            state.adminDetails = action.payload;
         }
     }
 })
 
-export const { setAuthorized, setUnauthorized, setRole } = authSlice.actions;
+export const { setAuthorized, setUnauthorized, setAdminDetails } = authSlice.actions;
 export default authSlice.reducer;

@@ -46,11 +46,11 @@ const AllPhotos = () => {
       </div>
 
       {/* Photo list */}
-      <div className="bg-white mt-10 p-2 rounded-md max-w-5xl">
+      <div className="bg-white mt-10 p-2 rounded-md max-w-7xl">
         <p className="mb-2">
           Filtered Result : <span className="text-lg font-bold">{323}</span>
         </p>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-x-3 gap-y-2 flex-wrap">
           <img
             src="https://images.pexels.com/photos/16564742/pexels-photo-16564742/free-photo-of-fashion-man-people-woman.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"

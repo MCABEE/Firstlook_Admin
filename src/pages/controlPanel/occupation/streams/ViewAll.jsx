@@ -38,7 +38,7 @@ const ViewAll = () => {
       <h2 className="mb-4">View all</h2>
       <input
         type="search"
-        placeholder="Search religion..."
+        placeholder="Search stream..."
         className="border border-gray rounded-xl py-2 px-5 my-2 w-80"
         onChange={(e) => searchReligion(e.target.value)}
       />

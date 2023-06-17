@@ -36,6 +36,11 @@ const institutionSubmenus = [
   { id: 3, name: "Institute Names", link: "institutes" },
 ];
 
+const adminPublishSubmenus = [
+  {id:1, name: 'Feed Post', link:'feedPost'},
+  {id:2, name: 'Notifications', link:'notifications'},
+]
+
 const employersSubmenu = [{ id: 1, name: "Employer", link: "employer" }];
 
 export const menus = [
@@ -130,7 +135,8 @@ export const menus = [
         subMenus: employersSubmenu,
       },
       { id: 6, name: "Academic", hasSubmenu: true, subMenus: academicSubmenus },
-      { id: 7, name: "Occupation", hasSubmenu: true, subMenus: occupationSubmenus},
+      { id: 7, name: "Occupation", hasSubmenu: true, subMenus: occupationSubmenus },
+      { id: 8, name: "Admin Publish", hasSubmenu: true, subMenus: adminPublishSubmenus }
     ],
   },
   {

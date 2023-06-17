@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthorized } from "../../redux/slices/authSlice";
 import { doLogin } from "../../services/auth";
+import { signinSchema } from "../../validation/authentication/signin";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [selected, setSelected] = useState("master");
-  const [mail, setMail] = useState('');
-  const [password, setPassword] = useState('');
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
   const { authorized } = useSelector((store) => store.auth);
 
   const navigate = useNavigate();
@@ -33,19 +34,26 @@ const LoginPage = () => {
   // form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await doLogin({
-        email: mail,
-        password,
-        isMaster: selected === "master" ? true : false,
-      });
+    await signinSchema
+      .validate({ email: mail, password })
+      .then(async () => {
+        try {
+          const { data } = await doLogin({
+            email: mail,
+            password,
+            isMaster: selected === "master" ? true : false,
+          });
 
-      localStorage.setItem("token", JSON.stringify(data.token));
-      dispatch(setAuthorized());
-      navigate("/controlPanel");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
+          localStorage.setItem("token", JSON.stringify(data.token));
+          dispatch(setAuthorized());
+          navigate("/controlPanel");
+        } catch (error) {
+          toast.error(error.response.data.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
