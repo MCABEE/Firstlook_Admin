@@ -3,11 +3,15 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import { addHomeTown, getDistrictsList, getStatesList } from "../../../../services/dataManager";
+import {
+  addHomeTown,
+  getDistrictsList,
+  getStatesList,
+} from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { homeTownSchema } from "../../../../validation/dataManager/places/homeTown";
 
-const Form = ({countries}) => {
-
+const Form = ({ countries }) => {
   const [states, setStates] = useState([]);
   const [districts, setDistricts] = useState([]);
 
@@ -28,8 +32,13 @@ const Form = ({countries}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addHomeTown({ district: districtId, homeTown });
-    toast.success("Hometown added!");
+    try {
+      await homeTownSchema.validate({ district: districtId, homeTown });
+      await addHomeTown({ district: districtId, homeTown });
+      toast.success("Hometown added!");
+    } catch (error) {
+      toast.error(error.message || "Coudn't add!");
+    }
   };
 
   useEffect(() => {

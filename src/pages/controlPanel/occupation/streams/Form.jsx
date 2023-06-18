@@ -3,14 +3,20 @@ import Button from "../../../../components/Button";
 import InputField from "../../../../components/inputField";
 import { addOccupationStream } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { occupationStreamSchema } from "../../../../validation/dataManager/occupation/stream";
 
 const Form = () => {
   const [stream, setStream] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addOccupationStream({ stream });
-    toast.success("Stream added!");
+    try {
+      await occupationStreamSchema.validate({ stream });
+      await addOccupationStream({ stream });
+      toast.success("Stream added!");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!");
+    }
   };
 
   return (

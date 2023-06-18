@@ -5,6 +5,7 @@ import Button from "../../../../components/Button";
 import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import { addDistrict, getStatesList } from "../../../../services/dataManager";
+import { districtSchema } from "../../../../validation/dataManager/places/district";
 
 const From = ({ countries }) => {
   const [states, setStates] = useState([]);
@@ -14,8 +15,19 @@ const From = ({ countries }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addDistrict({ stateId: state, district });
-    toast.success("District added!");
+    await districtSchema
+      .validate({ state, district })
+      .then(async () => {
+        try {
+          await addDistrict({ stateId: state, district });
+          toast.success("District added!");
+        } catch (error) {
+          toast.error("Couldn't add!");
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   const listStates = async (country) => {

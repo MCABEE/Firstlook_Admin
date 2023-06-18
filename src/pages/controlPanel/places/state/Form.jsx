@@ -5,15 +5,23 @@ import InputField from "../../../../components/inputField";
 import Button from "../../../../components/Button";
 import { addState } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { stateSchema } from "../../../../validation/dataManager/places/state";
 
-const Form = ({countries}) => {
+const Form = ({ countries }) => {
   const [country, setCounty] = useState("");
   const [state, setState] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addState({ country, state });
-    toast.success("State added!");
+    await stateSchema
+      .validate({ country, state })
+      .then(async () => {
+        await addState({ country, state });
+        toast.success("State added!");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (

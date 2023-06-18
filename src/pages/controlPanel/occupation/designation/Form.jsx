@@ -5,6 +5,7 @@ import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import { addDesignation } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { designationSchema } from "../../../../validation/dataManager/occupation/designation";
 
 const Form = ({ streams }) => {
   const [stream, setStream] = useState("");
@@ -12,8 +13,13 @@ const Form = ({ streams }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addDesignation({ stream, designation });
-    toast.success("Designation added!");
+    try {
+      await designationSchema.validate({ stream, designation });
+      await addDesignation({ stream, designation });
+      toast.success("Designation added!");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!");
+    }
   };
 
   return (

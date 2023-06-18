@@ -17,6 +17,8 @@ const ViewAll = ({ countries }) => {
   const removeState = async (id) => {
     try {
       await deleteState(id);
+      fetchStates(country);
+      toast.success("Deleted succefully");
     } catch (error) {
       toast.error(error.response.data.message);
     }

@@ -13,6 +13,16 @@ const getHeaders = () => {
   };
 };
 
+const uploadHeaders = () => {
+  const token = getToken();
+  return {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+};
+
 // ============== PLACE ==============
 
 // >>>>>> COUNTRY
@@ -117,7 +127,7 @@ export const getReligions = () =>
   axios.get("/api/admin/dataManager/religion", getHeaders());
 
 export const deleteReligion = (id) =>
-  axios.get(`/api/admin/dataManager/religion?id=${id}`, getHeaders());
+  axios.delete(`/api/admin/dataManager/religion?id=${id}`, getHeaders());
 
 export const addCaste = (data) =>
   axios.post("/api/admin/dataManager/religion/caste", data, getHeaders());
@@ -211,10 +221,14 @@ export const deleteDesignation = (id) =>
 
 // ============== EMPLOYER ================
 export const addEmployer = (data) =>
-  axios.post("/api/admin/datamanager/employer", data, getHeaders());
+  axios.post("/api/admin/dataManager/employer", data, getHeaders());
 
 export const getEmployers = (country) =>
-  axios.get(`/api/admin/datamanager/employer?country=${country}`, getHeaders());
+  axios.get(`/api/admin/dataManager/employer?country=${country}`, getHeaders());
 
 export const deleteEmployer = (id) =>
-  axios.delete(`/api/admin/datamanager/employer?id=${id}`, getHeaders());
+  axios.delete(`/api/admin/dataManager/employer?id=${id}`, getHeaders());
+
+// ================ ADMIN PUBLISH ===============
+export const adminPost = (data) =>
+  axios.post("/api/admin/dataManager/adminPost", data, uploadHeaders());

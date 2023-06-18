@@ -19,11 +19,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const selectedLink =
-    "w-20 bg-pink text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200 text-white";
-  const nonSelectedLink =
-    "w-20 bg-white text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200";
-
   // redirect to dashboard, if the user is authorized
   useEffect(() => {
     if (authorized) {
@@ -66,17 +61,17 @@ const LoginPage = () => {
             <div className="flex gap-8 mt-5 mb-10 font-medium">
               <div
                 onClick={() => setSelected("master")}
-                className={
-                  selected === "master" ? selectedLink : nonSelectedLink
-                }
+                className={`${
+                  selected === "master" ? "bg-pink text-white" : "bg-white"
+                } text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200`}
               >
                 MASTER
               </div>
               <div
                 onClick={() => setSelected("region")}
-                className={
-                  selected === "region" ? selectedLink : nonSelectedLink
-                }
+                className={`${
+                  selected === "region" ? "bg-pink text-white" : "bg-white"
+                } text-center cursor-pointer w-36 p-2 rounded-xl border border-slate-200`}
               >
                 REGION
               </div>

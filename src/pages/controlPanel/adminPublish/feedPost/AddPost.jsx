@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import Customisation from "./Customisation";
+import { adminPost } from "../../../../services/dataManager";
 
 const options = [
   { id: 1, name: "Request" },
@@ -10,6 +11,18 @@ const options = [
 ];
 
 const AddPost = () => {
+  const [postType, setPostType] = useState("");
+  const [file, setFile] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("postType", postType);
+    await adminPost(formData);
+  };
+
+  // customisation modal
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -22,7 +35,7 @@ const AddPost = () => {
     <div>
       <Customisation open={open} handleClose={handleClose} />
       <h2 className="mb-4">Add Feed Post</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label className="ml-1 text-slate-500 text-sm" htmlFor="type">
             Firstlook added
@@ -32,6 +45,7 @@ const AddPost = () => {
             placeHolder={"Select Post type"}
             name={"type"}
             options={options}
+            setState={setPostType}
           />
         </div>
 
@@ -75,7 +89,13 @@ const AddPost = () => {
               Select a Photo
             </div>
           </label>
-          <input hidden id="photo" type="file" />
+          <input
+            hidden
+            id="photo"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
         </div>
         <div>
           <button
@@ -87,8 +107,8 @@ const AddPost = () => {
         </div>
 
         <button
+          type="submit"
           className="w-80 rounded-xl mb-4 bg-pink text-white p-2 text-center cursor-pointer"
-          onClick={(e) => e.preventDefault()}
         >
           Publish
         </button>

@@ -5,8 +5,9 @@ import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import { addCity, getStatesList } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { citySchema } from "../../../../validation/dataManager/places/city";
 
-const Form = ({countries}) => {
+const Form = ({ countries }) => {
   const [states, setStates] = useState([]);
   const [country, setCounty] = useState("");
   const [state, setState] = useState("");
@@ -19,8 +20,13 @@ const Form = ({countries}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCity({ stateId: state, city });
-    toast.success("City name added!");
+    try {
+      await citySchema.validate({ state, city });
+      await addCity({ stateId: state, city });
+      toast.success("City name added!");
+    } catch (error) {
+      toast.error(error.message || "Couldn't add!");
+    }
   };
 
   useEffect(() => {

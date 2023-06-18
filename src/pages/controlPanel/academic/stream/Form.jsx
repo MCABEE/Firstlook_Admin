@@ -3,14 +3,20 @@ import Button from "../../../../components/Button";
 import InputField from "../../../../components/inputField";
 import { addStream } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { academicStreamSchema } from "../../../../validation/dataManager/academic/streams";
 
 const Form = () => {
   const [stream, setStream] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addStream({ stream });
-    toast.success("Stream added!");
+    try {
+      await academicStreamSchema.validate({ stream });
+      await addStream({ stream });
+      toast.success("Stream added!");
+    } catch (error) {
+      toast.error(error.message || "Somthing went wrong!");
+    }
   };
 
   return (

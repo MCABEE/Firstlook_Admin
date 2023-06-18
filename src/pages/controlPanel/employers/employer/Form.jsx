@@ -8,18 +8,23 @@ import {
   getOccupationStreams,
 } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { employerSchema } from "../../../../validation/dataManager/employer";
 
 const Form = ({ countries }) => {
   const [streams, setStreams] = useState([]);
-
   const [country, setCountry] = useState("");
   const [stream, setStream] = useState("");
   const [employer, setEmployer] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addEmployer({ country, stream, employer });
-    toast.success("Employer added!");
+    try {
+      await employerSchema.validate({ country, stream, employer });
+      await addEmployer({ country, stream, employer });
+      toast.success("Employer added!");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!");
+    }
   };
 
   const listStreams = async () => {

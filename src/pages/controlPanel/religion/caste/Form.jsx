@@ -5,17 +5,22 @@ import InputField from "../../../../components/inputField";
 import Button from "../../../../components/Button";
 import { addCaste } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { casteSchema } from "../../../../validation/dataManager/religion/caste";
 
-const Form = ({religions}) => {
+const Form = ({ religions }) => {
+  const [religion, setReligion] = useState("");
+  const [caste, setCaste] = useState("");
 
-    const [religion, setReligion] = useState("");
-    const [caste, setCaste] = useState("");
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        await addCaste({ religion, caste });
-        toast.success("Caste name added!");
-      };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await casteSchema.validate({ religion, caste });
+      await addCaste({ religion, caste });
+      toast.success("Caste name added!");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>

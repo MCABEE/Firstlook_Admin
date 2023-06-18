@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import { addMotherTounge, getStatesList } from "../../../../services/dataManager";
+import {
+  addMotherTounge,
+  getStatesList,
+} from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { languageSchema } from "../../../../validation/dataManager/motherTounge/language";
 
 const Form = ({ countries }) => {
   const [states, setStates] = useState([]);
@@ -15,8 +19,13 @@ const Form = ({ countries }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addMotherTounge({ stateId, language });
-    toast.success("Language added!");
+    try {
+      await languageSchema.validate({ state: stateId, language });
+      await addMotherTounge({ stateId, language });
+      toast.success("Language added!");
+    } catch (error) {
+      toast.error(error.message || "Couldn't add!");
+    }
   };
 
   const listStates = async (country) => {

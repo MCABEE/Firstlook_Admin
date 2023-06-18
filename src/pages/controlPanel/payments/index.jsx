@@ -48,7 +48,7 @@ const Payments = () => {
   return (
     <div>
       <h1>Payments</h1>
-      <div className="mt-5 bg-white p-2">
+      <div className="mt-5 bg-white rounded p-2">
         <p className="mb-1">Result Count : <span className="font-bold">4</span></p>
         <DataTable columns={columns} rows={data} />
       </div>

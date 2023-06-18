@@ -49,7 +49,7 @@ const ViewAll = ({ streams }) => {
                   <input id="course" type="checkbox" />
                   <label htmlFor="course">{course?.name}</label>
                 </div>
-                <button>
+                <button className="text-slate-500">
                   <DeleteForeverOutlinedIcon />
                 </button>
               </div>

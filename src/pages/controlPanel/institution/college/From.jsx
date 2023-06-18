@@ -6,6 +6,7 @@ import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import { addCollege } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
+import { institutionSchema } from "../../../../validation/dataManager/institutions/institution";
 
 const From = ({ countries }) => {
   const [country, setCountry] = useState("");
@@ -13,8 +14,13 @@ const From = ({ countries }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCollege({ country, institution });
-    toast.success("College added!");
+    try {
+      await institutionSchema.validate({ country, institution });
+      await addCollege({ country, institution });
+      toast.success("College added!");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!");
+    }
   };
 
   return (
