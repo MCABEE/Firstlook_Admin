@@ -2,27 +2,27 @@
 import { useEffect, useState } from "react";
 import { Dropdown } from "../../../../components/dropDown";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { getCourses } from "../../../../services/dataManager";
+import { getCourses, deleteCourse } from "../../../../services/dataManager";
+import { toast } from "react-hot-toast";
 
 const ViewAll = ({ streams }) => {
   const [courses, setCourses] = useState([]);
-  const [courseList, setCourseList] = useState([]);
+  const [stream, setStream] = useState("");
 
-  const fetchCourses = async () => {
-    const { data } = await getCourses();
+  const fetchCourses = async (stream) => {
+    const { data } = await getCourses(stream);
     setCourses(data.courses);
-    setCourseList(data.courses);
   };
 
-  const filterCousre = (stream) => {
-    stream
-      ? setCourseList(courses.filter((course) => course._id === stream))
-      : setCourseList(courses);
+  const removeCourse = async (id) => {
+    await deleteCourse(id);
+    toast.success("Deleted successfully");
+    fetchCourses(stream);
   };
 
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    fetchCourses(stream);
+  }, [stream]);
 
   return (
     <div>
@@ -31,11 +31,11 @@ const ViewAll = ({ streams }) => {
         name={"stream"}
         options={streams}
         placeHolder={"Select stream"}
-        setState={filterCousre}
+        setState={setStream}
       />
 
       <div className="mt-3 flex flex-col gap-3">
-        {courseList.map((stream) => (
+        {courses.map((stream) => (
           <>
             <span
               key={stream._id}
@@ -49,7 +49,10 @@ const ViewAll = ({ streams }) => {
                   <input id="course" type="checkbox" />
                   <label htmlFor="course">{course?.name}</label>
                 </div>
-                <button className="text-slate-500">
+                <button
+                  className="text-slate-500"
+                  onClick={() => removeCourse(course?._id)}
+                >
                   <DeleteForeverOutlinedIcon />
                 </button>
               </div>

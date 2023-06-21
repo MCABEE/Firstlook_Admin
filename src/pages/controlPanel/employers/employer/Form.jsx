@@ -5,7 +5,7 @@ import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import {
   addEmployer,
-  getOccupationStreams,
+  getOccupationStreamsList,
 } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 import { employerSchema } from "../../../../validation/dataManager/employer";
@@ -28,7 +28,7 @@ const Form = ({ countries }) => {
   };
 
   const listStreams = async () => {
-    const { data } = await getOccupationStreams();
+    const { data } = await getOccupationStreamsList('');
     setStreams(data.occupationStreams);
   };
 

@@ -1,21 +1,36 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
-import { Dropdown } from "../../../../components/dropDown";
+import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
-import { addDesignation } from "../../../../services/dataManager";
+import {
+  addDesignation,
+  getOccupationStreamsList,
+} from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 import { designationSchema } from "../../../../validation/dataManager/occupation/designation";
+import { streamCategories } from "../../../../lib/constants";
 
-const Form = ({ streams }) => {
-  const [stream, setStream] = useState("");
+const Form = () => {
+  const [streams, setStreams] = useState([]);
+  const [category, setCategory] = useState("");
+  const [streamId, setStreamId] = useState("");
   const [designation, setDesignation] = useState("");
+
+  const listStreams = async (category) => {
+    const { data } = await getOccupationStreamsList(category);
+    setStreams(data.occupationStreams);
+  };
+
+  useEffect(() => {
+    listStreams(category);
+  }, [category]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await designationSchema.validate({ stream, designation });
-      await addDesignation({ stream, designation });
+      await designationSchema.validate({ streamId, designation });
+      await addDesignation({ streamId, designation });
       toast.success("Designation added!");
     } catch (error) {
       toast.error(error.message || "Something went wrong!");
@@ -26,10 +41,16 @@ const Form = ({ streams }) => {
     <form onSubmit={handleSubmit}>
       <h2 className="mb-4">Add Designation</h2>
       <Dropdown
+        name={"category"}
+        options={streamCategories}
+        placeHolder={"Select a category"}
+        setState={setCategory}
+      />
+      <DropdownValueId
         name={"stream"}
         options={streams}
         placeHolder={"Select Stream"}
-        setState={setStream}
+        setState={setStreamId}
       />
       <InputField
         id={"designation"}

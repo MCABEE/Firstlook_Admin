@@ -1,61 +1,67 @@
 import { useEffect, useState } from "react";
-import { deleteOccpationStream, getOccupationStreams } from "../../../../services/dataManager";
+import {
+  deleteOccpationStream,
+  getOccupationStreams,
+} from "../../../../services/dataManager";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { toast } from "react-hot-toast";
+import { Dropdown } from "../../../../components/dropDown";
+import { streamCategories } from "../../../../lib/constants";
 
 const ViewAll = () => {
   const [streams, setStreams] = useState([]);
-  const [list, setList] = useState([]);
+  const [category, setCategory] = useState([]);
 
-  const fetchStreams = async () => {
-    const { data } = await getOccupationStreams();
+  const fetchStreams = async (category) => {
+    const { data } = await getOccupationStreams(category);
     setStreams(data.occupationStreams);
-    setList(data.occupationStreams);
-  };
-
-  const searchReligion = (search) => {
-    search
-      ? setList(
-          list.filter((religion) =>
-            religion.name.toLowerCase().includes(search.toLowerCase())
-          )
-        )
-      : setList(streams);
   };
 
   const removeStream = async (id) => {
     await deleteOccpationStream(id);
     toast.success("Deleted successfully");
-    fetchStreams();
+    fetchStreams(category);
   };
 
   useEffect(() => {
-    fetchStreams();
-  }, []);
+    fetchStreams(category);
+  }, [category]);
 
   return (
     <div>
       <h2 className="mb-4">View all</h2>
-      <input
-        type="search"
-        placeholder="Search stream..."
-        className="border border-gray rounded-xl py-2 px-5 my-2 w-80"
-        onChange={(e) => searchReligion(e.target.value)}
+      <Dropdown
+        name={"category"}
+        setState={setCategory}
+        options={streamCategories}
+        placeHolder={"Select a category"}
       />
-      {list?.map((stream) => (
-        <div key={stream?._id} className="flex justify-between ml-4">
-          <div className="flex gap-2">
-            <input id="language" type="checkbox" />
-            <label htmlFor="language">{stream?.name}</label>
-          </div>
-          <button
-            className="text-slate-500"
-            onClick={() => removeStream(stream._id)}
-          >
-            <DeleteForeverOutlinedIcon />
-          </button>
-        </div>
-      ))}
+      <div className="mt-3 flex flex-col gap-3">
+        {streams?.map((category) => (
+          <>
+            <span
+              key={category._id}
+              className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
+            >
+              {category._id}
+            </span>
+            {category?.streams?.map((stream) => (
+              <div key={stream?._id} className="flex justify-between ml-4">
+                <div className="flex gap-2">
+                  <input id="language" type="checkbox" />
+                  <label htmlFor="language">{stream?.name}</label>
+                </div>
+                <button
+                  className="text-slate-500"
+                  onClick={() => removeStream(stream._id)}
+                >
+                  <DeleteForeverOutlinedIcon />
+                </button>
+              </div>
+            ))}
+          </>
+        ))}
+      </div>
     </div>
   );
 };

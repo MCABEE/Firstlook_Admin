@@ -1,20 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Form from "./Form";
 import ViewAll from "./ViewAll";
-import { getOccupationStreams } from "../../../../services/dataManager";
 
 const Designation = () => {
-  const [selected, setSelected] = useState("add");
-  const [streams, setStreams] = useState([]);
-
-  const listStreams = async () => {
-    const { data } = await getOccupationStreams();
-    setStreams(data.occupationStreams);
-  };
-
-  useEffect(() => {
-    listStreams();
-  }, []);
+  const [selected, setSelected] = useState("add")
 
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
@@ -38,10 +27,10 @@ const Designation = () => {
             View all
           </button>
         </div>
-        {selected === "add" && <Form streams={streams} />}
+        {selected === "add" && <Form />}
 
         {/* VIEW ALL */}
-        {selected === "viewAll" && <ViewAll streams={streams} />}
+        {selected === "viewAll" && <ViewAll />}
       </div>
     </section>
   );
