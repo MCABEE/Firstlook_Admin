@@ -3,49 +3,88 @@ import { Dropdown } from "../../../../components/dropDown";
 import InputField from "../../../../components/inputField";
 import Customisation from "./Customisation";
 import { adminPost } from "../../../../services/dataManager";
-
-const options = [
-  { id: 1, name: "Request" },
-  { id: 2, name: "Greetings" },
-  { id: 3, name: "Offer" },
-];
+import {
+  postTypes,
+  buttonNames,
+  landingPages,
+} from "../../../../lib/constants";
+import { adminPostSchema } from "../../../../validation/dataManager/adminPost/post";
+import { toast } from "react-hot-toast";
 
 const AddPost = () => {
-  const [postType, setPostType] = useState("");
+  const [postTitle, setPostTitle] = useState("");
+  const [buttonName, setButtonName] = useState("");
+  const [landingPage, setLandingPage] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [file, setFile] = useState(null);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("postType", postType);
-    await adminPost(formData);
-  };
 
   // customisation modal
   const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [audience, setAudience] = useState(null);
   const handleOpen = (e) => {
     e.preventDefault();
     setOpen(true);
   };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const validateInputs = async () => {
+    await adminPostSchema.validate({
+      postTitle,
+      buttonName,
+      landingPage,
+      startDate,
+      endDate,
+      file,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await validateInputs()
+      .then(async () => {
+        const formData = new FormData();
+        try {
+          toast.loading("Post Uploading...");
+          formData.append("image", file);
+          formData.append("title", postTitle);
+          formData.append("buttonName", buttonName);
+          formData.append("landingPage", landingPage);
+          formData.append("startDate", startDate);
+          formData.append("endDate", endDate);
+          formData.append("audience", JSON.stringify(audience));
+          await adminPost(formData);
+          toast.dismiss();
+          toast.success("Post uploaded successfully");
+        } catch (error) {
+          toast.dismiss();
+          toast.error("Post upload failed!");
+        }
+      })
+      .catch((error) => toast.error(error.message));
+  };
+
   return (
     <div>
-      <Customisation open={open} handleClose={handleClose} />
+      <Customisation
+        open={open}
+        handleClose={handleClose}
+        setAudience={setAudience}
+      />
       <h2 className="mb-4">Add Feed Post</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label className="ml-1 text-slate-500 text-sm" htmlFor="type">
+          <label className="ml-1 text-slate-500 text-sm" htmlFor="title">
             Firstlook added
           </label>
           <Dropdown
-            id="type"
-            placeHolder={"Select Post type"}
-            name={"type"}
-            options={options}
-            setState={setPostType}
+            id="title"
+            placeHolder={"Select Post title"}
+            name={"title"}
+            options={postTypes}
+            setState={setPostTitle}
           />
         </div>
 
@@ -57,7 +96,8 @@ const AddPost = () => {
             id="type"
             placeHolder={"Select One"}
             name={"type"}
-            options={options}
+            options={buttonNames}
+            setState={setButtonName}
           />
         </div>
         <div>
@@ -68,20 +108,21 @@ const AddPost = () => {
             id="type"
             placeHolder={"Select One"}
             name={"type"}
-            options={options}
+            options={landingPages}
+            setState={setLandingPage}
           />
         </div>
         <div>
           <label className="ml-1 text-slate-500 text-sm" htmlFor="type">
             Select Start Date
           </label>
-          <InputField type={"Date"} id={"date"} />
+          <InputField type={"Date"} id={"date"} setState={setStartDate} />
         </div>
         <div>
           <label className="ml-1 text-slate-500 text-sm" htmlFor="type">
             Select End Date
           </label>
-          <InputField type={"Date"} id={"date"} />
+          <InputField type={"Date"} id={"date"} setState={setEndDate} />
         </div>
         <div>
           <label htmlFor="photo">

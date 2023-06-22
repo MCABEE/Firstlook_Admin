@@ -8,33 +8,73 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DialogActions from "@mui/material/DialogActions";
-import { useState } from "react";
 import { Checkbox, ListItemText } from "@mui/material";
+import { useReducer } from "react";
 
 const districts = [
   "Alappuzha",
   "Ernakulam",
-  "Kollama",
+  "Kollam",
   "Kottayam",
   "Malappuram",
 ];
 
-export default function Customisation({ handleClose, open }) {
-  const [age, setAge] = useState("");
-  const [districtName, setDistrictName] = useState([]);
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "USER_TYPE":
+      return { ...state, userType: action.val };
+    case "USER_GENDER":
+      return { ...state, gender: action.val };
+    case "USER_AGE_FROM":
+      return { ...state, ageFrom: action.val };
+    case "USER_AGE_UPTO":
+      return { ...state, ageUpto: action.val };
+    case "USER_COUNTRY":
+      return { ...state, country: action.val };
+    case "USER_STATE":
+      return { ...state, state: action.val };
+    case "USER_DISTRICTS":
+      return { ...state, districts: action.val };
+    case "USER_OCCUPATION_STREAM":
+      return { ...state, occupationStream: action.val };
+    case "USER_DESIGNATION":
+      return { ...state, designation: action.val };
+    default:
+      return state;
+  }
+};
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+const initialState = {
+  userType: "",
+  gender: "",
+  ageFrom: "",
+  ageUpto: "",
+  country: "",
+  state: "",
+  districts: [],
+  occupationStream: "",
+  designation: "",
+};
+
+export default function Customisation({ handleClose, open, setAudience }) {
+  const [customisationState, customisationDispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   const handleSelect = (event) => {
     const {
       target: { value },
     } = event;
-    setDistrictName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    customisationDispatch({
+      type: "USER_DISTRICTS",
+      val: typeof value === "string" ? value.split(",") : value,
+    });
+  };
+
+  const saveChanges = () => {
+    setAudience(customisationState)
+    handleClose();
   };
 
   return (
@@ -51,8 +91,13 @@ export default function Customisation({ handleClose, open }) {
           <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
             <label className="text-sm ml-1">Quick Selection</label>
             <Select
-              value={age}
-              onChange={handleChange}
+              value={customisationState.userType}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_TYPE",
+                  val: e.target.value,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               sx={{ borderRadius: "12px" }}
@@ -70,10 +115,15 @@ export default function Customisation({ handleClose, open }) {
           <h4>More Customize </h4>
 
           <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
-            <label className="text-sm ml-1">Select Gender</label>
+            <label className="text-sm ml-1">Gender</label>
             <Select
-              value={age}
-              onChange={handleChange}
+              value={customisationState.gender}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_GENDER",
+                  val: e.target.value,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               sx={{ borderRadius: "12px" }}
@@ -81,34 +131,51 @@ export default function Customisation({ handleClose, open }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Male</MenuItem>
-              <MenuItem value={20}>Female</MenuItem>
+              <MenuItem value={"male"}>Male</MenuItem>
+              <MenuItem value={"female"}>Female</MenuItem>
             </Select>
           </FormControl>
 
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
-            <label className="text-sm ml-1">Age From/To</label>
-            <Select
-              value={age}
-              onChange={handleChange}
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-              sx={{ borderRadius: "12px" }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={25}>Twenty Five</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
+          <FormControl sx={{ m: 1, minWidth: "80%" }}>
+            <label className="text-sm ml-1">Age From</label>
+            <input
+              type="number"
+              className="border border-gray focus:outline-sky-700 rounded-xl px-4 py-2 placeholder-black placeholder:italic"
+              placeholder="None"
+              value={customisationState.ageFrom}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_AGE_FROM",
+                  val: e.target.value,
+                });
+              }}
+            />
           </FormControl>
-
+          <FormControl sx={{ m: 1, minWidth: "80%" }}>
+            <label className="text-sm ml-1">Age Upto</label>
+            <input
+              type="number"
+              className="border border-gray  focus:outline-sky-700 rounded-xl px-4 py-2 placeholder-black placeholder:italic"
+              placeholder="None"
+              value={customisationState.ageUpto}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_AGE_UPTO",
+                  val: e.target.value,
+                });
+              }}
+            />
+          </FormControl>
           <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
             <label className="text-sm ml-1">Country</label>
             <Select
-              value={age}
-              onChange={handleChange}
+              value={customisationState.country}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_COUNTRY",
+                  val: e.target.value,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               sx={{ borderRadius: "12px" }}
@@ -116,18 +183,23 @@ export default function Customisation({ handleClose, open }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={'Canada'}>Canada</MenuItem>
-              <MenuItem value={'India'}>India</MenuItem>
-              <MenuItem value={'UAE'}>UAE</MenuItem>
-              <MenuItem value={'USA'}>USA</MenuItem>
+              <MenuItem value={"Canada"}>Canada</MenuItem>
+              <MenuItem value={"India"}>India</MenuItem>
+              <MenuItem value={"UAE"}>UAE</MenuItem>
+              <MenuItem value={"USA"}>USA</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
             <label className="text-sm ml-1">State</label>
             <Select
-              value={age}
-              onChange={handleChange}
+              value={customisationState.state}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_STATE",
+                  val: e.target.value,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               sx={{ borderRadius: "12px" }}
@@ -135,26 +207,28 @@ export default function Customisation({ handleClose, open }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={30}>Karnadaka</MenuItem>
-              <MenuItem value={10}>Kerala</MenuItem>
-              <MenuItem value={20}>Tamilnadu</MenuItem>
+              <MenuItem value={"Karnadaka"}>Karnadaka</MenuItem>
+              <MenuItem value={"Kerala"}>Kerala</MenuItem>
+              <MenuItem value={"Tamilnadu"}>Tamilnadu</MenuItem>
             </Select>
           </FormControl>
 
-          <FormControl sx={{ m: 1, width: 300 }} size="small">
-            <label className="text-sm ml-1">District</label>
+          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+            <label className="text-sm ml-1">Districts</label>
             <Select
               labelId="demo-multiple-checkbox-label"
               id="demo-multiple-checkbox"
               multiple
-              value={districtName}
+              value={customisationState.districts}
               onChange={handleSelect}
               renderValue={(selected) => selected.join(", ")}
               sx={{ borderRadius: "12px" }}
             >
               {districts.map((name) => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={districtName.indexOf(name) > -1} />
+                  <Checkbox
+                    checked={customisationState.districts.indexOf(name) > -1}
+                  />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}
@@ -163,8 +237,13 @@ export default function Customisation({ handleClose, open }) {
           <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
             <label className="text-sm ml-1">Occupation Stream</label>
             <Select
-              value={age}
-              onChange={handleChange}
+              value={customisationState.occupationStream}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_OCCUPATION_STREAM",
+                  val: e.target.value,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               sx={{ borderRadius: "12px" }}
@@ -172,17 +251,22 @@ export default function Customisation({ handleClose, open }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={20}>Business</MenuItem>
-              <MenuItem value={20}>Engineering</MenuItem>
-              <MenuItem value={10}>IT</MenuItem>
-              <MenuItem value={30}>Medical</MenuItem>
+              <MenuItem value={"Business"}>Business</MenuItem>
+              <MenuItem value={"Engineering"}>Engineering</MenuItem>
+              <MenuItem value={"IT"}>IT</MenuItem>
+              <MenuItem value={"Medical"}>Medical</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
             <label className="text-sm ml-1">Designation</label>
             <Select
-              value={age}
-              onChange={handleChange}
+              value={customisationState.designation}
+              onChange={(e) => {
+                customisationDispatch({
+                  type: "USER_DESIGNATION",
+                  val: e.target.value,
+                });
+              }}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
               sx={{ borderRadius: "12px" }}
@@ -190,26 +274,9 @@ export default function Customisation({ handleClose, open }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>Doctor</MenuItem>
-              <MenuItem value={20}>Nurse</MenuItem>
-              <MenuItem value={30}>Software Engineer</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
-            <label className="text-sm ml-1">Status</label>
-            <Select
-              value={age}
-              onChange={handleChange}
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-              sx={{ borderRadius: "12px" }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>1</MenuItem>
-              <MenuItem value={20}>2</MenuItem>
-              <MenuItem value={30}>3</MenuItem>
+              <MenuItem value={"Doctor"}>Doctor</MenuItem>
+              <MenuItem value={"Nurse"}>Nurse</MenuItem>
+              <MenuItem value={"Software Engineer"}>Software Engineer</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -218,7 +285,7 @@ export default function Customisation({ handleClose, open }) {
         <Button
           label={"Save changes"}
           style={"border py-1 px-2 mr-2 rounded bg-pink text-white"}
-          onClick={handleClose}
+          onClick={saveChanges}
         />
       </DialogActions>
     </Dialog>

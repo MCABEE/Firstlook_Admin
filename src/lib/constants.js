@@ -5,6 +5,25 @@ export const streamCategories = [
   { id: 4, name: "Self Employed" }
 ]
 
+export const postTypes = [
+  { id: 2, name: "Greetings" },
+  { id: 3, name: "Offer" },
+  { id: 1, name: "Request" },
+];
+
+export const buttonNames = [
+  { id: 1, name: "Pay Now" },
+  { id: 3, name: "View Profile" },
+  { id: 2, name: "Watch Now" },
+];
+
+export const landingPages = [
+  { id: 2, name: "Feed" },
+  { id: 1, name: "Payment" },
+  { id: 3, name: "Profile" },
+];
+
+
 export const rows = [
   {
     id: 1,
