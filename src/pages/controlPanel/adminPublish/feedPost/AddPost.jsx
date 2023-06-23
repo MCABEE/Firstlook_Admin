@@ -68,11 +68,11 @@ const AddPost = () => {
 
   return (
     <div>
-      <Customisation
+      {open && <Customisation
         open={open}
         handleClose={handleClose}
         setAudience={setAudience}
-      />
+      />}
       <h2 className="mb-4">Add Feed Post</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -126,7 +126,11 @@ const AddPost = () => {
         </div>
         <div>
           <label htmlFor="photo">
-            <div className="w-80 rounded-xl mb-4 outline-dotted bg-white p-2 text-center text-pink cursor-pointer">
+            <div
+              className={`w-80 rounded-xl mb-4 outline-dotted bg-white ${
+                file ? "text-rose-300" : "text-pink"
+              } p-2 text-center cursor-pointer`}
+            >
               Select a Photo
             </div>
           </label>

@@ -107,35 +107,3 @@ export const rows = [
     join: "12/05/2023",
   },
 ];
-
-export const feedPostRows = [
-  {
-    id: 1,
-    startDate: '12/08/2023',
-    endDate: '13/08/2023',
-    landingPage: 'Payment',
-    audienceDetails: 'All Mens',
-  },
-  {
-    id: 2,
-    startDate: '12/08/2023',
-    endDate: '13/08/2023',
-    landingPage: 'Payment',
-    audienceDetails: 'All Women',
-  },
-  {
-    id: 3,
-    startDate: '12/08/2023',
-    endDate: '13/08/2023',
-    landingPage: 'Home',
-    audienceDetails: 'All Verified Users',
-  },
-  {
-    id: 4,
-    startDate: '12/08/2023',
-    endDate: '13/08/2023',
-    landingPage: 'Profile',
-    audienceDetails: 'Paid Users',
-  },
-
-]

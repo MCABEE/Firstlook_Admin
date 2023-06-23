@@ -9,15 +9,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DialogActions from "@mui/material/DialogActions";
 import { Checkbox, ListItemText } from "@mui/material";
-import { useReducer } from "react";
-
-const districts = [
-  "Alappuzha",
-  "Ernakulam",
-  "Kollam",
-  "Kottayam",
-  "Malappuram",
-];
+import { useReducer, useEffect, useState } from "react";
+import {
+  getCountries,
+  getStatesList,
+  getDistrictsList,
+  getDesignation,
+  getOccupationStreamsList,
+} from "../../../../services/dataManager";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -57,6 +56,11 @@ const initialState = {
 };
 
 export default function Customisation({ handleClose, open, setAudience }) {
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [occupationStreams, setOccupationStreams] = useState([]);
+  const [designations, setDesignations] = useState([]);
   const [customisationState, customisationDispatch] = useReducer(
     reducer,
     initialState
@@ -73,9 +77,51 @@ export default function Customisation({ handleClose, open, setAudience }) {
   };
 
   const saveChanges = () => {
-    setAudience(customisationState)
+    setAudience(customisationState);
     handleClose();
   };
+
+  const fetchCountries = async () => {
+    const { data } = await getCountries();
+    setCountries(data.countries);
+  };
+
+  const fetchStates = async (country) => {
+    const { data } = await getStatesList(country);
+    setStates(data?.states);
+  };
+
+  const fetchDistricts = async (state) => {
+    const { data } = await getDistrictsList(state);
+    setDistricts(data?.districts);
+  };
+
+  const fetchStreams = async () => {
+    const { data } = await getOccupationStreamsList('');
+    setOccupationStreams(data.occupationStreams);
+  };
+
+  const fetchDesignations = async (stream) => {
+    const { data } = await getDesignation(stream);
+    setDesignations(data.designations);
+  };
+
+  useEffect(() => {
+    fetchStates(customisationState.country);
+  }, [customisationState.country]);
+
+  useEffect(() => {
+    fetchDistricts(customisationState.state);
+  }, [customisationState.state]);
+
+  useEffect(() => {
+    fetchDesignations(customisationState.occupationStream);
+  }, [customisationState.occupationStream]);
+
+  useEffect(() => {
+    fetchCountries();
+    fetchStreams();
+  }, []);
 
   return (
     <Dialog fullWidth={true} maxWidth={"xs"} open={open}>
@@ -88,7 +134,7 @@ export default function Customisation({ handleClose, open, setAudience }) {
       </DialogTitle>
       <DialogContent>
         <div className="flex flex-col items-center">
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+          <FormControl sx={{ m: 1, width: "80%" }} size="small">
             <label className="text-sm ml-1">Quick Selection</label>
             <Select
               value={customisationState.userType}
@@ -114,7 +160,7 @@ export default function Customisation({ handleClose, open, setAudience }) {
 
           <h4>More Customize </h4>
 
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+          <FormControl sx={{ m: 1, width: "80%" }} size="small">
             <label className="text-sm ml-1">Gender</label>
             <Select
               value={customisationState.gender}
@@ -136,7 +182,7 @@ export default function Customisation({ handleClose, open, setAudience }) {
             </Select>
           </FormControl>
 
-          <FormControl sx={{ m: 1, minWidth: "80%" }}>
+          <FormControl sx={{ m: 1, width: "80%" }}>
             <label className="text-sm ml-1">Age From</label>
             <input
               type="number"
@@ -151,7 +197,7 @@ export default function Customisation({ handleClose, open, setAudience }) {
               }}
             />
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: "80%" }}>
+          <FormControl sx={{ m: 1, width: "80%" }}>
             <label className="text-sm ml-1">Age Upto</label>
             <input
               type="number"
@@ -166,7 +212,7 @@ export default function Customisation({ handleClose, open, setAudience }) {
               }}
             />
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+          <FormControl sx={{ m: 1, width: "80%" }} size="small">
             <label className="text-sm ml-1">Country</label>
             <Select
               value={customisationState.country}
@@ -183,14 +229,15 @@ export default function Customisation({ handleClose, open, setAudience }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={"Canada"}>Canada</MenuItem>
-              <MenuItem value={"India"}>India</MenuItem>
-              <MenuItem value={"UAE"}>UAE</MenuItem>
-              <MenuItem value={"USA"}>USA</MenuItem>
+              {countries?.map((country) => (
+                <MenuItem key={country?._id} value={country?.name}>
+                  {country?.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+          <FormControl sx={{ m: 1, width: "80%" }} size="small">
             <label className="text-sm ml-1">State</label>
             <Select
               value={customisationState.state}
@@ -207,13 +254,15 @@ export default function Customisation({ handleClose, open, setAudience }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={"Karnadaka"}>Karnadaka</MenuItem>
-              <MenuItem value={"Kerala"}>Kerala</MenuItem>
-              <MenuItem value={"Tamilnadu"}>Tamilnadu</MenuItem>
+              {states?.map((state) => (
+                <MenuItem key={state?._id} value={state?._id}>
+                  {state?.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+          <FormControl sx={{ m: 1, width: "80%" }} size="small">
             <label className="text-sm ml-1">Districts</label>
             <Select
               labelId="demo-multiple-checkbox-label"
@@ -224,17 +273,19 @@ export default function Customisation({ handleClose, open, setAudience }) {
               renderValue={(selected) => selected.join(", ")}
               sx={{ borderRadius: "12px" }}
             >
-              {districts.map((name) => (
-                <MenuItem key={name} value={name}>
+              {districts?.map((district) => (
+                <MenuItem key={district?._id} value={district?.name}>
                   <Checkbox
-                    checked={customisationState.districts.indexOf(name) > -1}
+                    checked={
+                      customisationState.districts.indexOf(district?.name) > -1
+                    }
                   />
-                  <ListItemText primary={name} />
+                  <ListItemText primary={district?.name} />
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+          <FormControl sx={{ m: 1, width: "80%" }} size="small">
             <label className="text-sm ml-1">Occupation Stream</label>
             <Select
               value={customisationState.occupationStream}
@@ -251,13 +302,14 @@ export default function Customisation({ handleClose, open, setAudience }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={"Business"}>Business</MenuItem>
-              <MenuItem value={"Engineering"}>Engineering</MenuItem>
-              <MenuItem value={"IT"}>IT</MenuItem>
-              <MenuItem value={"Medical"}>Medical</MenuItem>
+              {occupationStreams?.map((stream) => (
+                <MenuItem key={stream?._id} value={stream?._id}>
+                  {stream?.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
-          <FormControl sx={{ m: 1, minWidth: "80%" }} size="small">
+          <FormControl sx={{ m: 1, width: "80%" }} size="small">
             <label className="text-sm ml-1">Designation</label>
             <Select
               value={customisationState.designation}
@@ -274,9 +326,11 @@ export default function Customisation({ handleClose, open, setAudience }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={"Doctor"}>Doctor</MenuItem>
-              <MenuItem value={"Nurse"}>Nurse</MenuItem>
-              <MenuItem value={"Software Engineer"}>Software Engineer</MenuItem>
+              {designations?.map((designation) => (
+                <MenuItem key={designation?._id} value={designation?.name}>
+                  {designation?.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>

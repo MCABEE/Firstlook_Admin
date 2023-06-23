@@ -188,13 +188,13 @@ export const addCourse = (data) =>
   axios.post("/api/admin/dataManager/academic/course", data, getHeaders());
 
 export const getCourses = (stream) =>
-  axios.get(`/api/admin/dataManager/academic/course?stream=${stream}`, getHeaders());
-
-export const deleteCourse = (id) =>
-  axios.delete(
-    `/api/admin/dataManager/academic/course?id=${id}`,
+  axios.get(
+    `/api/admin/dataManager/academic/course?stream=${stream}`,
     getHeaders()
   );
+
+export const deleteCourse = (id) =>
+  axios.delete(`/api/admin/dataManager/academic/course?id=${id}`, getHeaders());
 
 //============== OCCUPATION ================
 export const addOccupationStream = (data) =>
@@ -250,3 +250,9 @@ export const deleteEmployer = (id) =>
 // ================ ADMIN PUBLISH ===============
 export const adminPost = (data) =>
   axios.post("/api/admin/dataManager/adminPost", data, uploadHeaders());
+
+export const getAdminPots = () =>
+  axios.get("/api/admin/dataManager/adminPost", getHeaders());
+
+export const deleteAdminPost = (id) =>
+  axios.delete(`/api/admin/dataManager/adminPost?postId=${id}`, getHeaders());
