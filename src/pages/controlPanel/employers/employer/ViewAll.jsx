@@ -38,14 +38,14 @@ const ViewAll = ({ countries }) => {
         {employers.map((item) => (
           <>
             <span
-              key={item?._id.country}
+              key={item?._id}
               className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
             >
-              {item?._id.stream} - {item?._id.country}
+              {item?._id}
             </span>
-            {item?.employers?.map((employer, index) => (
+            {item?.employers?.map((employer) => (
               <div
-                key={employer?.name + index}
+                key={employer?._id}
                 className="flex justify-between ml-4"
               >
                 <div className="flex gap-2">

@@ -6,11 +6,16 @@ import {
 } from "../../../../services/dataManager";
 import EditPost from "./EditPost";
 import { toast } from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setAdminPosts,
+  setSelectedPost,
+} from "../../../../redux/slices/adminPostSlice";
 
 const ViewPost = () => {
-  const [posts, setPosts] = useState(null);
-  const [selectedPost, setSelectedPost] = useState("");
+  const { adminPosts, update } = useSelector((state) => state.posts);
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
 
   const columns = [
     { field: "id", headerName: "No", width: 90 },
@@ -42,7 +47,7 @@ const ViewPost = () => {
             onClick={() => handleSelect(params.row)}
             className="py-1 px-3 rounded-md bg-slate-500 text-white"
           >
-            View
+            Details
           </button>
         );
       },
@@ -57,20 +62,19 @@ const ViewPost = () => {
             onClick={() => deletePost(params.row._id)}
             className="py-1 px-3 rounded-md bg-red-600 text-white"
           >
-            Remove
+            Delete
           </button>
         );
       },
     },
   ];
 
-  const feedPostRows = posts?.map((post, index) => {
+  const feedPostRows = adminPosts?.map((post, index) => {
     return { id: index + 1, ...post };
   });
 
   const handleSelect = (post) => {
-    console.log(post, " --------postid");
-    setSelectedPost(post);
+    dispatch(setSelectedPost(post));
     setShow(true);
   };
 
@@ -80,14 +84,18 @@ const ViewPost = () => {
 
   const fetchPosts = async () => {
     const { data } = await getAdminPots();
-    setPosts(data.posts);
+    dispatch(setAdminPosts(data.posts));
   };
 
-  const deletePost = async (id) => {
+  const deletePost = (id) => {
     try {
-      await deleteAdminPost(id);
-      toast.success("Deleted Successfully");
-      fetchPosts();
+      toast
+        .promise(deleteAdminPost(id), {
+          loading: "Deleting...",
+          success: "Deleted Successfully",
+          error: "Deletion failed!",
+        })
+        .then(() => fetchPosts());
     } catch (error) {
       toast.error("Something went wrong! Try again.");
     }
@@ -95,11 +103,12 @@ const ViewPost = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [update]);
 
   return (
     <div>
-      {posts ? (
+      {adminPosts.length ? (
         <>
           <h2 className="mb-2 ml-2">View All Posts</h2>
           <div className="bg-white">
@@ -113,13 +122,7 @@ const ViewPost = () => {
       ) : (
         <h4 className="text-center">Loading....</h4>
       )}
-      {show && (
-        <EditPost
-          open={show}
-          handleClose={handleClose}
-          selectedPost={selectedPost}
-        />
-      )}
+      {show && <EditPost open={show} handleClose={handleClose} />}
     </div>
   );
 };

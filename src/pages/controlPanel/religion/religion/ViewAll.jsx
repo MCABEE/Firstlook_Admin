@@ -16,7 +16,7 @@ const ViewAll = () => {
   const searchReligion = (search) => {
     search
       ? setList(
-          list.filter((religion) =>
+          religions.filter((religion) =>
             religion.name.toLowerCase().includes(search.toLowerCase())
           )
         )

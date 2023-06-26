@@ -1,9 +1,5 @@
 const basicSubmenus = [
   { id: 1, name: "Mother Tounge", link: "motherTounge" },
-  // { id: 2, name: "Father Education", link: "fatherEducation" },
-  // { id: 3, name: "Father Occupation", link: "fatherOccupation" },
-  // { id: 4, name: "Mother Education", link: "motherEducation" },
-  // { id: 5, name: "Mother Occupation", link: "motherOccupation" },
 ];
 
 const placeSubmenus = [
@@ -22,7 +18,6 @@ const academicSubmenus = [
 
 const occupationSubmenus = [
   { id: 1, name: "Steams", link: "occupationStreams" },
-  { id: 2, name: "Designation", link: "designation" },
 ]
 
 const religionSubmenus = [
@@ -37,8 +32,8 @@ const institutionSubmenus = [
 ];
 
 const adminPublishSubmenus = [
-  {id:1, name: 'Feed Post', link:'feedPost'},
-  {id:2, name: 'Notifications', link:'notifications'},
+  { id: 1, name: 'Feed Post', link: 'feedPost' },
+  { id: 2, name: 'Notifications', link: 'notifications' },
 ]
 
 const employersSubmenu = [{ id: 1, name: "Employer", link: "employer" }];

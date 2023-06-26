@@ -218,25 +218,6 @@ export const deleteOccpationStream = (id) =>
     getHeaders()
   );
 
-export const addDesignation = (data) =>
-  axios.post(
-    "/api/admin/dataManager/occupation/designation",
-    data,
-    getHeaders()
-  );
-
-export const getDesignation = (streamId) =>
-  axios.get(
-    `/api/admin/dataManager/occupation/designation?streamId=${streamId}`,
-    getHeaders()
-  );
-
-export const deleteDesignation = (id) =>
-  axios.delete(
-    `/api/admin/dataManager/occupation/designation?id=${id}`,
-    getHeaders()
-  );
-
 // ============== EMPLOYER ================
 export const addEmployer = (data) =>
   axios.post("/api/admin/dataManager/employer", data, getHeaders());
@@ -256,3 +237,6 @@ export const getAdminPots = () =>
 
 export const deleteAdminPost = (id) =>
   axios.delete(`/api/admin/dataManager/adminPost?postId=${id}`, getHeaders());
+
+export const updateAdminPost = (id, data) =>
+  axios.patch(`/api/admin/dataManager/adminPost?postId=${id}`, data, getHeaders())

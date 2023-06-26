@@ -47,7 +47,6 @@ const AddPost = () => {
       .then(async () => {
         const formData = new FormData();
         try {
-          toast.loading("Post Uploading...");
           formData.append("image", file);
           formData.append("title", postTitle);
           formData.append("buttonName", buttonName);
@@ -55,12 +54,13 @@ const AddPost = () => {
           formData.append("startDate", startDate);
           formData.append("endDate", endDate);
           formData.append("audience", JSON.stringify(audience));
-          await adminPost(formData);
-          toast.dismiss();
-          toast.success("Post uploaded successfully");
+          toast.promise(adminPost(formData), {
+            loading: "Post Uploading...",
+            success: "Post uploaded successfully",
+            error: "Post upload failed!",
+          });
         } catch (error) {
-          toast.dismiss();
-          toast.error("Post upload failed!");
+          toast.error("Something went wrong! Try again.");
         }
       })
       .catch((error) => toast.error(error.message));
@@ -68,11 +68,13 @@ const AddPost = () => {
 
   return (
     <div>
-      {open && <Customisation
-        open={open}
-        handleClose={handleClose}
-        setAudience={setAudience}
-      />}
+      {open && (
+        <Customisation
+          open={open}
+          handleClose={handleClose}
+          setAudience={setAudience}
+        />
+      )}
       <h2 className="mb-4">Add Feed Post</h2>
       <form onSubmit={handleSubmit}>
         <div>

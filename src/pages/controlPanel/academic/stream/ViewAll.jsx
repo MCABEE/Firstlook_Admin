@@ -13,11 +13,11 @@ const ViewAll = () => {
     setList(data.streams);
   };
 
-  const searchReligion = (search) => {
+  const searchStream = (search) => {
     search
       ? setList(
-          list.filter((religion) =>
-            religion.name.toLowerCase().includes(search.toLowerCase())
+          streams.filter((stream) =>
+            stream.name.toLowerCase().includes(search.toLowerCase())
           )
         )
       : setList(streams);
@@ -40,10 +40,10 @@ const ViewAll = () => {
         type="search"
         placeholder="Search stream..."
         className="border border-gray rounded-xl py-2 px-5 my-2 w-80"
-        onChange={(e) => searchReligion(e.target.value)}
+        onChange={(e) => searchStream(e.target.value)}
       />
       {list?.map((stream) => (
-        <div key={stream?._id} className="flex justify-between ml-4">
+        <div key={stream?._id} className="flex justify-between gap-2 my-1 ml-4">
           <div className="flex gap-2">
             <input id="language" type="checkbox" />
             <label htmlFor="language">{stream?.name}</label>

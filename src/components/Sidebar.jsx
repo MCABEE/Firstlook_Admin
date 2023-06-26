@@ -77,7 +77,7 @@ const Sidebar = () => {
       <div
         className={
           !toggle
-            ? "absolute bottom-0 top-0 left-0"
+            ? "absolute bottom-0 top-0"
             : "absolute bottom-0 top-0 z-10 w-44 bg-white border-r-2 py-8 px-4 border-indigo-100 shadow-lg rounded-tr-3xl rounded-br-3xl transform transition-transform duration-300 translate-x-full"
         }
       >

@@ -1,7 +1,3 @@
-import OccupationStreams from './streams'
-import Designation from './designation'
+import OccupationStreams from "./streams";
 
-export {
-    OccupationStreams,
-    Designation,
-}
+export { OccupationStreams };

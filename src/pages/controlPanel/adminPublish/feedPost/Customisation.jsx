@@ -14,7 +14,6 @@ import {
   getCountries,
   getStatesList,
   getDistrictsList,
-  getDesignation,
   getOccupationStreamsList,
 } from "../../../../services/dataManager";
 
@@ -36,8 +35,6 @@ const reducer = (state, action) => {
       return { ...state, districts: action.val };
     case "USER_OCCUPATION_STREAM":
       return { ...state, occupationStream: action.val };
-    case "USER_DESIGNATION":
-      return { ...state, designation: action.val };
     default:
       return state;
   }
@@ -52,7 +49,6 @@ const initialState = {
   state: "",
   districts: [],
   occupationStream: "",
-  designation: "",
 };
 
 export default function Customisation({ handleClose, open, setAudience }) {
@@ -60,7 +56,6 @@ export default function Customisation({ handleClose, open, setAudience }) {
   const [states, setStates] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [occupationStreams, setOccupationStreams] = useState([]);
-  const [designations, setDesignations] = useState([]);
   const [customisationState, customisationDispatch] = useReducer(
     reducer,
     initialState
@@ -101,11 +96,6 @@ export default function Customisation({ handleClose, open, setAudience }) {
     setOccupationStreams(data.occupationStreams);
   };
 
-  const fetchDesignations = async (stream) => {
-    const { data } = await getDesignation(stream);
-    setDesignations(data.designations);
-  };
-
   useEffect(() => {
     fetchStates(customisationState.country);
   }, [customisationState.country]);
@@ -113,10 +103,6 @@ export default function Customisation({ handleClose, open, setAudience }) {
   useEffect(() => {
     fetchDistricts(customisationState.state);
   }, [customisationState.state]);
-
-  useEffect(() => {
-    fetchDesignations(customisationState.occupationStream);
-  }, [customisationState.occupationStream]);
 
   useEffect(() => {
     fetchCountries();
@@ -305,30 +291,6 @@ export default function Customisation({ handleClose, open, setAudience }) {
               {occupationStreams?.map((stream) => (
                 <MenuItem key={stream?._id} value={stream?._id}>
                   {stream?.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl sx={{ m: 1, width: "80%" }} size="small">
-            <label className="text-sm ml-1">Designation</label>
-            <Select
-              value={customisationState.designation}
-              onChange={(e) => {
-                customisationDispatch({
-                  type: "USER_DESIGNATION",
-                  val: e.target.value,
-                });
-              }}
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-              sx={{ borderRadius: "12px" }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {designations?.map((designation) => (
-                <MenuItem key={designation?._id} value={designation?.name}>
-                  {designation?.name}
                 </MenuItem>
               ))}
             </Select>
