@@ -54,7 +54,7 @@ const LoginPage = () => {
   return (
     <>
       <Header />
-      <section className="h-[90vh] flex items-center justify-center bg-slate-100">
+      <section className="mt-16 min-h-[90vh] flex items-center justify-center bg-slate-100">
         <div>
           <h3>Select Login Type</h3>
           <form onSubmit={handleSubmit}>

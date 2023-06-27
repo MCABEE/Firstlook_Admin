@@ -4,19 +4,18 @@ import { setUnauthorized } from "../../redux/slices/authSlice";
 import { Toaster } from "react-hot-toast";
 
 const Header = () => {
-  
   const { authorized } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logout = () => {
-    dispatch(setUnauthorized())
-    localStorage.removeItem('token')
+    dispatch(setUnauthorized());
+    localStorage.removeItem("token");
     navigate("/");
   };
 
   return (
-    <header className="border flex border-b-2 px-4 py-5 border-slate-200">
-      <Toaster  position="top-center"/>
+    <header className="fixed top-0 z-50 w-full flex border border-b-2 px-4 py-5 bg-white border-slate-200">
+      <Toaster position="top-center" />
       <div className="flex flex-1 gap-6 items-center">
         <div className="flex items-center gap-2">
           <img src="/first look - icon.svg" alt="Logo" width={32} />

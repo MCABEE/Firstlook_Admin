@@ -39,6 +39,7 @@ const adminPublishSubmenus = [
 const employersSubmenu = [{ id: 1, name: "Employer", link: "employer" }];
 
 export const menus = [
+  { id: 0, name: 'Home', hasSubmenu: false, link: "/controlpanel" },
   { id: 1, name: "Statistics", hasSubmenu: false, link: "statistics" },
   {
     id: 2,

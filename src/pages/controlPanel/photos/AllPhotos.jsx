@@ -19,7 +19,7 @@ const AllPhotos = () => {
     <section>
         <PhotoDetails handleClose={handleClose} open={open} />
       {/* Total users and Filters */}
-      <div className="flex gap-1 overflow-auto items-start">
+      <div className="flex flex-col md:flex-row gap-4 items-start">
         <div>
           <div className="p-2 rounded-xl text-center border text-gray-dark w-28">
             <p className="text-xs">All Photos</p>
@@ -50,106 +50,106 @@ const AllPhotos = () => {
         <p className="mb-2">
           Filtered Result : <span className="text-lg font-bold">{323}</span>
         </p>
-        <div className="flex gap-x-3 gap-y-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap">
           <img
             src="https://images.pexels.com/photos/16564742/pexels-photo-16564742/free-photo-of-fashion-man-people-woman.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16578958/pexels-photo-16578958/free-photo-of-woman-portrait-near-louvre.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/14444779/pexels-photo-14444779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16943662/pexels-photo-16943662/free-photo-of-people-black.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16907552/pexels-photo-16907552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16564742/pexels-photo-16564742/free-photo-of-fashion-man-people-woman.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16578958/pexels-photo-16578958/free-photo-of-woman-portrait-near-louvre.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/14444779/pexels-photo-14444779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16943662/pexels-photo-16943662/free-photo-of-people-black.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16907552/pexels-photo-16907552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16564742/pexels-photo-16564742/free-photo-of-fashion-man-people-woman.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16578958/pexels-photo-16578958/free-photo-of-woman-portrait-near-louvre.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/14444779/pexels-photo-14444779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16943662/pexels-photo-16943662/free-photo-of-people-black.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16907552/pexels-photo-16907552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16564742/pexels-photo-16564742/free-photo-of-fashion-man-people-woman.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16578958/pexels-photo-16578958/free-photo-of-woman-portrait-near-louvre.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/14444779/pexels-photo-14444779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16943662/pexels-photo-16943662/free-photo-of-people-black.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
           <img
             src="https://images.pexels.com/photos/16907552/pexels-photo-16907552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="photo"
-            onClick={()=> handleClickOpen()} className="h-40 w-32 object-cover"
+            onClick={()=> handleClickOpen()} className="h-24 w-20 object-cover"
           />
         </div>
 
