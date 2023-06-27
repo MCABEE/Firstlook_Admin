@@ -1,3 +1,3 @@
 import OccupationStreams from "./streams";
-
-export { OccupationStreams };
+import Designations from "./designations";
+export { OccupationStreams, Designations };

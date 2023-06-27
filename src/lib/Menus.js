@@ -18,6 +18,7 @@ const academicSubmenus = [
 
 const occupationSubmenus = [
   { id: 1, name: "Steams", link: "occupationStreams" },
+  { id: 2, name: "Designations", link: "designations" },
 ]
 
 const religionSubmenus = [

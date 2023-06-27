@@ -19,7 +19,7 @@ import {
 } from "../../../../services/dataManager";
 import { Checkbox, ListItemText } from "@mui/material";
 import { updateAdminPost } from "../../../../services/dataManager";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setPostUpdate } from "../../../../redux/slices/adminPostSlice";
 import { adminPostSchema } from "../../../../validation/dataManager/adminPost/post";
@@ -166,6 +166,7 @@ const EditPost = ({ open, handleClose }) => {
 
   return (
     <Dialog fullWidth={true} maxWidth={"xs"} open={open} onClose={handleClose}>
+      <Toaster position="top-center" />
       <DialogTitle style={{ display: "flex", justifyContent: "end" }}>
         <Button
           label={"X"}

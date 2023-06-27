@@ -7,15 +7,15 @@ import { addEmployer } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 import { employerSchema } from "../../../../validation/dataManager/employer";
 
-const Form = ({ countries }) => {
-  const [country, setCountry] = useState("");
+const Form = ({ categories }) => {
+  const [category, setCategory] = useState("");
   const [employer, setEmployer] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await employerSchema.validate({ country, employer });
-      await addEmployer({ country, employer });
+      await employerSchema.validate({ category, employer });
+      await addEmployer({ category, employer });
       toast.success("Employer added!");
     } catch (error) {
       toast.error(error.message || "Something went wrong!");
@@ -26,14 +26,14 @@ const Form = ({ countries }) => {
     <form onSubmit={handleSubmit}>
       <h2 className="mb-4">Add Employer Name</h2>
       <Dropdown
-        name={"country"}
-        options={countries}
-        placeHolder={"Select Country"}
-        setState={setCountry}
+        name={"category"}
+        options={categories}
+        placeHolder={"Select a category"}
+        setState={setCategory}
       />
       <InputField
         id={"employer"}
-        placeholder={"Employer Name"}
+        placeholder={"Authority / Employer Name"}
         type={"text"}
         setState={setEmployer}
       />

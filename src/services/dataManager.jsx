@@ -218,12 +218,31 @@ export const deleteOccpationStream = (id) =>
     getHeaders()
   );
 
+export const addDesignation = (data) =>
+  axios.post(
+    "/api/admin/dataManager/occupation/designation",
+    data,
+    getHeaders()
+  );
+
+export const getDesignations = (category) =>
+  axios.get(
+    `/api/admin/dataManager/occupation/designation?category=${category}`,
+    getHeaders()
+  );
+
+export const deleteDesignation = (id) =>
+  axios.delete(
+    `/api/admin/dataManager/occupation/designation?id=${id}`,
+    getHeaders()
+  );
+
 // ============== EMPLOYER ================
 export const addEmployer = (data) =>
   axios.post("/api/admin/dataManager/employer", data, getHeaders());
 
-export const getEmployers = (country) =>
-  axios.get(`/api/admin/dataManager/employer?country=${country}`, getHeaders());
+export const getEmployers = (category) =>
+  axios.get(`/api/admin/dataManager/employer?category=${category}`, getHeaders());
 
 export const deleteEmployer = (id) =>
   axios.delete(`/api/admin/dataManager/employer?id=${id}`, getHeaders());
@@ -239,4 +258,8 @@ export const deleteAdminPost = (id) =>
   axios.delete(`/api/admin/dataManager/adminPost?postId=${id}`, getHeaders());
 
 export const updateAdminPost = (id, data) =>
-  axios.patch(`/api/admin/dataManager/adminPost?postId=${id}`, data, getHeaders())
+  axios.patch(
+    `/api/admin/dataManager/adminPost?postId=${id}`,
+    data,
+    getHeaders()
+  );

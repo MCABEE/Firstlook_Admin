@@ -33,7 +33,10 @@ import {
 } from "./pages/controlPanel/users/deActivation";
 import { Statistics } from "./pages/controlPanel/statistics";
 import { AllPhotos } from "./pages/controlPanel/photos";
-import { OccupationStreams } from "./pages/controlPanel/occupation";
+import {
+  Designations,
+  OccupationStreams,
+} from "./pages/controlPanel/occupation";
 import { AddPost, FeedPost, ViewPost } from "./pages/controlPanel/adminPublish";
 import Payments from "./pages/controlPanel/payments";
 
@@ -122,6 +125,7 @@ function App() {
 
           {/* Occupation */}
           <Route path="occupationStreams" element={<OccupationStreams />} />
+          <Route path="designations" element={<Designations />} />
 
           {/* Feed post */}
           <Route path="feedPost" element={<FeedPost />}>

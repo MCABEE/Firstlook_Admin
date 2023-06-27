@@ -5,33 +5,33 @@ import { useState, useEffect } from "react";
 import { deleteEmployer, getEmployers } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const ViewAll = ({ countries }) => {
+const ViewAll = ({ categories }) => {
   const [employers, setEmployers] = useState([]);
-  const [country, setCountry] = useState("");
+  const [category, setCategory] = useState("");
 
-  const listEmployers = async (country) => {
-    const { data } = await getEmployers(country);
+  const listEmployers = async (category) => {
+    const { data } = await getEmployers(category);
     setEmployers(data.employers);
   };
 
   const removeEmployer = async (id) => {
     await deleteEmployer(id);
     toast.success("Deleted Successfully!");
-    listEmployers(country);
+    listEmployers(category);
   };
 
   useEffect(() => {
-    listEmployers(country);
-  }, [country]);
+    listEmployers(category);
+  }, [category]);
 
   return (
     <div>
       <h2 className="mb-4">View all</h2>
       <Dropdown
-        name={"country"}
-        options={countries}
-        placeHolder={"Select Country"}
-        setState={setCountry}
+        name={"category"}
+        options={categories}
+        placeHolder={"Select category"}
+        setState={setCategory}
       />
 
       <div className="mt-3 flex flex-col gap-3">
@@ -44,10 +44,7 @@ const ViewAll = ({ countries }) => {
               {item?._id}
             </span>
             {item?.employers?.map((employer) => (
-              <div
-                key={employer?._id}
-                className="flex justify-between ml-4"
-              >
+              <div key={employer?._id} className="flex justify-between ml-4">
                 <div className="flex gap-2">
                   <input id="course" type="checkbox" />
                   <label htmlFor="course">{employer?.name}</label>

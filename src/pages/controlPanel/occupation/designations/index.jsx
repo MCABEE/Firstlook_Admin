@@ -2,13 +2,8 @@ import { useState } from "react";
 import Form from "./Form";
 import ViewAll from "./ViewAll";
 
-const Employers = () => {
+const Designations = () => {
   const [selected, setSelected] = useState("add");
-  const categories = [
-    { id: 1, name: "Government" },
-    { id: 2, name: "Private" },
-  ];
-
   const selectedLink =
     "w-20 bg-pink text-center p-2 rounded-xl border border-slate-200 text-white";
   const nonSelectedLink =
@@ -31,13 +26,15 @@ const Employers = () => {
             View all
           </button>
         </div>
-        {selected === "add" && <Form categories={categories} />}
+
+        {/* ADD FORM */}
+        {selected === "add" && <Form />}
 
         {/* VIEW ALL */}
-        {selected === "viewAll" && <ViewAll categories={categories} />}
+        {selected === "viewAll" && <ViewAll />}
       </div>
     </section>
   );
 };
 
-export default Employers;
+export default Designations;
