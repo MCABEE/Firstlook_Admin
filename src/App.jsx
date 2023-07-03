@@ -19,7 +19,7 @@ import {
   Institute,
   University,
 } from "./pages/controlPanel/institution";
-import { Caste, Religion } from "./pages/controlPanel/religion";
+import { Caste, Diocese, Religion } from "./pages/controlPanel/religion";
 import { Employers } from "./pages/controlPanel/employers";
 import { AllUsers, UserProfile } from "./pages/controlPanel/users/allUsers";
 import { NewUsers, NewUserDetails } from "./pages/controlPanel/users/newUsers";
@@ -118,6 +118,7 @@ function App() {
           {/* Religion */}
           <Route path="religion" element={<Religion />} />
           <Route path="caste" element={<Caste />} />
+          <Route path="diocese" element={<Diocese />} />
 
           {/* Academic */}
           <Route path="streams" element={<Streams />} />

@@ -103,7 +103,7 @@ const EditPost = ({ open, handleClose }) => {
       landingPage: postDetails.landingPage,
       startDate: postDetails.startDate,
       endDate: postDetails.endDate,
-      file: postDetails.imageUrl,
+      file: postDetails.image.url,
     });
   };
 
@@ -178,7 +178,7 @@ const EditPost = ({ open, handleClose }) => {
         <div className="flex flex-col items-center">
           <Box>
             <img
-              src={postDetails.imageUrl}
+              src={postDetails?.image.url}
               className="h-auto w-52 object-cover rounded"
               alt="photo"
             />

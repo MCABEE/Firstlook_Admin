@@ -24,6 +24,7 @@ const occupationSubmenus = [
 const religionSubmenus = [
   { id: 1, name: "Religion", link: "religion" },
   { id: 2, name: "Caste", link: "caste" },
+  { id: 3, name: "Diocese", link: "diocese" },
 ];
 
 const institutionSubmenus = [

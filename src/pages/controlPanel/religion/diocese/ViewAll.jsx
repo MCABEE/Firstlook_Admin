@@ -2,58 +2,58 @@
 import { useEffect, useState } from "react";
 import { Dropdown } from "../../../../components/dropDown";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { getCastes, deleteCaste } from "../../../../services/dataManager";
+import { deleteDiocese, getDiocese } from "../../../../services/dataManager";
 import { toast } from "react-hot-toast";
 
-const ViewAll = ({ religions }) => {
-  const [castes, setCastes] = useState([]);
-  const [religion, setReligion] = useState("");
+const ViewAll = ({ castes }) => {
+  const [dioceses, setDioceses] = useState([]);
+  const [caste, setCaste] = useState("");
 
-  const listCastes = async (religion) => {
-    const { data } = await getCastes(religion);
-    setCastes(data.castes);
+  const listDiocese = async (caste) => {
+    const { data } = await getDiocese(caste);
+    setDioceses(data.dioceses);
   };
 
-  const removeCaste = async (id) => {
-    await deleteCaste(id);
+  const removeDiocese = async (id) => {
+    await deleteDiocese(id);
     toast.success("Deleted Successfully!");
-    listCastes(religion)
+    listDiocese(caste);
   };
 
   useEffect(() => {
-    listCastes(religion);
-  }, [religion]);
+    listDiocese(caste);
+  }, [caste]);
 
   return (
     <div>
       <h2 className="mb-4">View all</h2>
       <Dropdown
-        name={"religion"}
-        options={religions}
-        placeHolder={"Select Religion"}
-        setState={setReligion}
+        name={"caste"}
+        options={castes}
+        placeHolder={"Select Caste"}
+        setState={setCaste}
       />
 
       <div className="mt-3 flex flex-col gap-3">
-        {castes?.map((religion) => (
+        {dioceses?.map((caste) => (
           <>
             <span
-              key={religion?._id}
+              key={caste?._id}
               className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
             >
-              {religion._id}
+              {caste._id}
             </span>
-            {religion?.castes?.map((caste) => (
+            {caste?.dioceses?.map((diocese) => (
               <div
-                key={caste?._id}
+                key={diocese?.name}
                 className="flex justify-between items-center ml-4"
               >
                 <div className="flex gap-2">
-                  <input id={caste?.name} type="checkbox" />
-                  <label htmlFor={caste?.name}>{caste?.name}</label>
+                  <input id={diocese?.name} type="checkbox" />
+                  <label htmlFor={diocese?.name}>{diocese?.name}</label>
                 </div>
                 <button
-                  onClick={() => removeCaste(caste?._id)}
+                  onClick={() => removeDiocese(diocese?._id)}
                   className="text-slate-500"
                 >
                   <DeleteForeverOutlinedIcon />

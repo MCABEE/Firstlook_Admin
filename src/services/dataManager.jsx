@@ -47,7 +47,7 @@ export const getStates = (country) =>
 
 export const getStatesList = (country) =>
   axios.get(
-    `/api/admin/dataManager/place/state?dropdown=${true}&country=${country}`,
+    `/api/admin/dataManager/place/state/list?country=${country}`,
     getHeaders()
   );
 
@@ -66,7 +66,7 @@ export const getDistricts = (stateId) =>
 
 export const getDistrictsList = (stateId) =>
   axios.get(
-    `/api/admin/dataManager/place/district?dropdown=${true}&stateId=${stateId}`,
+    `/api/admin/dataManager/place/district/list?stateId=${stateId}`,
     getHeaders()
   );
 
@@ -138,11 +138,26 @@ export const getCastes = (religion) =>
     getHeaders()
   );
 
-export const deleteCaste = (casteName) =>
-  axios.delete(
-    `/api/admin/dataManager/religion/caste?caste=${casteName}`,
+export const getCastesList = (religion) =>
+  axios.get(
+    `/api/admin/dataManager/religion/caste/list?religion=${religion}`,
     getHeaders()
   );
+
+export const deleteCaste = (id) =>
+  axios.delete(`/api/admin/dataManager/religion/caste?id=${id}`, getHeaders());
+
+export const addDiocese = (data) =>
+  axios.post("/api/admin/dataManager/religion/diocese", data, getHeaders());
+
+export const getDiocese = (caste) =>
+  axios.get(
+    `/api/admin/dataManager/religion/diocese?caste=${caste}`,
+    getHeaders()
+  );
+
+export const deleteDiocese = (id) =>
+  axios.delete(`/api/admin/dataManager/religion/diocese?id=${id}`, getHeaders());
 
 // ============== INSTITUTION ================
 export const addCollege = (data) =>
@@ -202,7 +217,7 @@ export const addOccupationStream = (data) =>
 
 export const getOccupationStreamsList = (category) =>
   axios.get(
-    `/api/admin/dataManager/occupation/stream?dropdown=${true}&category=${category}`,
+    `/api/admin/dataManager/occupation/stream/list?category=${category}`,
     getHeaders()
   );
 
@@ -242,7 +257,10 @@ export const addEmployer = (data) =>
   axios.post("/api/admin/dataManager/employer", data, getHeaders());
 
 export const getEmployers = (category) =>
-  axios.get(`/api/admin/dataManager/employer?category=${category}`, getHeaders());
+  axios.get(
+    `/api/admin/dataManager/employer?category=${category}`,
+    getHeaders()
+  );
 
 export const deleteEmployer = (id) =>
   axios.delete(`/api/admin/dataManager/employer?id=${id}`, getHeaders());
