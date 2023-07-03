@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 
 const ViewAll = ({ religions }) => {
   const [castes, setCastes] = useState([]);
-  const [religion, setReligion] = useState("");
+  const [religion, setReligion] = useState(religions[0]?.name ?? "");
 
   const listCastes = async (religion) => {
     const { data } = await getCastes(religion);
@@ -17,7 +17,7 @@ const ViewAll = ({ religions }) => {
   const removeCaste = async (id) => {
     await deleteCaste(id);
     toast.success("Deleted Successfully!");
-    listCastes(religion)
+    listCastes(religion);
   };
 
   useEffect(() => {
