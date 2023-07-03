@@ -37,12 +37,7 @@ import {
   Designations,
   OccupationStreams,
 } from "./pages/controlPanel/occupation";
-import {
-  AddPost,
-  FeedPost,
-  VideoUpload,
-  ViewPost,
-} from "./pages/controlPanel/adminPublish";
+import { AddPost, FeedPost, ViewPost } from "./pages/controlPanel/adminPublish";
 import Payments from "./pages/controlPanel/payments";
 
 function App() {
@@ -138,7 +133,6 @@ function App() {
             <Route index element={<AddPost />} />
             <Route path="viewAll" element={<ViewPost />} />
           </Route>
-          <Route path="videoUpload" element={<VideoUpload />} />
 
           {/* Institutions */}
           <Route path="colleges" element={<College />} />
