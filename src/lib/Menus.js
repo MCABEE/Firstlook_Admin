@@ -35,6 +35,7 @@ const institutionSubmenus = [
 
 const adminPublishSubmenus = [
   { id: 1, name: 'Feed Post', link: 'feedPost' },
+  { id: 3, name: 'Video upload', link: 'videoUpload' },
   { id: 2, name: 'Notifications', link: 'notifications' },
 ]
 

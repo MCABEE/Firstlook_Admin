@@ -157,7 +157,10 @@ export const getDiocese = (caste) =>
   );
 
 export const deleteDiocese = (id) =>
-  axios.delete(`/api/admin/dataManager/religion/diocese?id=${id}`, getHeaders());
+  axios.delete(
+    `/api/admin/dataManager/religion/diocese?id=${id}`,
+    getHeaders()
+  );
 
 // ============== INSTITUTION ================
 export const addCollege = (data) =>
@@ -281,3 +284,6 @@ export const updateAdminPost = (id, data) =>
     data,
     getHeaders()
   );
+
+export const postVideo = () =>
+  axios.get("/api/admin/dataManager/test/video", getHeaders());
