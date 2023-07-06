@@ -60,35 +60,30 @@ const ViewAll = ({ countries }) => {
         setState={setStateId}
       />
 
-      <div className="mt-3 flex flex-col gap-3">
-        {districts?.map((item) => (
-          <>
-            <span
-              key={item?._id.country}
-              className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
+      {districts?.map((item) => (
+        <div key={item?._id.country} className="mt-3 flex flex-col">
+          <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
+            {`${item?._id.state} - ${item?._id.country}`}
+          </span>
+          {item?.districts?.map((district) => (
+            <div
+              key={district._id}
+              className="flex justify-between items-center ml-4"
             >
-              {`${item?._id.state} - ${item?._id.country}`}
-            </span>
-            {item?.districts?.map((district) => (
-              <div
-                key={district._id}
-                className="flex justify-between items-center ml-4"
-              >
-                <div className="flex gap-2">
-                  <input id={"name"} type="checkbox" />
-                  <label htmlFor={"name"}>{district.name}</label>
-                </div>
-                <button
-                  onClick={() => removeDistrict(district._id)}
-                  className="text-slate-500"
-                >
-                  <DeleteForeverOutlinedIcon />
-                </button>
+              <div className="flex gap-2">
+                <input id={"name"} type="checkbox" />
+                <label htmlFor={"name"}>{district.name}</label>
               </div>
-            ))}
-          </>
-        ))}
-      </div>
+              <button
+                onClick={() => removeDistrict(district._id)}
+                className="text-slate-500"
+              >
+                <DeleteForeverOutlinedIcon />
+              </button>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

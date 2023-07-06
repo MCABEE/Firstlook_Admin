@@ -37,39 +37,29 @@ const ViewAll = ({ countries }) => {
         setState={setCountry}
       />
 
-      <div className="mt-3 flex flex-col gap-3">
-        {motherTounges?.map((country) => (
-          <>
-            {country?.states?.map((state) => (
-              <>
-                <span
-                  key={state?.stateId}
-                  className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
+      {motherTounges?.map((country) =>
+        country?.states?.map((state) => (
+          <div key={state?.stateId} className="mt-3 flex flex-col">
+            <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
+              {`${state?.state} - ${country?._id}`}
+            </span>
+            {state?.languages?.map((language, index) => (
+              <div key={language + index} className="flex justify-between ml-4">
+                <div className="flex gap-2">
+                  <input id="language" type="checkbox" />
+                  <label htmlFor="language">{language}</label>
+                </div>
+                <button
+                  className="text-slate-500"
+                  onClick={() => deleteLanguage(state?.stateId, language)}
                 >
-                  {`${state?.state} - ${country?._id}`}
-                </span>
-                {state?.languages?.map((language, index) => (
-                  <div
-                    key={language + index}
-                    className="flex justify-between ml-4"
-                  >
-                    <div className="flex gap-2">
-                      <input id="language" type="checkbox" />
-                      <label htmlFor="language">{language}</label>
-                    </div>
-                    <button
-                      className="text-slate-500"
-                      onClick={() => deleteLanguage(state?.stateId, language)}
-                    >
-                      <DeleteForeverOutlinedIcon />
-                    </button>
-                  </div>
-                ))}
-              </>
+                  <DeleteForeverOutlinedIcon />
+                </button>
+              </div>
             ))}
-          </>
-        ))}
-      </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };

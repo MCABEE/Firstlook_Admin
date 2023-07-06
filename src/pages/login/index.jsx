@@ -39,7 +39,7 @@ const LoginPage = () => {
             isMaster: selected === "master" ? true : false,
           });
 
-          localStorage.setItem("token", JSON.stringify(data.token));
+          localStorage.setItem("accessToken", JSON.stringify(data.accessToken));
           dispatch(setAuthorized());
           navigate("/controlPanel");
         } catch (error) {

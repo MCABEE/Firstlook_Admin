@@ -37,31 +37,27 @@ const ViewAll = ({ countries }) => {
         setState={setCountry}
       />
 
-      <div className="mt-3 flex flex-col gap-3">
-        {colleges?.map((country) => (
-          <>
-            <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
-              {country._id}
-            </span>
-            {country?.institutions.map((institution) => (
-              <div key={institution._id} className="flex justify-between ml-4">
-                <div className="flex gap-2 overflow-hidden">
-                  <input id="college" type="checkbox" />
-                  <label htmlFor="college">
-                    {institution.name}
-                  </label>
-                </div>
-                <button
-                  className="text-slate-500"
-                  onClick={() => removeCollege(institution._id)}
-                >
-                  <DeleteForeverOutlinedIcon />
-                </button>
+      {colleges?.map((country) => (
+        <div key={country._id} className="mt-3 flex flex-col">
+          <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
+            {country._id}
+          </span>
+          {country?.institutions.map((institution) => (
+            <div key={institution._id} className="flex justify-between ml-4">
+              <div className="flex gap-2 overflow-hidden">
+                <input id="college" type="checkbox" />
+                <label htmlFor="college">{institution.name}</label>
               </div>
-            ))}
-          </>
-        ))}
-      </div>
+              <button
+                className="text-slate-500"
+                onClick={() => removeCollege(institution._id)}
+              >
+                <DeleteForeverOutlinedIcon />
+              </button>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

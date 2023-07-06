@@ -86,35 +86,30 @@ const ViewAll = () => {
         setState={filterHometowns}
       />
 
-      <div className="mt-3 flex flex-col gap-3">
-        {homeTownsList?.map((item) => (
-          <>
-            <span
-              key={item?._id.state}
-              className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
+      {homeTownsList?.map((item) => (
+        <div key={item?._id.state} className="mt-3 flex flex-col">
+          <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
+            {`${item?._id.district}`}
+          </span>
+          {item?.homeTowns?.map((town) => (
+            <div
+              key={town._id}
+              className="flex justify-between items-center ml-4"
             >
-              {`${item?._id.district}`}
-            </span>
-            {item?.homeTowns?.map((town) => (
-              <div
-                key={town._id}
-                className="flex justify-between items-center ml-4"
-              >
-                <div className="flex gap-2">
-                  <input id={"name"} type="checkbox" />
-                  <label htmlFor={"name"}>{town.name}</label>
-                </div>
-                <button
-                  onClick={() => removeHometown(town._id)}
-                  className="text-slate-500"
-                >
-                  <DeleteForeverOutlinedIcon />
-                </button>
+              <div className="flex gap-2">
+                <input id={"name"} type="checkbox" />
+                <label htmlFor={"name"}>{town.name}</label>
               </div>
-            ))}
-          </>
-        ))}
-      </div>
+              <button
+                onClick={() => removeHometown(town._id)}
+                className="text-slate-500"
+              >
+                <DeleteForeverOutlinedIcon />
+              </button>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

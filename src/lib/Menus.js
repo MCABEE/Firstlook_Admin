@@ -78,9 +78,12 @@ export const menus = [
   },
   {
     id: 3,
-    name: "Payments",
-    hasSubmenu: false,
-    link: "payments",
+    name: "Payment",
+    hasSubmenu: true,
+    subMenu: [
+      { id: 1, name: "Payments", hasSubmenu: false, link: "payments" },
+      { id: 2, name: "Payment Plans", hasSubmenu: false, link: "paymentPlans" },
+    ]
   },
   {
     id: 4,

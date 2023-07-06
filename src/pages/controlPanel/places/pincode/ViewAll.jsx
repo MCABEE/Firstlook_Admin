@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Dropdown, DropdownValueId } from "../../../../components/dropDown";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import {
-    deletePincode,
+  deletePincode,
   getDistrictsList,
   getPincodes,
   getStatesList,
@@ -19,7 +19,7 @@ const ViewAll = () => {
   const fetchPincodes = async () => {
     const { data } = await getPincodes();
     setPincodes(data.pincodes);
-    setPincodesList(data.pincodes)
+    setPincodesList(data.pincodes);
   };
 
   const fetchStates = async () => {
@@ -55,11 +55,11 @@ const ViewAll = () => {
     }
   };
 
-    const removePincode = async (id) => {
-      await deletePincode(id);
-      toast.success("Deleted successfully");
-      fetchPincodes();
-    };
+  const removePincode = async (id) => {
+    await deletePincode(id);
+    toast.success("Deleted successfully");
+    fetchPincodes();
+  };
 
   useEffect(() => {
     fetchPincodes();
@@ -83,37 +83,32 @@ const ViewAll = () => {
         setState={filterPincodes}
       />
 
-      <div className="mt-3 flex flex-col gap-3">
-        {pincodesList?.map((item) => (
-          <>
-            <span
-              key={item?._id.state}
-              className="py-2 pl-4 bg-slate-300 font-medium rounded-xl"
+      {pincodesList?.map((item) => (
+        <div key={item?._id.state} className="mt-3 flex flex-col">
+          <span className="py-2 pl-4 bg-slate-300 font-medium rounded-xl">
+            {`${item?._id.district}`}
+          </span>
+          {item?.pincodes?.map((pincode) => (
+            <div
+              key={pincode._id}
+              className="flex justify-between items-center ml-4"
             >
-              {`${item?._id.district}`}
-            </span>
-            {item?.pincodes?.map((pincode) => (
-              <div
-                key={pincode._id}
-                className="flex justify-between items-center ml-4"
-              >
-                <div className="flex gap-2">
-                  <input id={"name"} type="checkbox" />
-                  <label htmlFor={"name"}>
-                    {pincode.code} - {pincode.postOffice}
-                  </label>
-                </div>
-                <button
-                    onClick={() => removePincode(pincode._id)}
-                  className="text-slate-500"
-                >
-                  <DeleteForeverOutlinedIcon />
-                </button>
+              <div className="flex gap-2">
+                <input id={"name"} type="checkbox" />
+                <label htmlFor={"name"}>
+                  {pincode.code} - {pincode.postOffice}
+                </label>
               </div>
-            ))}
-          </>
-        ))}
-      </div>
+              <button
+                onClick={() => removePincode(pincode._id)}
+                className="text-slate-500"
+              >
+                <DeleteForeverOutlinedIcon />
+              </button>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

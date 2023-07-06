@@ -96,7 +96,7 @@ const statistics = [
 
 const StatisticsTable = () => {
   return (
-    <div className="">
+    <div>
       <table className="mt-3 bg-white border border-slate-300 rounded-md xl:w-1/2 sm:w-full">
         <thead>
           <tr>

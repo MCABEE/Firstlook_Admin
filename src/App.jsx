@@ -38,7 +38,7 @@ import {
   OccupationStreams,
 } from "./pages/controlPanel/occupation";
 import { AddPost, FeedPost, ViewPost } from "./pages/controlPanel/adminPublish";
-import Payments from "./pages/controlPanel/payments";
+import * as Payment from "./pages/controlPanel/payments";
 
 function App() {
   return (
@@ -87,7 +87,8 @@ function App() {
           </Route>
 
           {/* Payments */}
-          <Route path="payments" element={<Payments />} />
+          <Route path="payments" element={<Payment.Payments />} />
+          <Route path="paymentPlans" element={<Payment.PaymentPlans />} />
 
           {/* Photo Updates */}
           <Route path="photoUpdates" element={<AllPhotos />} />

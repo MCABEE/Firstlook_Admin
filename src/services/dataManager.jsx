@@ -1,7 +1,7 @@
 import axios from "./axios";
 
 const getToken = () => {
-  return localStorage.getItem("token");
+  return localStorage.getItem("accessToken");
 };
 
 const getHeaders = () => {
@@ -157,7 +157,10 @@ export const getDiocese = (caste) =>
   );
 
 export const deleteDiocese = (id) =>
-  axios.delete(`/api/admin/dataManager/religion/diocese?id=${id}`, getHeaders());
+  axios.delete(
+    `/api/admin/dataManager/religion/diocese?id=${id}`,
+    getHeaders()
+  );
 
 // ============== INSTITUTION ================
 export const addCollege = (data) =>
@@ -281,3 +284,16 @@ export const updateAdminPost = (id, data) =>
     data,
     getHeaders()
   );
+
+// =============== PAYMENT =======================
+export const addPaymentPlan = (data) =>
+  axios.post("/api/admin/dataManager/payment", data, getHeaders());
+
+export const getPaymentPlans = () =>
+  axios.get("/api/admin/dataManager/payment", getHeaders());
+
+export const updatePaymentPlan = (id, data) =>
+  axios.patch(`/api/admin/dataManager/payment?id=${id}`, data, getHeaders());
+
+export const deletePaymentPlan = (id) =>
+  axios.delete(`/api/admin/dataManager/payment?id=${id}`, getHeaders());
