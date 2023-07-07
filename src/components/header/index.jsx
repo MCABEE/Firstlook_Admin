@@ -1,15 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setUnauthorized } from "../../redux/slices/authSlice";
+import { setAuthorized } from "../../redux/slices/authSlice";
 import { Toaster } from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const Header = () => {
+  const { logout } = useAuth();
   const { authorized } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logout = () => {
-    dispatch(setUnauthorized());
-    localStorage.removeItem("token");
+
+  const doLogout = () => {
+    dispatch(setAuthorized(false));
+    logout();
     navigate("/");
   };
 
@@ -26,7 +29,7 @@ const Header = () => {
       </div>
       {authorized && (
         <button
-          onClick={logout}
+          onClick={doLogout}
           className="border border-slate-200 bg-slate-300 p-2 font-medium rounded-md"
         >
           Logout

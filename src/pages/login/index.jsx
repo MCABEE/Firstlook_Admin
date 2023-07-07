@@ -9,6 +9,7 @@ import { setAuthorized } from "../../redux/slices/authSlice";
 import { doLogin } from "../../services/auth";
 import { signinSchema } from "../../validation/authentication/signin";
 import toast from "react-hot-toast";
+import useToken from "../../hooks/useToken";
 
 const LoginPage = () => {
   const [selected, setSelected] = useState("master");
@@ -16,6 +17,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const { authorized } = useSelector((store) => store.auth);
 
+  const { setToken } = useToken();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +26,7 @@ const LoginPage = () => {
     if (authorized) {
       navigate("/controlPanel");
     }
-  });
+  }, [authorized, navigate]);
 
   // form submit
   const handleSubmit = async (e) => {
@@ -38,9 +40,8 @@ const LoginPage = () => {
             password,
             isMaster: selected === "master" ? true : false,
           });
-
-          localStorage.setItem("accessToken", JSON.stringify(data.accessToken));
-          dispatch(setAuthorized());
+          setToken(data.accessToken);
+          dispatch(setAuthorized(true));
           navigate("/controlPanel");
         } catch (error) {
           toast.error(error.response.data.message);

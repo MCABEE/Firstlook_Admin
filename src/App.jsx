@@ -1,24 +1,18 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setAuthorized } from "./redux/slices/authSlice";
+import useAuth from "./hooks/useAuth";
+import useToken from "./hooks/useToken";
 import { Routes, Route, Outlet } from "react-router-dom";
 import LoginPage from "./pages/login";
 import ControlPanel from "./pages/controlPanel";
 import ErrorPage from "./pages/404Page";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import Dashboard from "./pages/controlPanel/dashboard";
-import {
-  Country,
-  State,
-  District,
-  Cities,
-  HomeTown,
-  Pincode,
-} from "./pages/controlPanel/places";
+import * as Places from "./pages/controlPanel/places";
 import { MotherTounge } from "./pages/controlPanel/basic";
 import { Streams, Courses } from "./pages/controlPanel/academic";
-import {
-  College,
-  Institute,
-  University,
-} from "./pages/controlPanel/institution";
+import * as Institutions from "./pages/controlPanel/institution";
 import { Caste, Diocese, Religion } from "./pages/controlPanel/religion";
 import { Employers } from "./pages/controlPanel/employers";
 import { AllUsers, UserProfile } from "./pages/controlPanel/users/allUsers";
@@ -41,6 +35,16 @@ import { AddPost, FeedPost, ViewPost } from "./pages/controlPanel/adminPublish";
 import * as Payment from "./pages/controlPanel/payments";
 
 function App() {
+  const { token } = useToken();
+  const { isAuthenticated } = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    token && isAuthenticated()
+      ? dispatch(setAuthorized(true))
+      : dispatch(setAuthorized(false));
+  }, [dispatch, isAuthenticated, token]);
+
   return (
     <Routes>
       {/* Login page */}
@@ -109,12 +113,12 @@ function App() {
           <Route path="motherTounge" element={<MotherTounge />} />
 
           {/* Places */}
-          <Route path="country" element={<Country />} />
-          <Route path="state" element={<State />} />
-          <Route path="district" element={<District />} />
-          <Route path="homeTown" element={<HomeTown />} />
-          <Route path="pincode" element={<Pincode />} />
-          <Route path="cities" element={<Cities />} />
+          <Route path="country" element={<Places.Country />} />
+          <Route path="state" element={<Places.State />} />
+          <Route path="district" element={<Places.District />} />
+          <Route path="homeTown" element={<Places.HomeTown />} />
+          <Route path="pincode" element={<Places.Pincode />} />
+          <Route path="cities" element={<Places.Cities />} />
 
           {/* Religion */}
           <Route path="religion" element={<Religion />} />
@@ -136,9 +140,9 @@ function App() {
           </Route>
 
           {/* Institutions */}
-          <Route path="colleges" element={<College />} />
-          <Route path="universities" element={<University />} />
-          <Route path="institutes" element={<Institute />} />
+          <Route path="colleges" element={<Institutions.College />} />
+          <Route path="universities" element={<Institutions.University />} />
+          <Route path="institutes" element={<Institutions.Institute />} />
 
           {/* Employers */}
           <Route path="employer" element={<Employers />} />

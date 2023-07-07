@@ -1,7 +1,7 @@
 import axios from "./axios";
 
 const getToken = () => {
-  return localStorage.getItem("accessToken");
+  return JSON.parse(localStorage.getItem("token"));
 };
 
 const getHeaders = () => {
