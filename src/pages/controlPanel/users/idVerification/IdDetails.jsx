@@ -7,21 +7,21 @@ const IdDetails = ({ heading, data }) => {
       <h4>{heading}</h4>
       <table className="mt-3">
         <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
+          <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
+            Aadhar Number
+          </th>
+          <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
+            {data?.aadharNumber}
+          </td>
+        </tr>
+        <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
           <th className="px-6 text-start py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-            First Name
+            Full Name
           </th>
           <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
             {data?.fullName}
           </td>
         </tr>
-        {/* <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
-          <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
-            Second Name
-          </th>
-          <td className="text-sm text-slate-900 font-light px-6 py-4 whitespace-nowrap">
-            {data?.lastName || "-----"}
-          </td>
-        </tr> */}
         <tr className="bg-white transition duration-300 ease-in-out hover:bg-slate-100">
           <th className="px-6 py-4 text-start whitespace-nowrap text-sm font-medium text-slate-900">
             Date Of Birth

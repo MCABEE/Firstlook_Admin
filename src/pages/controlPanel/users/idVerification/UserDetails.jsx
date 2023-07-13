@@ -4,9 +4,14 @@ import { NotificationModal } from "../../../../components/modal/NotificationModa
 import DataTable from "./DataTable";
 import IdProof from "./IdProof";
 import { useParams } from "react-router-dom";
-import { getAadharDetails } from "../../../../services/userServices";
+import {
+  getAadharDetails,
+  rejectAadhar,
+  verifyAadhar,
+} from "../../../../services/userServices";
 import dateFormat from "dateformat";
 import IdDetails from "./IdDetails";
+import { toast } from "react-hot-toast";
 
 const IdVerificationUserDetails = () => {
   const { userId } = useParams();
@@ -19,6 +24,16 @@ const IdVerificationUserDetails = () => {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleApproved = async (userId) => {
+    await verifyAadhar(userId);
+    toast.success("Aadhar Approved Successfully.");
+  };
+
+  const handleRejected = async (userId) => {
+    await rejectAadhar(userId);
+    toast.success("Aadhar Rejectd.");
   };
 
   const fetchUserDetails = async (userId) => {
@@ -76,10 +91,10 @@ const IdVerificationUserDetails = () => {
           </h3>
         </div>
         <div className="flex justify-center flex-wrap gap-10">
-          {/* user data --- make it dynamic */}
+          {/* user data */}
           <DataTable heading={"User Data"} data={aadharDetails.userId} />
 
-          {/* uidai data --- make it dynamic */}
+          {/* uidai data */}
           {isAuto && <IdDetails heading={"UIDAI Data"} data={aadharDetails} />}
 
           {/* ID - Manual verification */}
@@ -87,10 +102,16 @@ const IdVerificationUserDetails = () => {
         </div>
 
         <div className="mt-5 flex gap-5 justify-center">
-          <button className="loat-right py-2 px-3 w-44 text-sm bg-green-600 text-white rounded-xl">
+          <button
+            onClick={() => handleApproved(userId)}
+            className="loat-right py-2 px-3 w-44 text-sm bg-green-600 text-white rounded-xl"
+          >
             Approved
           </button>
-          <button className="loat-right py-2 px-3 w-44 text-sm bg-red-600 text-white rounded-xl">
+          <button
+            onClick={() => handleRejected(userId)}
+            className="loat-right py-2 px-3 w-44 text-sm bg-red-600 text-white rounded-xl"
+          >
             Rejected
           </button>
         </div>

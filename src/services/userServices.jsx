@@ -20,3 +20,10 @@ export const getIdVerificationUsers = (page) =>
 // =====  GET AADHAR DETAILS =====
 export const getAadharDetails = (userId) =>
   axios.get(`/api/admin/users/aadharDetails/${userId}`, getHeaders());
+
+// ==== VERIFY AADHAR ======
+export const verifyAadhar = (id) =>
+  axios.patch(`/api/admin/users/aadharDetails/${id}`, {}, getHeaders());
+
+export const rejectAadhar = (id) =>
+  axios.post(`/api/admin/users/aadharDetails/${id}`, {}, getHeaders());
