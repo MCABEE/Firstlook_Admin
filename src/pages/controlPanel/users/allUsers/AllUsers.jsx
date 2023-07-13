@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataTable } from "../../../../components/dataTable";
-import {Dropdown} from "../../../../components/dropDown";
+import { Dropdown } from "../../../../components/dropDown";
 import { NotificationModal } from "../../../../components/modal/NotificationModal";
-import { rows } from "../../../../lib/constants";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { getAllUsers } from "../../../../services/userServices";
 
 const AllUsers = () => {
   const [open, setOpen] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [totalUsers, setTotalUsers] = useState(0);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -14,22 +16,71 @@ const AllUsers = () => {
     setOpen(false);
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const fetchUsers = async () => {
+    const { data } = await getAllUsers();
+    setUsers(data.users);
+    setTotalUsers(data.totalUsers);
+  };
+
+  const userRows = users?.map((user, index) => {
+    return { id: index + 1, ...user };
+  });
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const columns = [
     { field: "id", headerName: "No", width: 90 },
-    { field: "firstName", headerName: "First name", width: 140 },
+    { field: "displayName", headerName: "User name", width: 140 },
     { field: "gender", headerName: "Gender", width: 100 },
-    { field: "state", headerName: "State", width: 130 },
-    { field: "district", headerName: "District", width: 130 },
-    { field: "religion", headerName: "Religion", width: 130 },
-    { field: "join", headerName: "Reg. Date", width: 130 },
+    {
+      field: "state",
+      headerName: "State",
+      width: 130,
+      renderCell: (params) => {
+        return params.row.native.state;
+      },
+    },
+    {
+      field: "district",
+      headerName: "District",
+      width: 130,
+      renderCell: (params) => {
+        return params.row.native.district;
+      },
+    },
+    {
+      field: "religion",
+      headerName: "Religion",
+      width: 130,
+      renderCell: (params) => {
+        return params.row.personalInfo.religion;
+      },
+    },
+    {
+      field: "createdAt",
+      headerName: "Reg. Date",
+      width: 130,
+      renderCell: (params) => {
+        return params.row.createdAt.slice(0, 10);
+      },
+    },
     {
       field: "action",
       headerName: "Action",
       width: 100,
       renderCell: (params) => {
-        return <button onClick={()=>navigate(`/controlPanel/allUsers/${params.row.id}`)} className="border py-1 px-3 rounded-md">View</button>;
+        return (
+          <button
+            onClick={() => navigate(`/controlPanel/allUsers/${params.row._id}`)}
+            className="border py-1 px-3 rounded-md"
+          >
+            View
+          </button>
+        );
       },
     },
   ];
@@ -43,7 +94,7 @@ const AllUsers = () => {
         <div>
           <div className="p-2 rounded-xl text-center border text-gray-dark w-28">
             <p className="text-xs">All Users</p>
-            <h2>64232</h2>
+            <h2>{totalUsers || '---'}</h2>
           </div>
         </div>
         <div className="px-3">
@@ -72,7 +123,8 @@ const AllUsers = () => {
         <div className="flex justify-between py-2">
           <div className="p-2 text-center ">
             <p>
-              Filtered Result : <span className="text-lg font-bold">{rows.length}</span>{" "}
+              Filtered Result :{" "}
+              <span className="text-lg font-bold">{users.length}</span>{" "}
             </p>
           </div>
           <button
@@ -83,7 +135,7 @@ const AllUsers = () => {
           </button>
         </div>
 
-        <DataTable rows={rows} columns={columns} showCheckbox={true} />
+        <DataTable rows={userRows} columns={columns} showCheckbox={true} />
       </div>
       <NotificationModal open={open} handleClose={handleClose} />
     </section>

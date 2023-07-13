@@ -1,7 +1,9 @@
-const UserDetails = () => {
+/* eslint-disable react/prop-types */
+import dateFormat from "dateformat";
+const UserDetails = ({ user }) => {
   return (
     <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <div className="rounded-md shadow-md p-4 overflow-x-auto">
+      <div className="rounded-md border border-slate-300 p-4 overflow-x-auto"> 
         <h4>
           <u>Basic Info</u>
         </h4>
@@ -11,7 +13,7 @@ const UserDetails = () => {
               Full Name
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Tom Antony
+              {`${user?.displayName} ${user?.lastName}`}
             </td>
           </tr>
           <tr>
@@ -19,7 +21,7 @@ const UserDetails = () => {
               Gender
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Male
+              {user?.gender}
             </td>
           </tr>
           <tr>
@@ -27,15 +29,15 @@ const UserDetails = () => {
               Date of Birth
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              12/04/1999
+              {dateFormat(user?.dob, "paddedShortDate")}
             </td>
           </tr>
           <tr>
             <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
               Phone No
             </th>
-            <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              9876543210
+            <td className="text-sm blur- font-light px-6 py-2 whitespace-nowrap">
+              {user?.phone?.toString().replace(/.(?=.{4,}$)/g, "*")}
             </td>
           </tr>
           <tr>
@@ -43,51 +45,51 @@ const UserDetails = () => {
               Subscription
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Basic
+              {user?.membershipType}
             </td>
           </tr>
         </table>
-      <div className="mt-4 overflow-x-auto">
-        <h4>
-          <u>Native Info</u>
-        </h4>
-        <table className="mt-2">
-          <tr>
-            <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
-              Country
-            </th>
-            <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              India
-            </td>
-          </tr>
-          <tr>
-            <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
-              State
-            </th>
-            <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Kerala
-            </td>
-          </tr>
-          <tr>
-            <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
-              District
-            </th>
-            <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Ernakulam
-            </td>
-          </tr>
-          <tr>
-            <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
-              Mother Tounge
-            </th>
-            <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Malayalam
-            </td>
-          </tr>
-        </table>
+        <div className="mt-4 overflow-x-auto">
+          <h4>
+            <u>Native Info</u>
+          </h4>
+          <table className="mt-2">
+            <tr>
+              <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
+                Country
+              </th>
+              <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
+                {user?.native?.country}
+              </td>
+            </tr>
+            <tr>
+              <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
+                State
+              </th>
+              <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
+                {user?.native?.state}
+              </td>
+            </tr>
+            <tr>
+              <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
+                District
+              </th>
+              <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
+                {user?.native?.district}
+              </td>
+            </tr>
+            <tr>
+              <th className="pr-6 text-start py-2 whitespace-nowrap text-sm font-medium">
+                Mother Tounge
+              </th>
+              <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
+                {user?.native?.motherTongue}
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
-      </div>
-      <div className="rounded-md shadow-md p-4 overflow-x-auto">
+      <div className="rounded-md border border-slate-300 p-4 overflow-x-auto">
         <h4>
           <u>Personal Info</u>
         </h4>
@@ -97,7 +99,7 @@ const UserDetails = () => {
               Religion
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Christian
+              {user?.personalInfo?.religion}
             </td>
           </tr>
           <tr>
@@ -105,7 +107,7 @@ const UserDetails = () => {
               Caste
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Orthodox
+              {user?.personalInfo?.caste}
             </td>
           </tr>
           <tr>
@@ -113,7 +115,7 @@ const UserDetails = () => {
               Marital Status
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Not Married
+              {user?.personalInfo?.maritalStatus || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -121,7 +123,7 @@ const UserDetails = () => {
               Height
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              181 CM
+              {user?.personalInfo?.height + " CM" || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -129,7 +131,7 @@ const UserDetails = () => {
               Body Type
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Physically Fit
+              {user?.personalInfo?.bodyType || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -137,7 +139,7 @@ const UserDetails = () => {
               Drinking Habits
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Occasionally
+              {user?.personalInfo?.drinkingHabits || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -145,7 +147,7 @@ const UserDetails = () => {
               Smoking Habits
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              No
+              {user?.personalInfo?.smokingHabits || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -153,7 +155,7 @@ const UserDetails = () => {
               Food Habits
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Good
+              {user?.personalInfo?.foodHabits || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -161,7 +163,7 @@ const UserDetails = () => {
               Blood Group
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              A+ve
+              {user?.personalInfo?.bloodGroup || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -169,7 +171,7 @@ const UserDetails = () => {
               Financial Status
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Middle Class
+              {user?.personalInfo?.financialStatus || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -177,12 +179,12 @@ const UserDetails = () => {
               Driving Licence
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Two wheel and Four Wheel
+              {user?.personalInfo?.license || "Not provided"}
             </td>
           </tr>
         </table>
       </div>
-      <div className="rounded-md shadow-md p-4 overflow-x-auto">
+      <div className="rounded-md border border-slate-300 p-4 overflow-x-auto">
         <h4>
           <u>Family Info</u>
         </h4>
@@ -192,7 +194,7 @@ const UserDetails = () => {
               Father&apos;s Name
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Tom Chako
+              {user?.family?.fatherName || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -200,7 +202,7 @@ const UserDetails = () => {
               Fathers&apos;s Education
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Primary Education
+              {user?.family?.fatherEducation}
             </td>
           </tr>
           <tr>
@@ -208,7 +210,7 @@ const UserDetails = () => {
               Father&apos;s Occupation
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Business
+              {user?.family?.fatherOccupation || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -216,7 +218,7 @@ const UserDetails = () => {
               Mohers&apos;s Name
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Marry
+              {user?.family?.motherName || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -224,7 +226,7 @@ const UserDetails = () => {
               Mother&apos;s Education
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Secondary Education
+              {user?.family?.motherEducation || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -232,7 +234,7 @@ const UserDetails = () => {
               Mother&apos;s Occupation
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Home Maker
+              {user?.family?.motherOccupation || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -240,7 +242,7 @@ const UserDetails = () => {
               Home Town
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Aluva
+              {user?.familyAddress?.homeTown || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -248,12 +250,12 @@ const UserDetails = () => {
               Pincode
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              658723
+              {user?.familyAddress?.pincode || "Not provided"}
             </td>
           </tr>
         </table>
       </div>
-      <div className="rounded-md shadow-md p-4 overflow-x-auto">
+      <div className="rounded-md border border-slate-300 p-4 overflow-x-auto">
         <h4>
           <u>Academic Info</u>
         </h4>
@@ -263,7 +265,7 @@ const UserDetails = () => {
               Academic Stream
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Business
+              {user?.academic?.academicStream || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -271,7 +273,7 @@ const UserDetails = () => {
               Course
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              MBA
+              {user?.academic?.courseName || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -279,7 +281,7 @@ const UserDetails = () => {
               Country
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              India
+              {user?.academic?.country || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -287,7 +289,7 @@ const UserDetails = () => {
               University
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              MG University
+              {user?.academic?.university || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -295,12 +297,12 @@ const UserDetails = () => {
               Pass Out
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              2020
+              {user?.academic?.passOut || "Not provided"}
             </td>
           </tr>
         </table>
       </div>
-      <div className="rounded-md shadow-md p-4 overflow-x-auto">
+      <div className="rounded-md border border-slate-300 p-4 overflow-x-auto">
         <h4>
           <u>Occupation Info</u>
         </h4>
@@ -310,7 +312,7 @@ const UserDetails = () => {
               Occupation Stream
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Business
+              {user?.occupation?.jobStream || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -318,7 +320,7 @@ const UserDetails = () => {
               Designation
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Sales Manager
+              {user?.occupation?.designation || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -326,7 +328,7 @@ const UserDetails = () => {
               Annual Income
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              20 - 30 Lackh
+              {user?.occupation?.annualIncome || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -334,7 +336,7 @@ const UserDetails = () => {
               Country
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              India
+              {user?.occupation?.country || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -342,7 +344,7 @@ const UserDetails = () => {
               State
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Karnadaka
+              {user?.occupation?.state || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -350,13 +352,13 @@ const UserDetails = () => {
               City
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Bengaluru
+              {user?.occupation?.city || "Not provided"}
             </td>
           </tr>
         </table>
       </div>
-      
-      <div className="rounded-md shadow-md p-4 overflow-x-auto">
+
+      <div className="rounded-md border border-slate-300 p-4 overflow-x-auto">
         <h4>
           <u>Preference Data</u>
         </h4>
@@ -366,7 +368,7 @@ const UserDetails = () => {
               Caste
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Orthodox
+              {user?.perferenceData?.caste || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -374,7 +376,9 @@ const UserDetails = () => {
               Academic
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Business, Medical
+              {user?.perferenceData?.qualification?.map(
+                (qualification) => qualification + " "
+              ) || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -382,7 +386,9 @@ const UserDetails = () => {
               Occupation
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Business, Medical
+              {user?.perferenceData?.occupation?.map(
+                (occupation) => occupation + " "
+              ) || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -390,7 +396,9 @@ const UserDetails = () => {
               Location
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Thrissur, Ernakulam, Kottayam
+              {user?.perferenceData?.location?.map(
+                (location) => location + " "
+              ) || "Not provided"}
             </td>
           </tr>
           <tr>
@@ -398,7 +406,8 @@ const UserDetails = () => {
               Age
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              21 - 24
+              {`${user?.perferenceData?.age?.minAge} - ${user?.perferenceData?.age?.maxAge}` ||
+                "Not provided"}
             </td>
           </tr>
           <tr>
@@ -406,7 +415,8 @@ const UserDetails = () => {
               Height
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              160 - 170 CM
+              {`${user?.perferenceData?.height?.minHeight} - ${user?.perferenceData?.height?.maxHeight}` ||
+                "Not provided"}
             </td>
           </tr>
           <tr>
@@ -414,7 +424,7 @@ const UserDetails = () => {
               Marital Status
             </th>
             <td className="text-sm font-light px-6 py-2 whitespace-nowrap">
-              Not Married
+              {`${user?.perferenceData?.maritalStatus}` || "Not provided"}
             </td>
           </tr>
         </table>
