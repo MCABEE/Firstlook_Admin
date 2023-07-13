@@ -110,7 +110,7 @@ const ViewPost = () => {
     <div>
       {adminPosts.length ? (
         <>
-          <h2 className="mb-2 ml-2">View All Posts</h2>
+          {/* <h2 className="mb-2 ml-2">View All Posts</h2> */}
           <div className="bg-white">
             <DataTable
               rows={feedPostRows}

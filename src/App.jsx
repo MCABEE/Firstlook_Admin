@@ -62,12 +62,12 @@ function App() {
           {/* Users */}
           <Route path="newUsers" element={<Outlet />}>
             <Route index element={<NewUsers />} />
-            <Route path=":id" element={<NewUserDetails />} />
+            <Route path=":userId" element={<NewUserDetails />} />
           </Route>
 
           <Route path="allUsers" element={<Outlet />}>
             <Route index element={<AllUsers />} />
-            <Route path=":id" element={<UserProfile />} />
+            <Route path=":userId" element={<UserProfile />} />
           </Route>
 
           <Route
@@ -87,7 +87,7 @@ function App() {
 
           <Route path="idVerification" element={<Outlet />}>
             <Route index element={<IdVerification />} />
-            <Route path=":id" element={<IdVerificationUserDetails />} />
+            <Route path=":userId" element={<IdVerificationUserDetails />} />
           </Route>
 
           {/* Payments */}

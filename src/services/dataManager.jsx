@@ -4,7 +4,7 @@ const getToken = () => {
   return JSON.parse(localStorage.getItem("token"));
 };
 
-const getHeaders = () => {
+export const getHeaders = () => {
   const token = getToken();
   return {
     headers: {
